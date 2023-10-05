@@ -8,26 +8,26 @@ const { width } = Dimensions.get('window')
 const scaleFactor = width / 430
 
 const OnBoardingScreen_1 = ({ navigation }) => {
-    useEffect(() => {
-        const backAction = () => {
-            Alert.alert("Hold on!", "Are you sure you want to exit?", [
-                {
-                    text: "Cancel",
-                    onPress: () => null,
-                    style: "cancel"
-                },
-                { text: "YES", onPress: () => BackHandler.exitApp() }
-            ]);
-            return true;
-        };
+    // // useEffect(() => {
+    // //     const backAction = () => {
+    // //         Alert.alert("Hold on!", "Are you sure you want to exit?", [
+    // //             {
+    // //                 text: "Cancel",
+    // //                 onPress: () => null,
+    // //                 style: "cancel"
+    // //             },
+    // //             { text: "YES", onPress: () => BackHandler.exitApp() }
+    // //         ]);
+    // //         return true;
+    // //     };
 
-        const backHandler = BackHandler.addEventListener(
-            "hardwareBackPress",
-            backAction
-        );
+    //     const backHandler = BackHandler.addEventListener(
+    //         "hardwareBackPress",
+    //         backAction
+    //     );
 
-        return () => backHandler.remove();
-    }, [navigation]);
+    //     return () => backHandler.remove();
+    // }, [navigation]);
     return (
         <SafeAreaView style={styles.container}>
             <View style={styles.header}>
@@ -68,7 +68,7 @@ const styles = StyleSheet.create({
         fontWeight: '700',
         textAlign: 'center',
         lineHeight: 33,
-        wordWrap: 'break-word'
+        // wordWrap: 'break-word'
     },
     contentText: {
         marginTop: 20 * scaleFactor,
@@ -77,7 +77,7 @@ const styles = StyleSheet.create({
         // fontFamily: 'Urbanist',
         fontWeight: '400',
         lineHeight: 24,
-        wordWrap: 'break-word',
+        // wordWrap: 'break-word',
         textAlign: 'center'
     },
     skip_button: {
@@ -87,7 +87,7 @@ const styles = StyleSheet.create({
         fontSize: 18,
         // fontFamily: 'Montserrat',
         fontWeight: '500',
-        wordWrap: 'break-word'
+        // wordWrap: 'break-word'
     },
     content: {
         alignItems: 'center'
@@ -117,7 +117,7 @@ const styles = StyleSheet.create({
         fontSize: 18,
         // fontFamily: 'Urbanist',
         fontWeight: '700',
-        wordWrap: 'break-word'
+        // wordWrap: 'break-word'
     }
 }
 

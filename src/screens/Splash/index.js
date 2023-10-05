@@ -12,7 +12,7 @@ const SplashScreen = ({ navigation }) => {
         setTimeout(() => {
             navigation.navigate("OnBoardingScreen_1")
         }, 1500)
-    })
+    },[])
 
     return (
         <SafeAreaView style={styles.container}>

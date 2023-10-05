@@ -7,7 +7,7 @@ import VectorImage from '../../../assets/images/social/vector.svg'
 import GoogleImage from '../../../assets/images/social/google.svg'
 import UserImage from '../../../assets/images/auth/login/user.svg'
 import LockImage from '../../../assets/images/auth/login/lock.svg'
-import EyeSlashImage from '../../../assets/images/auth/login/eye-slash.svg'
+// import EyeSlashImage from '../../../assets/images/auth/login/eye-slash.svg'
 
 const { width } = Dimensions.get('window')
 const scaleFactor = width / 414
@@ -42,11 +42,13 @@ const Login_Screen = ({ navigation }) => {
                                     <LockImage width={20 * scaleFactor} height={20 * scaleFactor} style={styles.password_image} />
                                     <TextInput style={styles.email_text_input} secureTextEntry={true} ></TextInput>
                                 </View>
-                                <Text style={styles.forget_text}>Forget Password</Text>
+                                <TouchableOpacity onPress={() => navigation.navigate("ForgetPasswordScreen")}>
+                                    <Text style={styles.forget_text} >Forget Password</Text>
+                                </TouchableOpacity>
                             </View>
                         </View>
                         <View style={styles.buttons}>
-                            <TouchableOpacity style={styles.login_button} onPress={() => navigation.navigate("LoginScreen")}>
+                            <TouchableOpacity style={styles.login_button} onPress={() => navigation.navigate("RegisterScreen")}>
                                 <Text style={styles.login_text}>Log In</Text>
                             </TouchableOpacity>
                         </View>
@@ -94,7 +96,7 @@ const styles = StyleSheet.create({
         fontSize: 34,
         fontFamily: 'Urbanist',
         fontWeight: '700',
-        wordWrap: 'break-word'
+        // wordWrap: 'break-word'
     },
 
     content_text: {
@@ -104,7 +106,7 @@ const styles = StyleSheet.create({
         fontFamily: 'Urbanist',
         fontWeight: '500',
         lineHeight: 24 * scaleFactor,
-        wordWrap: 'break-word'
+        // wordWrap: 'break-word'
     },
     content: {
         marginTop: 21 * scaleFactor
@@ -114,7 +116,7 @@ const styles = StyleSheet.create({
         fontSize: 14,
         fontFamily: 'Urbanist',
         fontWeight: '500',
-        wordWrap: 'break-word'
+        // wordWrap: 'break-word'
     },
     email_input: {
         flexDirection: 'row',
@@ -138,12 +140,12 @@ const styles = StyleSheet.create({
         fontSize: 14,
         fontFamily: 'Urbanist',
         fontWeight: '500',
-        wordWrap: 'break-word',
+        // wordWrap: 'break-word',
         color: 'black',
         fontSize: 16,
         fontFamily: 'Urbanist',
         fontWeight: '600',
-        wordWrap: 'break-word'
+        // wordWrap: 'break-word'
     },
     password_text: {
         marginTop: 16 * scaleFactor,
@@ -151,7 +153,7 @@ const styles = StyleSheet.create({
         fontSize: 14,
         fontFamily: 'Urbanist',
         fontWeight: '500',
-        wordWrap: 'break-word'
+        // wordWrap: 'break-word'
     },
     password_input: {
         marginTop: 8 * scaleFactor,
@@ -183,12 +185,12 @@ const styles = StyleSheet.create({
         fontSize: 14,
         fontFamily: 'Urbanist',
         fontWeight: '500',
-        wordWrap: 'break-word',
+        // wordWrap: 'break-word',
         color: 'black',
         fontSize: 16,
         fontFamily: 'Urbanist',
         fontWeight: '600',
-        wordWrap: 'break-word'
+        // wordWrap: 'break-word'
     },
     forget_text: {
         textAlign: 'right',
@@ -198,7 +200,7 @@ const styles = StyleSheet.create({
         fontFamily: 'Urbanist',
         fontWeight: '700',
         lineHeight: 24,
-        wordWrap: 'break-word'
+        // wordWrap: 'break-word'
     },
     buttons: {
         width: '100%',
@@ -222,7 +224,7 @@ const styles = StyleSheet.create({
         fontSize: 18,
         fontFamily: 'Urbanist',
         fontWeight: '700',
-        wordWrap: 'break-word'
+        // wordWrap: 'break-word'
     },
     register_button: {
         height: 58 * scaleFactor,
@@ -244,7 +246,7 @@ const styles = StyleSheet.create({
         fontSize: 18,
         fontFamily: 'Urbanist',
         fontWeight: '700',
-        wordWrap: 'break-word'
+        // wordWrap: 'break-word'
     },
     footer: {
         alignItems: 'center',
@@ -265,7 +267,7 @@ const styles = StyleSheet.create({
         fontSize: 14,
         fontFamily: 'Urbanist',
         fontWeight: '600',
-        wordWrap: 'break-word'
+        // wordWrap: 'break-word'
     },
     line_left: {
         marginRight: 10 * scaleFactor,
@@ -298,7 +300,7 @@ const styles = StyleSheet.create({
         fontSize: 16,
         fontFamily: 'Urbanist',
         fontWeight: '400',
-        wordWrap: 'break-word'
+        // wordWrap: 'break-word'
     },
     signup_text: {
         marginLeft: 5 * scaleFactor,
@@ -306,7 +308,7 @@ const styles = StyleSheet.create({
         fontSize: 16,
         fontFamily: 'Urbanist',
         fontWeight: '700',
-        wordWrap: 'break-word'
+        // wordWrap: 'break-word'
     }
 
 })

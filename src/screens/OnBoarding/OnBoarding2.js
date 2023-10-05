@@ -55,7 +55,7 @@ const styles = StyleSheet.create({
         fontWeight: '700',
         textAlign: 'center',
         lineHeight: 33,
-        wordWrap: 'break-word'
+        // wordWrap: 'break-word'
     },
     contentText: {
         marginTop: 20 * scaleFactor,
@@ -66,7 +66,7 @@ const styles = StyleSheet.create({
         // fontFamily: 'Urbanist',
         fontWeight: '400',
         lineHeight: 24,
-        wordWrap: 'break-word',
+        // wordWrap: 'break-word',
         textAlign: 'center'
     },
     skip_button: {
@@ -76,7 +76,7 @@ const styles = StyleSheet.create({
         fontSize: 18,
         // fontFamily: 'Montserrat',
         fontWeight: '500',
-        wordWrap: 'break-word'
+        // wordWrap: 'break-word'
     },
     content: {
         alignItems: 'center'
@@ -102,7 +102,7 @@ const styles = StyleSheet.create({
         fontSize: 18,
         // fontFamily: 'Urbanist',
         fontWeight: '700',
-        wordWrap: 'break-word'
+        // wordWrap: 'break-word'
     }
 }
 

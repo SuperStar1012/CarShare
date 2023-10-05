@@ -133,7 +133,7 @@ const Register_Screen = ({ navigation }) => {
                             </Text>
                         </View>
                         <View style={styles.buttons}>
-                            <TouchableOpacity style={styles.login_button} onPress={() => navigation.navigate("LoginScreen")}>
+                            <TouchableOpacity style={styles.login_button} onPress={() => navigation.navigate("OTPScreen")}>
                                 <Text style={styles.login_text}>Register</Text>
                             </TouchableOpacity>
                         </View>
@@ -167,7 +167,7 @@ const styles = StyleSheet.create({
         fontSize: 34,
         fontFamily: 'Urbanist',
         fontWeight: '700',
-        wordWrap: 'break-word'
+        // wordWrap: 'break-word'
     },
 
     content_text: {
@@ -177,7 +177,7 @@ const styles = StyleSheet.create({
         fontFamily: 'Urbanist',
         fontWeight: '500',
         lineHeight: 24 * scaleFactor,
-        wordWrap: 'break-word'
+        // wordWrap: 'break-word'
     },
     input_content: {
         marginBottom: 15 * scaleFactor
@@ -187,7 +187,7 @@ const styles = StyleSheet.create({
         fontSize: 14,
         fontFamily: 'Urbanist',
         fontWeight: '500',
-        wordWrap: 'break-word'
+        // wordWrap: 'break-word'
     },
     email_input: {
         flexDirection: 'row',
@@ -216,7 +216,7 @@ const styles = StyleSheet.create({
         fontSize: 16,
         fontFamily: 'Urbanist',
         fontWeight: '600',
-        wordWrap: 'break-word'
+        // wordWrap: 'break-word'
     },
     password_text: {
         marginTop: 16 * scaleFactor,
@@ -224,7 +224,7 @@ const styles = StyleSheet.create({
         fontSize: 14,
         fontFamily: 'Urbanist',
         fontWeight: '500',
-        wordWrap: 'break-word'
+        // wordWrap: 'break-word'
     },
     password_input: {
         marginTop: 8 * scaleFactor,
@@ -261,7 +261,7 @@ const styles = StyleSheet.create({
         fontSize: 16,
         fontFamily: 'Urbanist',
         fontWeight: '600',
-        wordWrap: 'break-word'
+        // wordWrap: 'break-word'
     },
     forget_text: {
         textAlign: 'right',
@@ -271,7 +271,7 @@ const styles = StyleSheet.create({
         fontFamily: 'Urbanist',
         fontWeight: '700',
         lineHeight: 24,
-        wordWrap: 'break-word'
+        // wordWrap: 'break-word'
     },
     agree_field: {
         marginBottom: 32 * scaleFactor,
@@ -331,7 +331,7 @@ const styles = StyleSheet.create({
         fontSize: 18,
         fontFamily: 'Urbanist',
         fontWeight: '700',
-        wordWrap: 'break-word'
+        // wordWrap: 'break-word'
     },
     register_button: {
         height: 58 * scaleFactor,
@@ -353,7 +353,7 @@ const styles = StyleSheet.create({
         fontSize: 18,
         fontFamily: 'Urbanist',
         fontWeight: '700',
-        wordWrap: 'break-word'
+        // wordWrap: 'break-word'
     },
     footer: {
         alignItems: 'center',
@@ -374,7 +374,7 @@ const styles = StyleSheet.create({
         fontSize: 14,
         fontFamily: 'Urbanist',
         fontWeight: '600',
-        wordWrap: 'break-word'
+        // wordWrap: 'break-word'
     },
     line_left: {
         marginRight: 10 * scaleFactor,
@@ -407,7 +407,7 @@ const styles = StyleSheet.create({
         fontSize: 16,
         fontFamily: 'Urbanist',
         fontWeight: '400',
-        wordWrap: 'break-word'
+        // wordWrap: 'break-word'
     },
     signup_text: {
         marginLeft: 5 * scaleFactor,
@@ -415,7 +415,7 @@ const styles = StyleSheet.create({
         fontSize: 16,
         fontFamily: 'Urbanist',
         fontWeight: '700',
-        wordWrap: 'break-word'
+        // wordWrap: 'break-word'
     }
 
 })

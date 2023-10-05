@@ -20,8 +20,6 @@ const Login_RegisterScreen = ({ navigation }) => {
                     <Text style={styles.register_text}>Register</Text>
                 </TouchableOpacity>
             </View>
-
-
         </SafeAreaView>
     )
 }
@@ -60,7 +58,7 @@ const styles = StyleSheet.create({
         fontSize: 18,
         fontFamily: 'Urbanist',
         fontWeight: '700',
-        wordWrap: 'break-word'
+        // wordWrap: 'break-word'
     },
     register_button: {
         height: 58 * scaleFactor,
@@ -82,7 +80,7 @@ const styles = StyleSheet.create({
         fontSize: 18,
         fontFamily: 'Urbanist',
         fontWeight: '700',
-        wordWrap: 'break-word'
+        // wordWrap: 'break-word'
     }
 
 })
