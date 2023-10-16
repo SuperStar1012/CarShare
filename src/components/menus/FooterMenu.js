@@ -9,26 +9,26 @@ import ProfileImage from '../../assets/images/user/home/profile.svg'
 const { width } = Dimensions.get('window')
 const scaleFactor = width / 414
 
-const FooterMenu = () => {
+const FooterMenu = ({navigation}) => {
     return (
         <View style={styles.footer_menu}>
             <TouchableOpacity style={styles.footer_menu_item}>
                 <HomeImage />
                 <Text style={styles.selected_footer_menu_text}>Home</Text>
             </TouchableOpacity>
-            <TouchableOpacity style={styles.footer_menu_item}>
+            <TouchableOpacity style={styles.footer_menu_item} onPress={()=>navigation.navigate("MessageScreen")}>
                 <MessageImage />
                 <Text style={styles.footer_menu_text}>Chat</Text>
             </TouchableOpacity>
-            <TouchableOpacity style={styles.footer_menu_item}>
+            <TouchableOpacity style={styles.footer_menu_item} >
                 <MapImage />
                 <Text style={styles.footer_menu_text}>Rent Car</Text>
             </TouchableOpacity>
-            <TouchableOpacity style={styles.footer_menu_item}>
+            <TouchableOpacity style={styles.footer_menu_item} onPress={()=>navigation.navigate("NotificationScreen")}>
                 <NotificationImage />
                 <Text style={styles.footer_menu_text}>Notification</Text>
             </TouchableOpacity>
-            <TouchableOpacity style={styles.footer_menu_item}>
+            <TouchableOpacity style={styles.footer_menu_item} onPress={()=>navigation.navigate("ProfileScreen")}>
                 <ProfileImage />
                 <Text style={styles.footer_menu_text}>Profile</Text>
             </TouchableOpacity>

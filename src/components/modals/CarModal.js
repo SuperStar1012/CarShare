@@ -5,7 +5,7 @@ import LocationTicketModalImage from '../../assets/images/auth/register/location
 const { width } = Dimensions.get('window')
 const scaleFactor = width / 414
 
-const LocationModal = ({ navigation, modalVisible, setModalVisible }) => {
+const CarModal = ({ navigation, modalVisible, setModalVisible }) => {
     // const goToHomePage = () => {
     //     setModalVisible(false)
     //     navigation.navigate('SplashScreen')
@@ -73,4 +73,4 @@ const styles = StyleSheet.create({
 
 });
 
-export default LocationModal
+export default CarModal

@@ -45,7 +45,7 @@ const LicenseVerifyScreen = ({ navigation }) => {
         <SafeAreaView style={styles.container}>
             <View style={{ flex: 1 }}>
                 <View style={styles.header}>
-                    <TouchableOpacity style={styles.header_icon} onPress={() => navigation.navigate('EnterLicenseScreen')}>
+                    <TouchableOpacity style={styles.header_icon} onPress={() => navigation.goBack()}>
                         <ArrowLeftImage width={24 * scaleFactor} height={24 * scaleFactor} />
                     </TouchableOpacity>
                     <Text style={styles.header_text}>License Verify</Text>

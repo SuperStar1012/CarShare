@@ -175,6 +175,15 @@ const styles = StyleSheet.create({
         position: 'absolute',
         left: 0,
     },
+    header_text: {
+        textAlign: 'center',
+        color: 'black',
+        fontSize: 18,
+        fontFamily: 'Montserrat',
+        fontWeight: '700',
+        lineHeight: 27.34
+
+    },
     header_search_icon: {
         position: 'absolute',
         right: 0

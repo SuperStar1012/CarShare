@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react"
 import { Dimensions, StyleSheet, TouchableOpacity, Text, View, Button, ScrollView } from "react-native"
 import CheckBox from '@react-native-community/checkbox';
+import PencilKitView from "./PencilKitView";
 
 const { width } = Dimensions.get('window')
 const scaleFactor = width / 414
@@ -12,20 +13,6 @@ const DrawSignView = () => {
         <View style={styles.draw_view}>
             <Text style={styles.draw_text}>Draw Signature Here!</Text>
             <View style={styles.draw_content}>
-
-            </View>
-            <View style={styles.draw_footer}>
-                <View style={styles.agree_field}>
-                    <CheckBox
-                        disabled={false}
-                        value={checked}
-                        onChange={() => setChecked(!checked)}
-                    />
-                    <Text style={styles.agree_text}>
-                        I agree to
-                        <Text style={styles.agree_bold_text}> Terms & Conditions</Text>
-                    </Text>
-                </View>
             </View>
         </View>
     )
@@ -39,7 +26,7 @@ const styles = StyleSheet.create({
         color: 'black',
         fontSize: 18,
         fontFamily: 'Montserrat',
-        fontWeight: '70',
+        fontWeight: '700',
         textAlign: 'center'
     },
     draw_content: {

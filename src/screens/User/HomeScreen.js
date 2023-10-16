@@ -99,8 +99,7 @@ const HomeScreen = ({ navigation }) => {
                     </ScrollView>
                 </View>
                 <View style={styles.footer}>
-
-                    <FooterMenu />
+                    <FooterMenu navigation={navigation}/>
                 </View>
             </SafeAreaView>
         </TouchableWithoutFeedback>

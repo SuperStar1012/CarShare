@@ -156,7 +156,7 @@ const BookingDetailScreen = ({ navigation }) => {
                     </View>
                 </View>
 
-                <TouchableOpacity style={styles.footer} onPress={()=>navigation.navigate("SummaryScreen")}>
+                <TouchableOpacity style={styles.footer} onPress={()=>navigation.navigate("SummaryScreen",{type: "beforeadded"})}>
                     <Text style={styles.footer_text}>Continue</Text>
                 </TouchableOpacity>
             </SafeAreaView>

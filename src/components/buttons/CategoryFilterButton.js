@@ -5,7 +5,7 @@ const { width } = Dimensions.get('window')
 const scaleFactor = width / 414
 
 const CategoryFilterButton = ({ selected, value }) => {
-    const [select, setSelected] = useState(false);
+    const [select, setSelected] = useState(selected);
     useEffect(() => {
         setSelected(selected)
     }, [])
@@ -19,7 +19,7 @@ const CategoryFilterButton = ({ selected, value }) => {
 const styles = StyleSheet.create({
     button: {
         backgroundColor: 'white',
-        paddingHorizontal: 22 * scaleFactor,
+        paddingHorizontal: 20 * scaleFactor,
         paddingVertical: 10 * scaleFactor,
         borderRadius: 10 * scaleFactor,
         borderWidth: 1 * scaleFactor,
@@ -42,7 +42,7 @@ const styles = StyleSheet.create({
         
     },
     selected_button: {
-        paddingHorizontal: 22 * scaleFactor,
+        paddingHorizontal: 20 * scaleFactor,
         paddingVertical: 10 * scaleFactor,
         backgroundColor: '#00A86B',
         borderRadius: 10 * scaleFactor,

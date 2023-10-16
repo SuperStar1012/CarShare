@@ -1,19 +1,17 @@
 import React, { useEffect, useState } from "react"
-import { Dimensions, View, StyleSheet, TouchableOpacity, SafeAreaView, Text } from "react-native"
+import { Dimensions, View, StyleSheet, TouchableWithoutFeedback, Keyboard, TouchableOpacity, SafeAreaView, Text } from "react-native"
 import ArrowLeftImage from '../../../assets/images/auth/register/arrow-left.svg'
-import AvatarImage from '../../../assets/images/auth/register/Rectangle_34625954.svg'
-import SelfieImage from '../../../assets/images/auth/register/Rectangle_34625958.svg'
-import UploadImage from '../../../assets/images/auth/register/document-upload.svg'
+import CheckBox from '@react-native-community/checkbox';
 
-import LinearGradient from 'react-native-linear-gradient';
 import { launchImageLibrary } from 'react-native-image-picker';
-import { Image } from "react-native-svg"
 import DrawSignView from "../../../components/views/DrawSignView"
+import TypeSignView from "../../../components/views/TypeSignView";
 
 const { width } = Dimensions.get('window')
 const scaleFactor = width / 414
 
 const DrawSignatureScreen = ({ navigation }) => {
+    const [checked, setChecked] = useState(false)
     const [visible, setVisible] = useState(false)
     const [type, setType] = useState('license')
     const [selectedImage, setSelectedImage] = useState('')
@@ -43,41 +41,47 @@ const DrawSignatureScreen = ({ navigation }) => {
     };
 
     return (
-        <SafeAreaView style={styles.container}>
-            <View style={{ flex: 1 }}>
-                <View style={styles.header}>
-                    <TouchableOpacity style={styles.header_icon} onPress={() => navigation.navigate('BookingDetailScreen')}>
-                        <ArrowLeftImage width={24 * scaleFactor} height={24 * scaleFactor} />
-                    </TouchableOpacity>
-                    <Text style={styles.header_text}>Contact</Text>
-                </View>
-                <View style={styles.content}>
-                    <View style={styles.content_header} >
-                        <TouchableOpacity style={type == 'license' ? styles.license_header : styles.disabled_license_header} onPress={() => setType('license')}>
-                            <Text style={type == 'license' ? styles.content_header_text : styles.disabled_content_header_text}>Draw Sign</Text>
+        <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
+            <SafeAreaView style={styles.container}>
+                <View style={{ flex: 1 }}>
+                    <View style={styles.header}>
+                        <TouchableOpacity style={styles.header_icon} onPress={() => navigation.navigate('BookingDetailScreen')}>
+                            <ArrowLeftImage width={24 * scaleFactor} height={24 * scaleFactor} />
                         </TouchableOpacity>
-                        <TouchableOpacity style={type == 'selfie' ? styles.selfie_header : styles.disabled_selfie_header} onPress={() => setType('selfie')}>
-                            <Text style={type == 'selfie' ? styles.content_header_text : styles.disabled_content_header_text}>Type Sign</Text>
-                        </TouchableOpacity>
+                        <Text style={styles.header_text}>Contact</Text>
                     </View>
-                    {type == "license" ? (<DrawSignView />) :
-                        (<View style={{ width: '100%', alignItems: 'center' }}>
-                            <View style={styles.selfie_card}>
-                                <SelfieImage width={207 * scaleFactor} height={207 * scaleFactor} />
-                            </View>
-                        </View>)}
-
-
+                    <View style={styles.content}>
+                        <View style={styles.content_header} >
+                            <TouchableOpacity style={type == 'license' ? styles.license_header : styles.disabled_license_header} onPress={() => setType('license')}>
+                                <Text style={type == 'license' ? styles.content_header_text : styles.disabled_content_header_text}>Draw Sign</Text>
+                            </TouchableOpacity>
+                            <TouchableOpacity style={type == 'selfie' ? styles.selfie_header : styles.disabled_selfie_header} onPress={() => setType('selfie')}>
+                                <Text style={type == 'selfie' ? styles.content_header_text : styles.disabled_content_header_text}>Type Sign</Text>
+                            </TouchableOpacity>
+                        </View>
+                        {type == "license" ? (<DrawSignView />) :
+                            (<TypeSignView />)}
+                    </View>
+                </View>
+                <View style={styles.footer}>
+                    <View style={styles.agree_field}>
+                        <CheckBox
+                            disabled={false}
+                            value={checked}
+                            onChange={() => setChecked(!checked)}
+                        />
+                        <Text style={styles.agree_text}>
+                            I agree to
+                            <Text style={styles.agree_bold_text}> Terms & Conditions</Text>
+                        </Text>
+                    </View>
+                    <TouchableOpacity style={styles.agree_button} onPress={() => navigation.navigate("SelectPaymentMethodScreen", { type: "beforeadd" })} >
+                        <Text style={styles.button_text}>Confirm & Submit</Text>
+                    </TouchableOpacity>
                 </View>
 
-            </View>
-            <View style={styles.footer}>
-                <TouchableOpacity style={styles.agree_button} >
-                    <Text style={styles.button_text}>Confirm & Submit</Text>
-                </TouchableOpacity>
-            </View>
-
-        </SafeAreaView>
+            </SafeAreaView>
+        </TouchableWithoutFeedback>
     )
 }
 
@@ -186,94 +190,9 @@ const styles = StyleSheet.create({
         fontFamily: 'Montserrat',
         fontWeight: '500',
     },
-    content_card: {
-        marginTop: 43 * scaleFactor,
-        marginBottom: 62 * scaleFactor,
-        paddingLeft: 24 * scaleFactor,
-        paddingTop: 15 * scaleFactor,
-        width: '100%',
-        height: 214 * scaleFactor,
-        alignContent: 'center',
-        backgroundColor: 'linear-gradient(180deg, #1BD994 0%, #0F704D 100%)',
-        borderRadius: 10 * scaleFactor,
-        border: '1px rgba(0, 0, 0, 0.05) solid',
-        flexDirection: 'row'
-    },
-    left_content_card: {
-        marginRight: 25 * scaleFactor
-    },
-    left_card_header: {
-        textAlign: 'center',
-        color: 'white',
-        fontSize: 20,
-        fontFamily: 'Montserrat',
-        fontWeight: '700',
-        lineHeight: 24,
-    },
-    avatar_image: {
-        marginTop: 18 * scaleFactor,
-        borderRadius: 11 * scaleFactor
-    },
-    right_card_item: {
-        marginBottom: 4 * scaleFactor
-    },
-    right_card_item_header: {
-        color: 'white',
-        fontSize: 12,
-        fontFamily: 'Urbanist',
-        fontWeight: '400',
-        lineHeight: 24,
-    },
-    right_card_item_content: {
-        color: 'white',
-        fontSize: 18,
-        fontFamily: 'Urbanist',
-        fontWeight: '700',
-        lineHeight: 24,
-    },
-    right_footer_items: {
-        marginTop: 25 * scaleFactor,
-        flexDirection: 'row'
-    },
-    right_fotter_item: {
-        marginRight: 25 * scaleFactor,
-    },
-    card_footer_item_header: {
-        color: 'white',
-        fontSize: 8,
-        fontFamily: 'Urbanist',
-        fontWeight: '400',
-        lineHeight: 24,
-    },
-    card_footer_item_content: {
-        color: 'white',
-        fontSize: 10,
-        fontFamily: 'Urbanist',
-        fontWeight: '700',
-        lineHeight: 24,
-    },
-    content_photo: {
-        alignItems: 'center'
-    },
-    content_photo_header: {
-        color: '#00A86B',
-        fontSize: 21,
-        fontFamily: 'Montserrat',
-        fontWeight: '700',
-    },
-    content_photo_main: {
-        textAlign: 'center',
-        marginTop: 38 * scaleFactor,
-        color: 'rgba(0,0,0,0.80)',
-        fontSize: 18,
-        fontFamily: 'Montserrat',
-        fontWeight: '500',
-        lineHeight: 29,
-    },
     footer: {
         width: '100%',
         marginBottom: 46 * scaleFactor,
-        alignItems: 'center'
     },
     agree_button: {
         flexDirection: 'row',
@@ -300,7 +219,27 @@ const styles = StyleSheet.create({
         fontSize: 18,
         fontFamily: 'Urbanist',
         fontWeight: '700'
-    }
+    },
+    agree_field: {
+        marginTop: 20 * scaleFactor,
+        marginBottom: 32 * scaleFactor,
+        display: 'flex',
+        flexDirection: 'row',
+        alignItems: 'center'
+    },
+    agree_text: {
+        color: 'black',
+        fontSize: 18,
+        fontFamily: 'Montserrat',
+        fontWeight: '500',
+
+    },
+    agree_bold_text: {
+        color: '#00A86B',
+        fontSize: 18,
+        fontFamily: 'Montserrat',
+        fontWeight: '700',
+    },
 })
 
 export default DrawSignatureScreen

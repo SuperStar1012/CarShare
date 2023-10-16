@@ -5,7 +5,7 @@ const { width } = Dimensions.get('window')
 const scaleFactor = width / 414
 
 const HomeButton = ({ selected, value }) => {
-    const [select,setSelected] = useState(false);
+    const [select,setSelected] = useState({selected});
     useEffect(() => {
         setSelected(selected)
     },[])

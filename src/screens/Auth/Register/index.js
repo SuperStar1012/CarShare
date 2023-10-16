@@ -1,4 +1,4 @@
-import React, { useEffect,useState } from "react"
+import React, { useEffect, useState } from "react"
 import {
     Dimensions, View, StyleSheet, TouchableOpacity, SafeAreaView, Text, TextInput, TouchableWithoutFeedback,
     Keyboard, ScrollView
@@ -18,12 +18,12 @@ const { width } = Dimensions.get('window')
 const scaleFactor = width / 414
 
 const Register_Screen = ({ navigation }) => {
-    const[keyboardVisible, setKeyboardVisible] = useState(false);
-    const[checked,setChecked] = useState(false)
-    
+    const [keyboardVisible, setKeyboardVisible] = useState(false);
+    const [checked, setChecked] = useState(false)
+
     useEffect(() => {
         // Keyboard will show event
-        const keyboardDidShowListener  = Keyboard.addListener(
+        const keyboardDidShowListener = Keyboard.addListener(
             'keyboardDidShow',
             () => {
                 setKeyboardVisible(true);
@@ -31,7 +31,7 @@ const Register_Screen = ({ navigation }) => {
         );
 
         // Keyboard will hide event
-        const keyboardDidHideListener  = Keyboard.addListener(
+        const keyboardDidHideListener = Keyboard.addListener(
             'keyboardDidHide',
             () => {
                 setKeyboardVisible(false);
@@ -124,7 +124,7 @@ const Register_Screen = ({ navigation }) => {
                             <CheckBox
                                 disabled={false}
                                 value={checked}
-                                onChange = {() => setChecked(!checked)}
+                                onChange={() => setChecked(!checked)}
                             />
                             <Text style={styles.agree_text}>
                                 By selecting

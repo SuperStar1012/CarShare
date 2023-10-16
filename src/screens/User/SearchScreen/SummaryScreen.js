@@ -1,12 +1,15 @@
 import React, { useEffect, useState } from "react"
 import { Dimensions, View, StyleSheet, ScrollView, Button, TouchableOpacity, TouchableWithoutFeedback, Keyboard, SafeAreaView, Text, TextInput } from "react-native"
 import ArrowLeftImage from '../../../assets/images/auth/register/arrow-left.svg'
+import PaymentSuccessModal from "../../../components/modals/PaymentSuccessModal"
 
 
 const { width } = Dimensions.get('window')
 const scaleFactor = width / 414
 
-const SummaryScreen = ({ navigation }) => {
+const SummaryScreen = ({ route, navigation }) => {
+    const type = route.params && route.params.type
+    const [modalVisible,setModalVisible] = useState(false)
     const missHandle = () => {
         // setModalVisible(false)
         Keyboard.dismiss()
@@ -16,7 +19,7 @@ const SummaryScreen = ({ navigation }) => {
             <SafeAreaView style={styles.container}>
                 <View style={{ flex: 1 }}>
                     <View style={styles.header_view}>
-                        <TouchableOpacity style={styles.header_icon} onPress={() => navigation.navigate('BookingDetailScreen')}>
+                        <TouchableOpacity style={styles.header_icon} onPress={() => { type == "added" ? navigation.navigate('SelectPaymentMethodScreen', { type: 'added' }) : navigation.navigate('BookingDetailScreen') }}>
                             <ArrowLeftImage width={24 * scaleFactor} height={24 * scaleFactor} />
                         </TouchableOpacity>
                         <Text style={styles.header_text}>Review Details</Text>
@@ -71,13 +74,15 @@ const SummaryScreen = ({ navigation }) => {
                                 <Text style={styles.review_detail_footer_right}>$ 420.00</Text>
                             </View>
                         </View>
-
+                        <PaymentSuccessModal navigation={navigation} modalVisible={modalVisible} setModalVisible={setModalVisible}/>
                     </View>
                 </View>
-
-                <TouchableOpacity style={styles.footer} onPress={()=>navigation.navigate("DrawSignatureScreen")}>
+                {type == "added" ? (<TouchableOpacity style={styles.footer} onPress={() => setModalVisible(true)}>
+                    <Text style={styles.footer_text}>Continue to payment</Text>
+                </TouchableOpacity>) : (<TouchableOpacity style={styles.footer} onPress={() => navigation.navigate("DrawSignatureScreen")}>
                     <Text style={styles.footer_text}>Sign Contract</Text>
-                </TouchableOpacity>
+                </TouchableOpacity>)}
+                
             </SafeAreaView>
         </TouchableWithoutFeedback>
     )
