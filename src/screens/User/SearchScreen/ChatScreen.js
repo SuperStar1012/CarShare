@@ -88,7 +88,8 @@ const styles = StyleSheet.create({
     body:{
         flex: 1,
         paddingTop: 35 * scaleFactor,
-        paddingHorizontal: 25 * scaleFactor
+        paddingHorizontal: 25 * scaleFactor,
+        backgroundColor: 'white'
     },
     header: {
         width: '100%',

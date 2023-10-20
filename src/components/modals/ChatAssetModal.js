@@ -76,7 +76,7 @@ const styles = StyleSheet.create({
         backgroundColor: 'rgba(0, 0, 0, 0.70)',
     },
     modalView: {
-        marginTop: height * scaleFactor * 0.75,
+        marginTop: height * scaleFactor * 0.67,
         width: 304 * scaleFactor,
         paddingLeft: 21 * scaleFactor,
         paddingRight: 21 * scaleFactor,

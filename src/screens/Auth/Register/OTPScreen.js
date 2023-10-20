@@ -136,7 +136,8 @@ const styles = StyleSheet.create({
         marginTop: 45 * scaleFactor,
         width: 292 * scaleFactor,
         flexDirection: 'row',
-        justifyContent: 'space-between'
+        justifyContent: 'space-between',
+        alignItems: 'center'
     },
     input_number: {
         width: 52 * scaleFactor,

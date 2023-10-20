@@ -12,7 +12,7 @@ const scaleFactor = width / 414
 const FooterMenu = ({navigation}) => {
     return (
         <View style={styles.footer_menu}>
-            <TouchableOpacity style={styles.footer_menu_item}>
+            <TouchableOpacity style={styles.footer_menu_item} onPress={()=>navigation.navigate("HomeScreen")}>
                 <HomeImage />
                 <Text style={styles.selected_footer_menu_text}>Home</Text>
             </TouchableOpacity>

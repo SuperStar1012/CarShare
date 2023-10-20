@@ -88,7 +88,8 @@ const styles = StyleSheet.create({
         flex: 1,
         paddingLeft: 25 * scaleFactor,
         paddingRight: 25 * scaleFactor,
-        paddingTop: 30 * scaleFactor
+        paddingTop: 30 * scaleFactor,
+        marginBottom: 30 * scaleFactor
     },
     header_view: {
         flexDirection: 'row',

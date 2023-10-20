@@ -18,7 +18,7 @@ import HomeCarCard from "../../components/cards/HomeCarCard";
 import FooterMenu from "../../components/menus/FooterMenu";
 
 
-const { width } = Dimensions.get('window')
+const { width,height } = Dimensions.get('window')
 const scaleFactor = width / 414
 
 const HomeScreen = ({ navigation }) => {
@@ -220,7 +220,7 @@ const styles = StyleSheet.create({
     map_icon: {
         zIndex: 3,
         position: 'absolute',
-        top: 650 * scaleFactor,
+        top: height * 0.7 * scaleFactor,
         justifyContent: 'center',
         alignItems: 'center',
         marginBottom: 25 * scaleFactor,

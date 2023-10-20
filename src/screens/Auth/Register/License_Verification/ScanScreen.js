@@ -74,7 +74,7 @@ const styles = StyleSheet.create({
     },
     driver_image: {
         width: "100%",
-        height: height * 0.8 * scaleFactor,
+        height: height * 0.72 * scaleFactor,
         position: 'relative'
     },
     info_image: {
@@ -85,7 +85,7 @@ const styles = StyleSheet.create({
         width: 62 * scaleFactor,
         height: 62 * scaleFactor,
         borderRadius: 100 * scaleFactor,
-        left: (width / 2 - 20 ) * scaleFactor
+        left: (width / 2 - 30 ) * scaleFactor
     },
     content: {
         width: '100%',

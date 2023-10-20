@@ -17,6 +17,7 @@ const LicenseVerifyScreen = ({ navigation }) => {
     const [type, setType] = useState('license')
     const [selectedImage, setSelectedImage] = useState('')
 
+
     const openImagePicker = () => {
         const options = {
             mediaType: 'photo',
@@ -26,6 +27,7 @@ const LicenseVerifyScreen = ({ navigation }) => {
         };
 
         launchImageLibrary(options, (response) => {
+            console.log(response.uri)
             if (response.didCancel) {
                 console.log('User cancelled image picker');
             } else if (response.error) {
@@ -35,7 +37,7 @@ const LicenseVerifyScreen = ({ navigation }) => {
                 setSelectedImage(imageUri);
                 navigation.navigate("ScanScreen", {
                     navigation: navigation,
-                    selectedImage: selectedImage
+                    selectedImage: imageUri
                 })
             }
         });
