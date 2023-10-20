@@ -77,28 +77,28 @@ const styles = StyleSheet.create({
     header_text: {
         textAlign: 'center',
         color: 'black',
-        fontSize: 18,
+        fontSize: 18 * scaleFactor,
         fontFamily: 'Urbanist',
         fontWeight: '700',
-        lineHeight: 24
+        lineHeight: 24 * scaleFactor
     },
     content: { flex: 1 },
     content_header_text: {
         marginTop: 44 * scaleFactor,
         color: '#00A86B',
-        fontSize: 18,
+        fontSize: 18 * scaleFactor,
         fontFamily: 'Montserrat',
         fontWeight: '700',
-        lineHeight: 24
+        lineHeight: 24 * scaleFactor
     },
     content_header_detail_text: {
         opacity: 0.6,
         marginTop: 10 * scaleFactor,
         color: 'black',
-        fontSize: 16,
+        fontSize: 16 * scaleFactor,
         fontFamily: 'Montserra',
         fontWeight: '400',
-        lineHeight: 24
+        lineHeight: 24 * scaleFactor
     },
     content_header: {
         marginTop: 39 * scaleFactor,
@@ -121,7 +121,7 @@ const styles = StyleSheet.create({
     content_item_text: {
         marginLeft: 16 * scaleFactor,
         color: 'black',
-        fontSize: 18,
+        fontSize: 18 * scaleFactor,
         fontFamily: 'Montserrat',
         fontWeight: '700'
     }

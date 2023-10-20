@@ -24,17 +24,18 @@ const RatingScreen = ({ route, navigation }) => {
     return (
         <TouchableWithoutFeedback onPress={() => missHandle()}>
             <SafeAreaView style={styles.container}>
-                <View style={styles.main_content}>
-                    <View style={styles.header_view}>
-                        <TouchableOpacity style={styles.header_icon} onPress={()=>navigation.navigate("PersonalFeedbackScreen")}>
-                            <ArrowLeftImage width={24 * scaleFactor} height={24 * scaleFactor} />
-                        </TouchableOpacity>
-                        <Text style={styles.header_text}>Ratings</Text>
-                    </View>
-                    <View style={styles.content}>
-                        <View style={styles.content_header}>
-                            <Text style={styles.content_header_text}>Owner Reviews</Text>
-                            {/* <TouchableOpacity style={styles.content_right_view}>
+                <View style={styles.body}>
+                    <View style={styles.main_content}>
+                        <View style={styles.header_view}>
+                            <TouchableOpacity style={styles.header_icon} onPress={() => navigation.navigate("PersonalFeedbackScreen")}>
+                                <ArrowLeftImage width={24 * scaleFactor} height={24 * scaleFactor} />
+                            </TouchableOpacity>
+                            <Text style={styles.header_text}>Ratings</Text>
+                        </View>
+                        <View style={styles.content}>
+                            <View style={styles.content_header}>
+                                <Text style={styles.content_header_text}>Owner Reviews</Text>
+                                {/* <TouchableOpacity style={styles.content_right_view}>
                                 <Dropdown
                                     value={value}
                                     onChangeText={setValue}
@@ -42,15 +43,16 @@ const RatingScreen = ({ route, navigation }) => {
                                     multiple
                                 />
                             </TouchableOpacity> */}
+                            </View>
+                            <ScrollView style={styles.content_view}>
+                                <RatingCard navigation={navigation}/>
+                                <RatingCard />
+                                <RatingCard />
+                                <RatingCard />
+                                <RatingCard />
+                                <RatingCard />
+                            </ScrollView>
                         </View>
-                        <ScrollView style={styles.content_view}>
-                            <RatingCard />  
-                            <RatingCard />
-                            <RatingCard />
-                            <RatingCard />
-                            <RatingCard />
-                            <RatingCard />
-                        </ScrollView>
                     </View>
                 </View>
             </SafeAreaView>
@@ -62,6 +64,9 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         backgroundColor: 'white',
+    },
+    body: {
+        flex: 1,
         paddingTop: 37 * scaleFactor,
         paddingHorizontal: 25 * scaleFactor
     },
@@ -78,17 +83,17 @@ const styles = StyleSheet.create({
         position: 'absolute',
         left: 0,
     },
-   
+
     header_text: {
         textAlign: 'center',
         color: 'black',
-        fontSize: 18,
+        fontSize: 18 * scaleFactor,
         fontFamily: 'Urbanist',
         fontWeight: '700',
-        lineHeight: 24
+        lineHeight: 24 * scaleFactor
     },
-    content: {flex: 1},
-    content_header :{
+    content: { flex: 1 },
+    content_header: {
         marginTop: 36 * scaleFactor,
         flexDirection: 'row',
         justifyContent: 'space-between',
@@ -96,7 +101,7 @@ const styles = StyleSheet.create({
     },
     content_header_text: {
         color: 'black',
-        fontSize: 20,
+        fontSize: 20 * scaleFactor,
         fontFamily: 'Montserrat',
         fontWeight: '700'
     },
@@ -151,7 +156,7 @@ const styles = StyleSheet.create({
     },
     footer_text: {
         color: 'white',
-        fontSize: 18,
+        fontSize: 18 * scaleFactor,
         fontFamily: 'Urbanist',
         fontWeight: '700'
     },

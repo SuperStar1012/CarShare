@@ -7,7 +7,7 @@ import InfoImage from '../../../../assets/images/auth/register/info-circle.svg'
 // import RNTesseractOcr from 'react-native-tesseract-ocr';
 
 
-const { width } = Dimensions.get('window')
+const { width,height } = Dimensions.get('window')
 const scaleFactor = width / 414
 
 const ScanScreen = ({ navigation,route }) => {
@@ -74,18 +74,18 @@ const styles = StyleSheet.create({
     },
     driver_image: {
         width: "100%",
-        height: 670 * scaleFactor,
-        position: 'absolute'
+        height: height * 0.8 * scaleFactor,
+        position: 'relative'
     },
     info_image: {
-        position: 'relative',
-        bottom: -(670 - 31) * scaleFactor,
+        position: 'absolute',
+        bottom: -31 * scaleFactor,
         padding: 10 * scaleFactor,
         backgroundColor: 'white',
         width: 62 * scaleFactor,
         height: 62 * scaleFactor,
         borderRadius: 100 * scaleFactor,
-        left: (width / 2 - 31) * scaleFactor
+        left: (width / 2 - 20 ) * scaleFactor
     },
     content: {
         width: '100%',

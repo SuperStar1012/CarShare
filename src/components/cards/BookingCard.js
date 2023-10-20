@@ -62,18 +62,18 @@ const styles = StyleSheet.create({
     },
     name_text: {
         color: 'black',
-        fontSize: 16,
+        fontSize: 16 * scaleFactor,
         fontFamily: 'Montserrat',
         fontWeight: '700',
-        lineHeight: 24
+        lineHeight: 24 * scaleFactor
     },
     detail_text: {
         marginTop: 2 * scaleFactor,
         color: 'rgba(0,0,0,0.60)',
-        fontSize: 12,
+        fontSize: 12 * scaleFactor,
         fontFamily: 'Montserrat',
         fontWeight: '400',
-        lineHeight: 24
+        lineHeight: 24 * scaleFactor
     },
     card_bottom_view: {
         alignItems: 'center',
@@ -82,17 +82,17 @@ const styles = StyleSheet.create({
     },
     card_bottom_left_text: {
         color: 'black',
-        fontSize: 16,
+        fontSize: 16 * scaleFactor,
         fontFamily: 'Montserrat',
         fontWeight: '400',
-        lineHeight: 24
+        lineHeight: 24 * scaleFactor
     },
     pay_text: {
         color: '#00A86B',
-        fontSize: 16,
+        fontSize: 16 * scaleFactor,
         fontFamily: 'Montserrat',
         fontWeight: '700',
-        lineHeight: 24
+        lineHeight: 24 * scaleFactor
     },
     type_view: {
         marginLeft: 16 * scaleFactor,
@@ -103,10 +103,10 @@ const styles = StyleSheet.create({
     },
     type_text: {
         color: 'white',
-        fontSize: 10,
+        fontSize: 10 * scaleFactor,
         fontFamily: 'Urbanist',
         fontWeight: '600',
-        lineHeight: 24,
+        lineHeight: 24 * scaleFactor,
         textAlign: 'center',
         verticalAlign: 'middle'
     },
@@ -122,10 +122,10 @@ const styles = StyleSheet.create({
     },
     cancel_type_text: {
         color: '#9F0000',
-        fontSize: 10,
+        fontSize: 10 * scaleFactor,
         fontFamily: 'Urbanist',
         fontWeight: '600',
-        lineHeight: 24,
+        lineHeight: 24 * scaleFactor,
         textAlign: 'center'
     },
     complete_type_view: {
@@ -140,10 +140,11 @@ const styles = StyleSheet.create({
     },
     complete_type_text: {
         color: '#009F06',
-        fontSize: 10,
+        fontSize: 10 * scaleFactor,
         fontFamily: 'Urbanist',
         fontWeight: '600',
-        lineHeight: 24,
+        lineHeight: 24 * scaleFactor
+        ,
         textAlign: 'center'
     }
 });

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react"
-import { Dimensions, View, StyleSheet, TouchableOpacity, TextInput, TouchableWithoutFeedback, Keyboard, SafeAreaView, Text } from "react-native"
+import { Dimensions, View, StyleSheet, ScrollView, TouchableOpacity,KeyboardAvoidingView, TextInput, TouchableWithoutFeedback, Keyboard, SafeAreaView, Text } from "react-native"
 import ArrowLeftImage from '../../../assets/images/auth/register/arrow-left.svg'
 
 import CreaditCard from "../../../components/cards/CreditCard"
@@ -12,10 +12,10 @@ const scaleFactor = width / 414
 const AddPaymentScreen = ({ navigation }) => {
 
     const [keyboardVisible, setKeyboardVisible] = useState(false);
-    const [name,setName] = useState("")
-    const [cvv,setCvv] = useState("")
-    const [date,setDate] = useState("")
-    const [cardNumber,setCardNumber] = useState("")
+    const [name, setName] = useState("")
+    const [cvv, setCvv] = useState("")
+    const [date, setDate] = useState("")
+    const [cardNumber, setCardNumber] = useState("")
 
     const missHandle = () => {
         Keyboard.dismiss()
@@ -45,62 +45,66 @@ const AddPaymentScreen = ({ navigation }) => {
     return (
         <TouchableWithoutFeedback onPress={() => missHandle()}>
             <SafeAreaView style={styles.container}>
-                <View style={{ flex: 1 }}>
-                    <View style={styles.header_view}>
-                        <TouchableOpacity style={styles.header_icon} onPress={() => {navigation.navigate('DrawSignatureScreen')}}>
-                            <ArrowLeftImage width={24 * scaleFactor} height={24 * scaleFactor} />
-                        </TouchableOpacity>
-                        <Text style={styles.header_text}>Payment Method</Text>
-                    </View>
-                    <View style={styles.content}>
-                        {keyboardVisible == false ? (
-                            <View>
-                                <Text style={styles.content_text}>Select your payment method</Text>
-                                <CreaditCard name={name} cardNumber={cardNumber} date={date} cvv={cvv} />
-                            </View>
-                        ) : null}
-                        <View style={styles.input_view}>
-                            <View style={styles.name_input_view}>
-                                <Text style={styles.name_header_text}>
-                                    Name on Card
-                                </Text>
-                                <View style={styles.email_input}>
-                                    <UserImage width={20 * scaleFactor} height={20 * scaleFactor} style={styles.user_image} />
-                                    <TextInput style={styles.email_text_input} onChangeText={e=>setName(e)}></TextInput>
-                                </View>
-                            </View>
-                            <View style={styles.name_input_view}>
-                                <Text style={styles.name_header_text}>
-                                    Card Number
-                                </Text>
-                                <View style={styles.email_input}>
-                                    <TextInput style={styles.number_text_input} keyboardType="numeric" onChangeText={e=>setCardNumber(e)}></TextInput>
-                                </View>
-                            </View>
-                            <View style={styles.date_ccv}>
-                                <View style={styles.date_view}>
-                                    <Text style={styles.name_header_text}>
-                                        Expiry Date
-                                    </Text>
-                                    <View style={styles.date_input}>
-                                        <TextInput style={styles.date_input_view} keyboardType="numeric" onChangeText={e=>setDate(e)}></TextInput>
-                                    </View>
-                                </View>
-                                <View style={styles.cvv_view}>
-                                    <Text style={styles.name_header_text}>
-                                        CVV
-                                    </Text>
-                                    <View style={styles.cvv_input}>
-                                        <TextInput style={styles.cvv_input_view} keyboardType="numeric" onChangeText={e=>setCvv(e)}></TextInput>
-                                    </View>
-                                </View>
-                            </View>
+                <View style={styles.body}>
+                    <View style={{ flex: 1 }}>
+                        <View style={styles.header_view}>
+                            <TouchableOpacity style={styles.header_icon} onPress={() => { navigation.navigate('DrawSignatureScreen') }}>
+                                <ArrowLeftImage width={24 * scaleFactor} height={24 * scaleFactor} />
+                            </TouchableOpacity>
+                            <Text style={styles.header_text}>Add New Card Details</Text>
                         </View>
+                        <ScrollView style={styles.content}>
+                            {keyboardVisible == false ? (
+                                <View>
+                                    <Text style={styles.content_text}>Select your payment method</Text>
+                                    <CreaditCard name={name} cardNumber={cardNumber} date={date} cvv={cvv} />
+                                </View>
+                            ) : null}
+                            <View style={styles.input_view}>
+                                <View style={styles.name_input_view}>
+                                    <Text style={styles.name_header_text}>
+                                        Name on Card
+                                    </Text>
+                                    <View style={styles.email_input}>
+                                        <UserImage width={20 * scaleFactor} height={20 * scaleFactor} style={styles.user_image} />
+                                        <TextInput style={styles.email_text_input} onChangeText={e => setName(e)}></TextInput>
+                                    </View>
+                                </View>
+                                <View style={styles.name_input_view}>
+                                    <Text style={styles.name_header_text}>
+                                        Card Number
+                                    </Text>
+                                    <View style={styles.email_input}>
+                                        <TextInput style={styles.number_text_input} keyboardType="numeric" onChangeText={e => setCardNumber(e)}></TextInput>
+                                    </View>
+                                </View>
+                                <View style={styles.date_ccv}>
+                                    <View style={styles.date_view}>
+                                        <Text style={styles.name_header_text}>
+                                            Expiry Date
+                                        </Text>
+                                        <View style={styles.date_input}>
+                                            <TextInput style={styles.date_input_view} keyboardType="numeric" onChangeText={e => setDate(e)}></TextInput>
+                                        </View>
+                                    </View>
+                                    <View style={styles.cvv_view}>
+                                        <Text style={styles.name_header_text}>
+                                            CVV
+                                        </Text>
+                                        <View style={styles.cvv_input}>
+                                            <TextInput style={styles.cvv_input_view} keyboardType="numeric" onChangeText={e => setCvv(e)}></TextInput>
+                                        </View>
+                                    </View>
+                                </View>
+                            </View>
+                        </ScrollView>
                     </View>
+                    <KeyboardAvoidingView behavior={Platform.OS === "ios" ? "padding" : "height"}>
+                        <TouchableOpacity style={styles.footer} onPress={() => navigation.navigate("SelectPaymentMethodScreen", { type: "added" })}>
+                            <Text style={styles.footer_text}>Add Card</Text>
+                        </TouchableOpacity>
+                    </KeyboardAvoidingView>
                 </View>
-                <TouchableOpacity style={styles.footer} onPress={() => navigation.navigate("SelectPaymentMethodScreen",{type: "added"})}>
-                    <Text style={styles.footer_text}>Add Card</Text>
-                </TouchableOpacity>
             </SafeAreaView>
         </TouchableWithoutFeedback>
     )
@@ -110,6 +114,9 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         backgroundColor: 'white',
+    },
+    body: {
+        flex: 1,
         paddingTop: 37 * scaleFactor,
         paddingHorizontal: 25 * scaleFactor
     },
@@ -131,20 +138,20 @@ const styles = StyleSheet.create({
     header_text: {
         textAlign: 'center',
         color: 'black',
-        fontSize: 16,
+        fontSize: 16 * scaleFactor,
         fontFamily: 'Urbanist',
         fontWeight: '700',
-        lineHeight: 24
+        lineHeight: 24 * scaleFactor
 
     },
     content_text: {
         marginTop: 48 * scaleFactor,
         marginBottom: 27 * scaleFactor,
         color: 'black',
-        fontSize: 20,
+        fontSize: 20 * scaleFactor,
         fontFamily: 'Urbanist',
         fontWeight: '700',
-        lineHeight: 24
+        lineHeight: 24 * scaleFactor
     },
     input_view: {
         width: '100%',
@@ -167,7 +174,7 @@ const styles = StyleSheet.create({
     },
     email_text: {
         color: 'rgba(0,0,0,0.40)',
-        fontSize: 14,
+        fontSize: 14 * scaleFactor,
         fontFamily: 'Urbanist',
         fontWeight: '500',
         // wordWrap: 'break-word'
@@ -186,7 +193,7 @@ const styles = StyleSheet.create({
     date_input_view: {
         width: '100%',
         color: 'black',
-        fontSize: 16,
+        fontSize: 16 * scaleFactor,
         fontFamily: 'Urbanist',
         fontWeight: '600'
     },
@@ -198,7 +205,7 @@ const styles = StyleSheet.create({
         width: 266 * scaleFactor,
         // Email or username
         color: 'black',
-        fontSize: 16,
+        fontSize: 16 * scaleFactor,
         fontFamily: 'Urbanist',
         fontWeight: '600',
         // wordWrap: 'break-word'
@@ -208,7 +215,7 @@ const styles = StyleSheet.create({
         width: 266 * scaleFactor,
         // Email or username
         color: 'black',
-        fontSize: 16,
+        fontSize: 16 * scaleFactor,
         fontFamily: 'Urbanist',
         fontWeight: '600',
         // wordWrap: 'break-word'
@@ -216,7 +223,7 @@ const styles = StyleSheet.create({
     cvv_input_view: {
         width: '100%',
         color: 'black',
-        fontSize: 16,
+        fontSize: 16 * scaleFactor,
         fontFamily: 'Urbanist',
         fontWeight: '600',
     },
@@ -258,10 +265,10 @@ const styles = StyleSheet.create({
     add_button_text: {
         marginLeft: 10 * scaleFactor,
         color: 'black',
-        fontSize: 16,
+        fontSize: 16 * scaleFactor,
         fontFamily: 'Urbanist',
         fontWeight: '700',
-        lineHeight: 24
+        lineHeight: 24 * scaleFactor
     },
     footer: {
         width: '100%',

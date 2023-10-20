@@ -10,21 +10,23 @@ const LocationScreen = ({ navigation }) => {
 
     return (
         <SafeAreaView style={styles.container}>
-            <View style={{ flex: 1 }}>
-                <View style={styles.header}>
-                    <TouchableOpacity style={styles.header_icon} onPress={() => navigation.navigate('TermScreen')}>
-                        <ArrowLeftImage  width={24 * scaleFactor} height={24 * scaleFactor} />
+            <View style={styles.body}>
+                <View style={{ flex: 1 }}>
+                    <View style={styles.header}>
+                        <TouchableOpacity style={styles.header_icon} onPress={() => navigation.goBack()}>
+                            <ArrowLeftImage width={24 * scaleFactor} height={24 * scaleFactor} />
+                        </TouchableOpacity>
+                        <Text style={styles.header_text}>Permission</Text>
+                    </View>
+                    <View style={styles.content}>
+                        <AddressImage width={343.7 * scaleFactor} height={346 * scaleFactor} />
+                    </View>
+                </View>
+                <View style={styles.footer}>
+                    <TouchableOpacity style={styles.agree_button} onPress={() => navigation.navigate("LocationScreen")}>
+                        <Text style={styles.button_text}>Turn on location</Text>
                     </TouchableOpacity>
-                    <Text style={styles.header_text}>Permission</Text>
                 </View>
-                <View style={styles.content}>
-                    <AddressImage width={343.7 * scaleFactor} height={346 * scaleFactor} />
-                </View>
-            </View>
-            <View style={styles.footer}>
-                <TouchableOpacity style={styles.agree_button} onPress={() => navigation.navigate("LocationScreen")}>
-                    <Text style={styles.button_text}>Turn on location</Text>
-                </TouchableOpacity>
             </View>
         </SafeAreaView>
     )
@@ -34,16 +36,18 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         backgroundColor: 'white',
+    },
+    body: {
+        flex: 1,
         paddingLeft: 25 * scaleFactor,
-        paddingRight: 25 * scaleFactor,
+        paddingRight: 25 * scaleFactor
     },
     header: {
-        marginTop: 31 * scaleFactor,
+        marginTop: 40 * scaleFactor,
         flexDirection: 'row',
         alignItems: 'center',
         justifyContent: 'center',
-        width: '100%',
-        position: 'relative'
+        width: '100%'
     },
     header_icon: {
         position: 'absolute',
@@ -51,13 +55,11 @@ const styles = StyleSheet.create({
     },
     header_text: {
         textAlign: 'center',
-        marginLeft: -24 * scaleFactor,
         color: 'black',
-        fontSize: 18,
+        fontSize: 18 * scaleFactor,
         fontFamily: 'Montserrat',
         fontWeight: '700',
-        lineHeight: 27.34,
-        wordWrap: 'break-word',
+        lineHeight: 27.34 * scaleFactor
     },
     content: {
         width: '100%',
@@ -66,25 +68,24 @@ const styles = StyleSheet.create({
     },
     content_header_text: {
         color: 'black',
-        fontSize: 18,
+        fontSize: 18 * scaleFactor,
         fontFamily: 'Poppins',
         fontWeight: '600',
-        wordWrap: 'break-word',
     },
     content_main_text: {
         marginTop: 10 * scaleFactor,
         color: 'rgba(0,0,0,0.60)',
-        fontSize: 14,
+        fontSize: 14 * scaleFactor,
         fontFamily: 'Poppins',
         fontWeight: '400',
-        lineHeight: 32,
+        lineHeight: 32 * scaleFactor,
     },
     learn_text: {
         color: 'rgb(0,0,0)',
-        fontSize: 14,
+        fontSize: 14 * scaleFactor,
         fontFamily: 'Poppins',
         fontWeight: '400',
-        lineHeight: 32,
+        lineHeight: 32 * scaleFactor,
         textDecorationLine: 'underline',
         textDecorationStyle: 'solid'
     },
@@ -112,10 +113,9 @@ const styles = StyleSheet.create({
     },
     button_text: {
         color: 'white',
-        fontSize: 18,
+        fontSize: 18 * scaleFactor,
         fontFamily: 'Urbanist',
-        fontWeight: '700',
-        wordWrap: 'break-word'
+        fontWeight: '700'
     }
 })
 

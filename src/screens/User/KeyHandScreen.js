@@ -58,10 +58,10 @@ const styles = StyleSheet.create({
     content_header_text: {
         marginTop: 37 * scaleFactor,
         color: 'black',
-        fontSize: 20,
+        fontSize: 20 * scaleFactor,
         fontFamily: 'Urbanist',
         fontWeight: '700',
-        lineHeight: 24
+        lineHeight: 24 * scaleFactor
     },
     header_icon: {
         position: 'absolute',
@@ -71,10 +71,10 @@ const styles = StyleSheet.create({
     header_text: {
         textAlign: 'center',
         color: 'black',
-        fontSize: 16,
+        fontSize: 16 * scaleFactor,
         fontFamily: 'Urbanist',
         fontWeight: '700',
-        lineHeight: 24
+        lineHeight: 24 * scaleFactor
     },
     content_item: {
         marginTop: 20 * scaleFactor,
@@ -87,10 +87,10 @@ const styles = StyleSheet.create({
     },
     content_item_text: {
         color: 'rgba(0,0,0,0.80)',
-        fontSize: 16,
+        fontSize: 16 * scaleFactor,
         fontFamily: 'Montserrat',
         fontWeight: '500',
-        lineHeight: 24.30,
+        lineHeight: 24.30 * scaleFactor,
         marginLeft: 28 * scaleFactor
     }
 

@@ -135,7 +135,7 @@ const styles = StyleSheet.create({
     location_header_text: {
         marginLeft: 8 * scaleFactor,
         color: 'white',
-        fontSize: 14,
+        fontSize: 14 * scaleFactor,
         fontFamily: 'Inter',
         fontWeight: '500',
     },
@@ -158,7 +158,7 @@ const styles = StyleSheet.create({
         height: 50 * scaleFactor,
         width: 286 * scaleFactor,
         color: 'white',
-        fontSize: 13,
+        fontSize: 13 * scaleFactor,
         fontFamily: 'Mulish',
         fontWeight: '400',
         letterSpacing: 0.26,
@@ -182,13 +182,13 @@ const styles = StyleSheet.create({
     },
     category_header_text: {
         color: 'black',
-        fontSize: 18,
+        fontSize: 18 * scaleFactor,
         fontFamily: 'Montserrat',
         fontWeight: '700',
     },
     category_header_see: {
         color: '#00A86B',
-        fontSize: 16,
+        fontSize: 16 * scaleFactor,
         fontFamily: 'Montserrat',
         fontWeight: '700',
         lineHeight: 15,
@@ -201,7 +201,7 @@ const styles = StyleSheet.create({
     },
     rec_topic: {
         color: '#1E2022',
-        fontSize: 19,
+        fontSize: 19 * scaleFactor,
         fontFamily: 'Poppins',
         fontWeight: '600',
         letterSpacing: 1
@@ -210,6 +210,7 @@ const styles = StyleSheet.create({
         marginTop: 17 * scaleFactor,
     },
     recommendations_content: {
+        width: "100%",
         marginTop: 21 * scaleFactor,
         flexDirection: 'column',
     },
@@ -236,7 +237,7 @@ const styles = StyleSheet.create({
     map_text: {
         marginTop: 4 * scaleFactor,
         color: 'white',
-        fontSize: 10,
+        fontSize: 10 * scaleFactor,
         fontFamily: 'Poppins',
         fontWeight: '500'
     }

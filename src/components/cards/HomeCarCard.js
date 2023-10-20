@@ -59,7 +59,7 @@ const HomeCarCard = ({ navigation,modalVisible,setModalVisible }) => {
 
 const styles = StyleSheet.create({
     rec_item: {
-        padding: 11 * scaleFactor,
+        wdith: '100%',
         marginBottom: 21 * scaleFactor,
         background: 'white',
         shadowColor: '#000',
@@ -78,14 +78,14 @@ const styles = StyleSheet.create({
     rec_car_name: {
         marginRight: 40 * scaleFactor,
         color: '#1E2022',
-        fontSize: 13,
+        fontSize: 13 * scaleFactor,
         fontFamily: 'Montserrat',
         fontWeight: '700',
         letterSpacing: 1
     },
     rec_car_pay: {
         color: 'black',
-        fontSize: 11,
+        fontSize: 11 * scaleFactor,
         fontFamily: 'Poppins',
         fontWeight: '600',
         letterSpacing: 1,
@@ -109,7 +109,7 @@ const styles = StyleSheet.create({
     rec_distance: {
         marginTop: 2 * scaleFactor,
         color: 'rgba(0,0,0,0.80)',
-        fontSize: 11,
+        fontSize: 11 * scaleFactor,
         fontFamily: 'Poppins',
         fontWeight: '400'
     },
@@ -123,14 +123,14 @@ const styles = StyleSheet.create({
     },
     rec_type: {
         color: 'rgba(0,0,0,0.59)',
-        fontSize: 11,
+        fontSize: 11 * scaleFactor,
         fontFamily: 'Poppins',
         fontWeight: '500',
         letterSpacing: 1
     },
     rec_state: {
         color: '#00A86B',
-        fontSize: 11,
+        fontSize: 11 * scaleFactor,
         fontFamily: 'Poppins',
         fontWeight: '700',
         letterSpacing: 1

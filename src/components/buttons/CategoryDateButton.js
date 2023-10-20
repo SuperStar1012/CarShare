@@ -38,19 +38,19 @@ const styles = StyleSheet.create({
     },
     button_text: {
         color: 'rgba(0,0,0,0.60)',
-        fontSize: 14,
+        fontSize: 14 * scaleFactor,
         fontFamily: 'Montserrat',
         fontWeight: '700',
     },
     selected_button_text: {
         color: 'white',
-        fontSize: 14,
+        fontSize: 14 * scaleFactor,
         fontFamily: 'Montserrat',
         fontWeight: '700',
        
     },
     selected_button: {
-        paddingHorizontal: 26 * scaleFactor,
+        paddingHorizontal: 20 * scaleFactor,
         paddingVertical: 16 * scaleFactor,
         flexDirection: 'row',
         alignItems: 'center',

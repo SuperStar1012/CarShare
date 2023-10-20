@@ -23,7 +23,7 @@ const ExtendDurationScreen = ({ route, navigation }) => {
             <SafeAreaView style={{ flex: 1 }}>
                 <View style={styles.main_content}>
                     <View style={styles.header_view}>
-                        <TouchableOpacity style={styles.header_icon} onPress={() => navigation.navigate("TimerScreen")}>
+                        <TouchableOpacity style={styles.header_icon} onPress={() => navigation.goBack()}>
                             <ArrowLeftImage width={24 * scaleFactor} height={24 * scaleFactor} />
                         </TouchableOpacity>
                         <Text style={styles.header_text}>Extend Duration</Text>
@@ -105,10 +105,10 @@ const styles = StyleSheet.create({
     header_text: {
         textAlign: 'center',
         color: 'black',
-        fontSize: 16,
+        fontSize: 16 * scaleFactor,
         fontFamily: 'Urbanist',
         fontWeight: '700',
-        lineHeight: 24
+        lineHeight: 24 * scaleFactor
     },
     content: { flex: 1 },
     date_time_view: {
@@ -121,7 +121,7 @@ const styles = StyleSheet.create({
     },
     date_header_text: {
         color: 'black',
-        fontSize: 20,
+        fontSize: 20 * scaleFactor,
         fontFamily: 'Urbanist',
         fontWeight: '700',
         letterSpacing: 0.40
@@ -170,7 +170,7 @@ const styles = StyleSheet.create({
     },
     footer_text: {
         color: 'white',
-        fontSize: 18,
+        fontSize: 18 * scaleFactor,
         fontFamily: 'Urbanist',
         fontWeight: '700'
     },
@@ -186,13 +186,13 @@ const styles = StyleSheet.create({
     },
     amount_header: {
         color: 'black',
-        fontSize: 20,
+        fontSize: 20 * scaleFactor,
         fontFamily: 'Urbanist',
         fontWeight: '400'
     },
     amount_content: {
         color: '#00A86B',
-        fontSize: 20,
+        fontSize: 20 * scaleFactor,
         fontFamily: 'Urbanist',
         fontWeight: '800',
     }

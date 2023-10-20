@@ -10,22 +10,24 @@ const scaleFactor = width / 414
 const SuccessOTPScreen = ({ navigation }) => {
     return (
         <SafeAreaView style={styles.container}>
-            <View style={{ flex: 1 }}>
-                <View style={styles.header}>
-                    <TouchableOpacity style={styles.header_icon} onPress={() => navigation.navigate('TermScreen')}>
-                        <ArrowLeftImage width={24 * scaleFactor} height={24 * scaleFactor} />
+            <View style={styles.body}>
+                <View style={{ flex: 1 }}>
+                    <View style={styles.header}>
+                        <TouchableOpacity style={styles.header_icon} onPress={() => navigation.goBack()}>
+                            <ArrowLeftImage width={24 * scaleFactor} height={24 * scaleFactor} />
+                        </TouchableOpacity>
+                    </View>
+                    <View style={styles.content}>
+                        <VerifyImage width={246 * scaleFactor} height={246 * scaleFactor} />
+                        <Text style={styles.content_header_text}>Phone Number verified successfully</Text>
+                        <Text style={styles.content_main_text}>Your phone number is verified Now. Click continue to proceed further</Text>
+                    </View>
+                </View>
+                <View style={styles.footer}>
+                    <TouchableOpacity style={styles.agree_button} onPress={() => navigation.navigate("EnterLicenseScreen")}>
+                        <Text style={styles.button_text}>Finish</Text>
                     </TouchableOpacity>
                 </View>
-                <View style={styles.content}>
-                    <VerifyImage width={246 * scaleFactor} height={246 * scaleFactor}  />
-                    <Text style={styles.content_header_text}>Phone Number verified successfully</Text>
-                    <Text style={styles.content_main_text}>Your phone number is verified Now. Click continue to proceed further</Text>
-                </View>
-            </View>
-            <View style={styles.footer}>
-                <TouchableOpacity style={styles.agree_button} onPress={() => navigation.navigate("SuccessOTPScreen")}>
-                    <Text style={styles.button_text}>Finish</Text>
-                </TouchableOpacity>
             </View>
         </SafeAreaView>
     )
@@ -35,13 +37,17 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         backgroundColor: 'white',
-        paddingLeft: 25 * scaleFactor,
-        paddingRight: 25 * scaleFactor,
     },
     header: {
         marginTop: 38 * scaleFactor,
         flexDirection: 'row',
         width: '100%',
+    },
+    body: {
+        flex: 1,
+        paddingLeft: 25 * scaleFactor,
+        paddingRight: 25 * scaleFactor,
+
     },
     content: {
         width: '100%',
@@ -58,10 +64,10 @@ const styles = StyleSheet.create({
     content_header_text: {
         // Add Phone Number
         color: 'black',
-        fontSize: 28,
+        fontSize: 28 * scaleFactor,
         fontFamily: 'Urbanist',
         fontWeight: '700',
-        lineHeight: 39,
+        lineHeight: 39 * scaleFactor,
         textAlign: 'center'
         // lineHeight: 24,
     },
@@ -69,10 +75,10 @@ const styles = StyleSheet.create({
         width: 316 * scaleFactor,
         marginTop: 32 * scaleFactor,
         color: 'rgba(0,0,0,0.40)',
-        fontSize: 16,
+        fontSize: 16 * scaleFactor,
         fontFamily: 'Urbanist',
         fontWeight: '500',
-        lineHeight: 24,
+        lineHeight: 24 * scaleFactor,
         textAlign: 'center'
     },
     verify_number_field: {
@@ -96,7 +102,7 @@ const styles = StyleSheet.create({
     },
     verify_number_input: {
         color: 'black',
-        fontSize: 26,
+        fontSize: 26 * scaleFactor,
         fontFamily: 'Montserrat',
         fontWeight: '700',
         textAlign: 'center'
@@ -105,7 +111,7 @@ const styles = StyleSheet.create({
         marginTop: 107 * scaleFactor,
         textDecorationLine: 'underline',
         color: '#00A86B',
-        fontSize: 16,
+        fontSize: 16 * scaleFactor,
         fontFamily: 'Montserrat',
         fontWeight: '700'
     },
@@ -124,14 +130,14 @@ const styles = StyleSheet.create({
     },
     button_text: {
         color: 'white',
-        fontSize: 18,
+        fontSize: 18 * scaleFactor,
         fontFamily: 'Urbanist',
         fontWeight: '700',
         // wordWrap: 'break-word'
     },
     term_text: {
         color: '#00A86B',
-        fontSize: 16,
+        fontSize: 16 * scaleFactor,
         fontFamily: 'Urbanist',
         fontWeight: '600',
     }

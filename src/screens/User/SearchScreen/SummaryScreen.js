@@ -9,7 +9,7 @@ const scaleFactor = width / 414
 
 const SummaryScreen = ({ route, navigation }) => {
     const type = route.params && route.params.type
-    const [modalVisible,setModalVisible] = useState(false)
+    const [modalVisible, setModalVisible] = useState(false)
     const missHandle = () => {
         // setModalVisible(false)
         Keyboard.dismiss()
@@ -17,72 +17,73 @@ const SummaryScreen = ({ route, navigation }) => {
     return (
         <TouchableWithoutFeedback onPress={() => missHandle()}>
             <SafeAreaView style={styles.container}>
-                <View style={{ flex: 1 }}>
-                    <View style={styles.header_view}>
-                        <TouchableOpacity style={styles.header_icon} onPress={() => { type == "added" ? navigation.navigate('SelectPaymentMethodScreen', { type: 'added' }) : navigation.navigate('BookingDetailScreen') }}>
-                            <ArrowLeftImage width={24 * scaleFactor} height={24 * scaleFactor} />
-                        </TouchableOpacity>
-                        <Text style={styles.header_text}>Review Details</Text>
+                <View style={styles.body}>
+                    <View style={{ flex: 1 }}>
+                        <View style={styles.header_view}>
+                            <TouchableOpacity style={styles.header_icon} onPress={() => navigation.goBack()}>
+                                <ArrowLeftImage width={24 * scaleFactor} height={24 * scaleFactor} />
+                            </TouchableOpacity>
+                            <Text style={styles.header_text}>Review Details</Text>
+                        </View>
+                        <ScrollView style={styles.content}>
+                            <TouchableOpacity style={styles.review_detail_header}>
+                                <Text style={styles.review_detail_header_text}>Review Details</Text>
+                                <View style={styles.review_detail_header_content}>
+                                    <View style={styles.review_detail_item}>
+                                        <Text style={styles.review_detail_left}>Customer Name</Text>
+                                        <Text style={styles.review_detail_right}>Kristin Watson</Text>
+                                    </View>
+                                    <View style={styles.review_detail_item}>
+                                        <Text style={styles.review_detail_left}>Customer Name</Text>
+                                        <Text style={styles.review_detail_right}>Kristin Watson</Text>
+                                    </View>
+                                    <View style={styles.review_detail_item}>
+                                        <Text style={styles.review_detail_left}>Customer Name</Text>
+                                        <Text style={styles.review_detail_right}>Kristin Watson</Text>
+                                    </View>
+                                    <View style={styles.review_detail_item}>
+                                        <Text style={styles.review_detail_left}>Customer Name</Text>
+                                        <Text style={styles.review_detail_right}>Kristin Watson</Text>
+                                    </View>
+                                    <View style={styles.review_detail_item}>
+                                        <Text style={styles.review_detail_left}>Customer Name</Text>
+                                        <Text style={styles.review_detail_right}>Kristin Watson</Text>
+                                    </View>
+                                    <View style={styles.review_detail_item}>
+                                        <Text style={styles.review_detail_left}>Customer Name</Text>
+                                        <Text style={styles.review_detail_right}>Kristin Watson</Text>
+                                    </View>
+                                    <View style={styles.review_detail_item}>
+                                        <Text style={styles.review_detail_left}>Customer Name</Text>
+                                        <Text style={styles.review_detail_right}>Kristin Watson</Text>
+                                    </View>
+                                </View>
+                            </TouchableOpacity>
+                            <View style={styles.review_detail_content}>
+                                <View style={styles.review_detail_item}>
+                                    <Text style={styles.review_detail_left}>Customer Name</Text>
+                                    <Text style={styles.review_detail_right}>Kristin Watson</Text>
+                                </View>
+                                <View style={styles.review_detail_item}>
+                                    <Text style={styles.review_detail_left}>Customer Name</Text>
+                                    <Text style={styles.review_detail_right}>Kristin Watson</Text>
+                                </View>
+                            </View>
+                            <View style={styles.review_detail_footer}>
+                                <View style={styles.review_detail_footer_item}>
+                                    <Text style={styles.review_detail_footer_left}>Total</Text>
+                                    <Text style={styles.review_detail_footer_right}>$ 420.00</Text>
+                                </View>
+                            </View>
+                            <PaymentSuccessModal navigation={navigation} modalVisible={modalVisible} setModalVisible={setModalVisible} />
+                        </ScrollView>
                     </View>
-                    <View style={styles.content}>
-                        <View style={styles.review_detail_header}>
-                            <Text style={styles.review_detail_header_text}>Review Details</Text>
-                            <View style={styles.review_detail_header_content}>
-                                <View style={styles.review_detail_item}>
-                                    <Text style={styles.review_detail_left}>Customer Name</Text>
-                                    <Text style={styles.review_detail_right}>Kristin Watson</Text>
-                                </View>
-                                <View style={styles.review_detail_item}>
-                                    <Text style={styles.review_detail_left}>Customer Name</Text>
-                                    <Text style={styles.review_detail_right}>Kristin Watson</Text>
-                                </View>
-                                <View style={styles.review_detail_item}>
-                                    <Text style={styles.review_detail_left}>Customer Name</Text>
-                                    <Text style={styles.review_detail_right}>Kristin Watson</Text>
-                                </View>
-                                <View style={styles.review_detail_item}>
-                                    <Text style={styles.review_detail_left}>Customer Name</Text>
-                                    <Text style={styles.review_detail_right}>Kristin Watson</Text>
-                                </View>
-                                <View style={styles.review_detail_item}>
-                                    <Text style={styles.review_detail_left}>Customer Name</Text>
-                                    <Text style={styles.review_detail_right}>Kristin Watson</Text>
-                                </View>
-                                <View style={styles.review_detail_item}>
-                                    <Text style={styles.review_detail_left}>Customer Name</Text>
-                                    <Text style={styles.review_detail_right}>Kristin Watson</Text>
-                                </View>
-                                <View style={styles.review_detail_item}>
-                                    <Text style={styles.review_detail_left}>Customer Name</Text>
-                                    <Text style={styles.review_detail_right}>Kristin Watson</Text>
-                                </View>
-                            </View>
-                        </View>
-                        <View style={styles.review_detail_content}>
-                            <View style={styles.review_detail_item}>
-                                <Text style={styles.review_detail_left}>Customer Name</Text>
-                                <Text style={styles.review_detail_right}>Kristin Watson</Text>
-                            </View>
-                            <View style={styles.review_detail_item}>
-                                <Text style={styles.review_detail_left}>Customer Name</Text>
-                                <Text style={styles.review_detail_right}>Kristin Watson</Text>
-                            </View>
-                        </View>
-                        <View style={styles.review_detail_footer}>
-                            <View style={styles.review_detail_footer_item}>
-                                <Text style={styles.review_detail_footer_left}>Total</Text>
-                                <Text style={styles.review_detail_footer_right}>$ 420.00</Text>
-                            </View>
-                        </View>
-                        <PaymentSuccessModal navigation={navigation} modalVisible={modalVisible} setModalVisible={setModalVisible}/>
-                    </View>
+                    {type == "added" ? (<TouchableOpacity style={styles.footer} onPress={() => setModalVisible(true)}>
+                        <Text style={styles.footer_text}>Continue to payment</Text>
+                    </TouchableOpacity>) : (<TouchableOpacity style={styles.footer} onPress={() => navigation.navigate("DrawSignatureScreen")}>
+                        <Text style={styles.footer_text}>Sign Contract</Text>
+                    </TouchableOpacity>)}
                 </View>
-                {type == "added" ? (<TouchableOpacity style={styles.footer} onPress={() => setModalVisible(true)}>
-                    <Text style={styles.footer_text}>Continue to payment</Text>
-                </TouchableOpacity>) : (<TouchableOpacity style={styles.footer} onPress={() => navigation.navigate("DrawSignatureScreen")}>
-                    <Text style={styles.footer_text}>Sign Contract</Text>
-                </TouchableOpacity>)}
-                
             </SafeAreaView>
         </TouchableWithoutFeedback>
     )
@@ -92,6 +93,10 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         backgroundColor: 'white',
+
+    },
+    body: {
+        flex: 1,
         paddingTop: 37 * scaleFactor,
         paddingHorizontal: 25 * scaleFactor
     },
@@ -113,14 +118,15 @@ const styles = StyleSheet.create({
     header_text: {
         textAlign: 'center',
         color: 'black',
-        fontSize: 16,
+        fontSize: 16 * scaleFactor,
         fontFamily: 'Urbanist',
         fontWeight: '700',
-        lineHeight: 24
+        lineHeight: 24 * scaleFactor
 
     },
     content: {
         marginTop: 64 * scaleFactor,
+        marginBottom: 20 * scaleFactor,
         width: '100%',
     },
     review_detail_header: {
@@ -128,10 +134,10 @@ const styles = StyleSheet.create({
     },
     review_detail_header_text: {
         color: '#00A86B',
-        fontSize: 24,
+        fontSize: 24 * scaleFactor,
         fontFamily: 'Urbanist',
         fontWeight: '700',
-        lineHeight: 24
+        lineHeight: 24 * scaleFactor
     },
     review_detail_header_content: {
         marginTop: 31 * scaleFactor,
@@ -145,17 +151,17 @@ const styles = StyleSheet.create({
     },
     review_detail_left: {
         color: 'rgba(0,0,0,0.50)',
-        fontSize: 16,
+        fontSize: 16 * scaleFactor,
         fontFamily: 'Urbanist',
         fontWeight: '500',
-        lineHeight: 24
+        lineHeight: 24 * scaleFactor
     },
     review_detail_right: {
         color: 'black',
-        fontSize: 16,
+        fontSize: 16 * scaleFactor,
         fontFamily: 'Urbanist',
         fontWeight: '700',
-        lineHeight: 24
+        lineHeight: 24 * scaleFactor
     },
     review_detail_footer: {
         marginTop: 30 * scaleFactor
@@ -169,17 +175,17 @@ const styles = StyleSheet.create({
     },
     review_detail_footer_left: {
         color: 'rgba(0,0,0,0.50)',
-        fontSize: 16,
+        fontSize: 16 * scaleFactor,
         fontFamily: 'Urbanist',
         fontWeight: '900',
-        lineHeight: 24
+        lineHeight: 24 * scaleFactor
     },
     review_detail_footer_right: {
         color: '#00A86B',
-        fontSize: 16,
+        fontSize: 16 * scaleFactor,
         fontFamily: 'Urbanist',
         fontWeight: '900',
-        lineHeight: 24
+        lineHeight: 24 * scaleFactor
     },
     footer: {
         width: '100%',
@@ -200,7 +206,7 @@ const styles = StyleSheet.create({
     },
     footer_text: {
         color: 'white',
-        fontSize: 18,
+        fontSize: 18 * scaleFactor,
         fontFamily: 'Urbanist',
         fontWeight: '700'
     },

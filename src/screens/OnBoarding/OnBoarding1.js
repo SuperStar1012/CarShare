@@ -1,5 +1,5 @@
 import React, { useEffect } from "react"
-import { Dimensions, View, StyleSheet, Text, TouchableOpacity, SafeAreaView, BackHandler,Alert } from "react-native"
+import { Dimensions, View, ScrollView, StyleSheet, Text, TouchableOpacity, SafeAreaView } from "react-native"
 import OnBoardingImage_1 from '../../assets/images/onboarding/onboarding_1.svg'
 import SliderImage_1 from '../../assets/images/onboarding/slider_1.svg'
 
@@ -11,7 +11,7 @@ const OnBoardingScreen_1 = ({ navigation }) => {
     // // useEffect(() => {
     // //     const backAction = () => {
     // //         Alert.alert("Hold on!", "Are you sure you want to exit?", [
-    // //             {
+    // //            {
     // //                 text: "Cancel",
     // //                 onPress: () => null,
     // //                 style: "cancel"
@@ -30,21 +30,25 @@ const OnBoardingScreen_1 = ({ navigation }) => {
     // }, [navigation]);
     return (
         <SafeAreaView style={styles.container}>
-            <View style={styles.header}>
-                <View>
-                    <Text style={styles.skip_button}>Skip</Text>
+            <View style={styles.body}>
+                <ScrollView style={{ flex: 1 }} scrollEnabled = {Platform.OS === "ios" ? true : false}>
+                    <View style={styles.header}>
+                        <View>
+                            <Text style={styles.skip_button}>Skip</Text>
+                        </View>
+                        <OnBoardingImage_1 width={397.5 * scaleFactor} height={265 * scaleFactor} style={{ marginTop: 55 * scaleFactor }} />
+                    </View>
+                    <View style={styles.content}>
+                        <Text style={styles.headerText}>Owner can rent out their vehicles to individual in need</Text>
+                        <Text style={styles.contentText}>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ac magna non.</Text>
+                        <SliderImage_1 width={46 * scaleFactor} height={10 * scaleFactor} style={styles.slider_image} />
+                    </View>
+                </ScrollView>
+                <View style={styles.footer}>
+                    <TouchableOpacity style={styles.button_container} onPress={() => navigation.navigate('OnBoardingScreen_2')}>
+                        <Text style={styles.button_text}>Continue</Text>
+                    </TouchableOpacity>
                 </View>
-                <OnBoardingImage_1 width={397.5 * scaleFactor} height={265 * scaleFactor} style={{ marginTop: 55 * scaleFactor }} />
-            </View>
-            <View style={styles.content}>
-                <Text style={styles.headerText}>Owner can rent out their vehicles to individual in need</Text>
-                <Text style={styles.contentText}>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ac magna non.</Text>
-                <SliderImage_1 width={46 * scaleFactor} height={10 * scaleFactor} style={styles.slider_image} />
-            </View>
-            <View style={styles.footer}>
-                <TouchableOpacity style={styles.button_container} onPress={() => navigation.navigate('OnBoardingScreen_2')}>
-                    <Text style={styles.button_text}>Continue</Text>
-                </TouchableOpacity>
             </View>
         </SafeAreaView>
     )
@@ -54,20 +58,22 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         alignContent: 'center',
+        backgroundColor: "white"
+    },
+    body:{
+        flex: 1,
         paddingTop: 41 * scaleFactor,
         paddingLeft: 16 * scaleFactor,
         paddingRight: 16 * scaleFactor,
-        backgroundColor: "white"
-
     },
     headerText: {
         marginTop: 103 * scaleFactor,
         color: 'black',
-        fontSize: 22,
+        fontSize: 22 * scaleFactor,
         // fontFamily: 'Montserrat',
         fontWeight: '700',
         textAlign: 'center',
-        lineHeight: 33,
+        lineHeight: 33 * scaleFactor,
         // wordWrap: 'break-word'
     },
     contentText: {
@@ -84,20 +90,20 @@ const styles = StyleSheet.create({
         textAlign: 'right',
         marginRight: 4 * scaleFactor,
         color: '#00A86B',
-        fontSize: 18,
+        fontSize: 18 * scaleFactor,
         // fontFamily: 'Montserrat',
         fontWeight: '500',
         // wordWrap: 'break-word'
     },
     content: {
-        alignItems: 'center'
+        alignItems: 'center',
+        marginBottom: 70 * scaleFactor
     },
     slider_image: {
         marginTop: 70 * scaleFactor
     },
     button_container: {
         width: '100%',
-        marginTop: 70 * scaleFactor,
         height: 58 * scaleFactor,
         alignItems: 'center',
         justifyContent: 'center',
@@ -110,11 +116,13 @@ const styles = StyleSheet.create({
     },
     footer: {
         paddingLeft: 8.5 * scaleFactor,
-        paddingRight: 8.5 * scaleFactor
+        paddingRight: 8.5 * scaleFactor,
+        marginBottom: 40 * scaleFactor,
+
     },
     button_text: {
         color: 'white',
-        fontSize: 18,
+        fontSize: 18 * scaleFactor,
         // fontFamily: 'Urbanist',
         fontWeight: '700',
         // wordWrap: 'break-word'

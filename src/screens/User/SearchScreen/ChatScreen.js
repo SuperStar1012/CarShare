@@ -19,18 +19,19 @@ const scaleFactor = width / 414
 
 const ChatScreen = ({ navigation }) => {
     const scrollViewRef = useRef(null);
-    const [modalVisible,setModalVisible] = useState(false)
-    const [keyModalVisible,setKeyModalVisible] = useState(false)
-    const [text,setText] = useState("")
-    
+    const [modalVisible, setModalVisible] = useState(false)
+    const [keyModalVisible, setKeyModalVisible] = useState(false)
+    const [text, setText] = useState("")
+
     return (
-            <SafeAreaView style={styles.container}>
+        <SafeAreaView style={styles.container}>
+            <View style={styles.body}>
                 <View style={styles.header}>
                     <View style={{ flexDirection: 'row' }}>
                         <View style={styles.header_left}></View>
-                        <TouchableOpacity onPress={()=>navigation.goBack()}>
+                        <TouchableOpacity onPress={() => navigation.goBack()}>
                             <ArrowLeftImage />
-                            </TouchableOpacity>
+                        </TouchableOpacity>
                         <View style={styles.my_avatar}>
                             <MyAvatarImage />
                             <View style={styles.online}></View>
@@ -49,7 +50,7 @@ const ChatScreen = ({ navigation }) => {
                         </TouchableOpacity>
                     </View>
                 </View>
-                <ScrollView ref={scrollViewRef} style={{ flex: 1}}>
+                <ScrollView ref={scrollViewRef} style={{ flex: 1 }}>
                     <View style={styles.content}>
                         <ReceivedChatCard />
                         <ReplyChatCard />
@@ -59,22 +60,22 @@ const ChatScreen = ({ navigation }) => {
                         <ReplyChatCard />
                         <ReplyChatCard />
                     </View>
-                <KeyHandedModal navigation = {navigation} modalVisible={keyModalVisible} setModalVisible={setKeyModalVisible}/>
+                    <KeyHandedModal navigation={navigation} modalVisible={keyModalVisible} setModalVisible={setKeyModalVisible} />
 
                 </ScrollView>
-                <ChatAssetModal modalVisible={modalVisible} setModalVisible={setModalVisible}/>
-                <View style={styles.footer}>
+                <ChatAssetModal modalVisible={modalVisible} setModalVisible={setModalVisible} />
+                <KeyboardAvoidingView style={styles.footer} behavior={Platform.OS === "ios" ? "padding" : "height"}>
                     <View style={styles.input_view}>
-                        <TouchableOpacity><PaperImage style={styles.paper_image}  onPress={()=>setModalVisible(true)}/></TouchableOpacity>
-                        <TextInput style={styles.footer_input} onChangeText = {(e)=>setText(e)} placeholder="Type something..." placeholderTextColor="rgba(0,0,0,0.50)" />
+                        <TouchableOpacity><PaperImage style={styles.paper_image} onPress={() => setModalVisible(true)} /></TouchableOpacity>
+                        <TextInput style={styles.footer_input} onChangeText={(e) => setText(e)} placeholder="Type something..." placeholderTextColor="rgba(0,0,0,0.50)" />
                         <TouchableOpacity><HappyImage /></TouchableOpacity>
                     </View>
-                    <TouchableOpacity style={styles.send_button} onPress={()=>setKeyModalVisible(true)}>
+                    <TouchableOpacity style={styles.send_button} onPress={() => setKeyModalVisible(true)}>
                         <SendImage />
                     </TouchableOpacity>
-                </View>
-
-            </SafeAreaView>
+                </KeyboardAvoidingView>
+            </View>
+        </SafeAreaView>
 
     )
 }
@@ -83,6 +84,9 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         backgroundColor: 'white',
+    },
+    body:{
+        flex: 1,
         paddingTop: 35 * scaleFactor,
         paddingHorizontal: 25 * scaleFactor
     },
@@ -99,14 +103,14 @@ const styles = StyleSheet.create({
     },
     name: {
         color: '#151B33',
-        fontSize: 14,
+        fontSize: 14 * scaleFactor,
         fontFamily: 'Outfit',
         fontWeight: '500',
         lineHeight: 18.20
     },
     status: {
         color: '#A7AEC1',
-        fontSize: 14,
+        fontSize: 14 * scaleFactor,
         fontFamily: 'Outfit',
         fontWeight: '400',
         lineHeight: 25.20
@@ -132,7 +136,7 @@ const styles = StyleSheet.create({
     footer_input: {
         width: 200 * scaleFactor,
         color: 'black',
-        fontSize: 15,
+        fontSize: 15 * scaleFactor,
         fontFamily: 'Montserrat',
         fontWeight: '400',
     },

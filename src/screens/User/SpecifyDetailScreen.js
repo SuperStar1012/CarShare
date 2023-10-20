@@ -85,10 +85,10 @@ const styles = StyleSheet.create({
     content_header_text: {
         marginTop: 37 * scaleFactor,
         color: 'black',
-        fontSize: 20,
+        fontSize: 20 * scaleFactor,
         fontFamily: 'Urbanist',
         fontWeight: '700',
-        lineHeight: 24
+        lineHeight: 24 * scaleFactor
     },
     header_icon: {
         position: 'absolute',
@@ -98,10 +98,10 @@ const styles = StyleSheet.create({
     header_text: {
         textAlign: 'center',
         color: 'black',
-        fontSize: 16,
+        fontSize: 16 * scaleFactor,
         fontFamily: 'Urbanist',
         fontWeight: '700',
-        lineHeight: 24
+        lineHeight: 24 * scaleFactor
     },
     content: { flex: 1 },
     location_view: {
@@ -109,7 +109,7 @@ const styles = StyleSheet.create({
     },
     location_header_text: {
         color: 'rgba(0,0,0,0.40)',
-        fontSize: 14,
+        fontSize: 14 * scaleFactor,
         fontFamily: 'Urbanist',
         fontWeight: '500',
     },
@@ -136,7 +136,7 @@ const styles = StyleSheet.create({
     },
     date_header_text: {
         color: 'black',
-        fontSize: 20,
+        fontSize: 20 * scaleFactor,
         fontFamily: 'Urbanist',
         fontWeight: '700',
         letterSpacing: 0.40
@@ -204,7 +204,7 @@ const styles = StyleSheet.create({
     },
     footer_text: {
         color: 'white',
-        fontSize: 18,
+        fontSize: 18 * scaleFactor,
         fontFamily: 'Urbanist',
         fontWeight: '700'
     },
@@ -220,13 +220,13 @@ const styles = StyleSheet.create({
     },
     amount_header: {
         color: 'black',
-        fontSize: 20,
+        fontSize: 20 * scaleFactor,
         fontFamily: 'Urbanist',
         fontWeight: '400'
     },
     amount_content: {
         color: '#00A86B',
-        fontSize: 20,
+        fontSize: 20 * scaleFactor,
         fontFamily: 'Urbanist',
         fontWeight: '800',
     }

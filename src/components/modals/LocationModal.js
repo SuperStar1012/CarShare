@@ -23,7 +23,7 @@ const LocationModal = ({ navigation, modalVisible, setModalVisible }) => {
                     <View style={styles.modalView}>
                         <LocationTicketModalImage style={styles.modal_image} width={89 * scaleFactor} height={89 * scaleFactor} />
                         <View style={styles.button_fields}>
-                            <TouchableOpacity style={styles.button_field} onPress={navigation.navigate('AddPhoneNumberScreen')}>
+                            <TouchableOpacity style={styles.button_field} onPress={() => {setModalVisible(false),navigation.navigate('AddPhoneNumberScreen')}}>
                                 <Text style={styles.button_text}>WHILE USING THE APP</Text>
                             </TouchableOpacity>
                             <TouchableOpacity style={styles.button_field}>
@@ -87,7 +87,7 @@ const styles = StyleSheet.create({
     },
     button_text: {
         color: 'rgba(0,0,0,0.80)',
-        fontSize: 16,
+        fontSize: 16 * scaleFactor,
         fontFamily: 'Montserrat',
         fontWeight: '600',
     }

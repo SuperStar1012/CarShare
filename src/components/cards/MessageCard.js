@@ -48,13 +48,13 @@ const styles = StyleSheet.create({
     },
     name_text: {
         color: 'black',
-        fontSize: 14,
+        fontSize: 14 * scaleFactor,
         fontFamily: 'Montserrat',
         fontWeight: '700'
     },
     type_text: {
         color: 'rgba(0,0,0,0.50)',
-        fontSize: 14,
+        fontSize: 14 * scaleFactor,
         fontFamily: 'Montserrat',
         fontWeight: '400',
     },
@@ -73,17 +73,17 @@ const styles = StyleSheet.create({
     count_text: {
         textAlign: 'center',
         color: 'white',
-        fontSize: 12,
+        fontSize: 12 * scaleFactor,
         fontFamily: 'Montserrat',
         fontWeight: '700',
     },
     date_text: {
         textAlign: 'center',
         color: 'rgba(0,0,0,0.40)',
-        fontSize: 10,
+        fontSize: 10 * scaleFactor,
         fontFamily: 'Montserrat',
         fontWeight: '500',
-        lineHeight: 15.19,
+        lineHeight: 15.19 * scaleFactor,
     }
 });
 

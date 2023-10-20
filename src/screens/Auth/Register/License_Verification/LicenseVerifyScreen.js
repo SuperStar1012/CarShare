@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react"
-import { Dimensions, View, StyleSheet, TouchableOpacity, SafeAreaView, Text } from "react-native"
+import { Dimensions, View, StyleSheet, TouchableOpacity, SafeAreaView, ScrollView, Text } from "react-native"
 import ArrowLeftImage from '../../../../assets/images/auth/register/arrow-left.svg'
 import AvatarImage from '../../../../assets/images/auth/register/Rectangle_34625954.svg'
 import SelfieImage from '../../../../assets/images/auth/register/Rectangle_34625958.svg'
@@ -15,7 +15,7 @@ const scaleFactor = width / 414
 const LicenseVerifyScreen = ({ navigation }) => {
     const [visible, setVisible] = useState(false)
     const [type, setType] = useState('license')
-    const [selectedImage,setSelectedImage] = useState('')
+    const [selectedImage, setSelectedImage] = useState('')
 
     const openImagePicker = () => {
         const options = {
@@ -33,7 +33,7 @@ const LicenseVerifyScreen = ({ navigation }) => {
             } else {
                 let imageUri = response.uri || response.assets?.[0]?.uri;
                 setSelectedImage(imageUri);
-                navigation.navigate("ScanScreen",{
+                navigation.navigate("ScanScreen", {
                     navigation: navigation,
                     selectedImage: selectedImage
                 })
@@ -43,73 +43,75 @@ const LicenseVerifyScreen = ({ navigation }) => {
 
     return (
         <SafeAreaView style={styles.container}>
-            <View style={{ flex: 1 }}>
-                <View style={styles.header}>
-                    <TouchableOpacity style={styles.header_icon} onPress={() => navigation.goBack()}>
-                        <ArrowLeftImage width={24 * scaleFactor} height={24 * scaleFactor} />
-                    </TouchableOpacity>
-                    <Text style={styles.header_text}>License Verify</Text>
+            <View style={styles.body}>
+                <View style={{ flex: 1 }}>
+                    <View style={styles.header}>
+                        <TouchableOpacity style={styles.header_icon} onPress={() => navigation.goBack()}>
+                            <ArrowLeftImage width={24 * scaleFactor} height={24 * scaleFactor} />
+                        </TouchableOpacity>
+                        <Text style={styles.header_text}>License Verify</Text>
+                    </View>
+                    <ScrollView style={styles.content}>
+                        <View style={styles.content_header} >
+                            <TouchableOpacity style={type == 'license' ? styles.license_header : styles.disabled_license_header} onPress={() => setType('license')}>
+                                <Text style={type == 'license' ? styles.content_header_text : styles.disabled_content_header_text}>License</Text>
+                            </TouchableOpacity>
+                            <TouchableOpacity style={type == 'selfie' ? styles.selfie_header : styles.disabled_selfie_header} onPress={() => setType('selfie')}>
+                                <Text style={type == 'selfie' ? styles.content_header_text : styles.disabled_content_header_text}>Selfie</Text>
+                            </TouchableOpacity>
+                        </View>
+                        {type == "license" ? (<LinearGradient
+                            style={styles.content_card}
+                            colors={['#1BD994', '#0F704D']}
+                            start={{ x: 0, y: 0 }}
+                            end={{ x: 0, y: 1 }}>
+                            <View style={styles.left_content_card}>
+                                <Text style={styles.left_card_header}>564728</Text>
+                                <AvatarImage width={101 * scaleFactor} height={122 * scaleFactor} style={styles.avatar_image} />
+                            </View>
+                            <View style={styles.right_content_card}>
+                                <View style={styles.right_card_item}>
+                                    <Text style={styles.right_card_item_header}>Card Name</Text>
+                                    <Text style={styles.right_card_item_content}>Eleanar Pena</Text>
+                                </View>
+                                <View style={styles.right_card_item}>
+                                    <Text style={styles.right_card_item_header}>Father Name</Text>
+                                    <Text style={styles.right_card_item_content}>Pena Janes</Text>
+                                </View>
+                                <View style={styles.right_footer_items}>
+                                    <View style={styles.right_fotter_item}>
+                                        <Text style={styles.card_footer_item_header}>Issue Date</Text>
+                                        <Text style={styles.card_footer_item_content}>May-2023</Text>
+                                    </View>
+                                    <View style={styles.right_fotter_item}>
+                                        <Text style={styles.card_footer_item_header}>Expiry Date</Text>
+                                        <Text style={styles.card_footer_item_content}>May-2026</Text>
+                                    </View>
+                                </View>
+                            </View>
+                            {/* <div style={{width: '100%', height: '100%', background: 'linear-gradient(180deg, rgba(255, 255, 255, 0.40) 0%, rgba(255, 255, 255, 0) 100%)'}} /> */}
+                        </LinearGradient>) :
+                            (<View style={{ width: '100%', alignItems: 'center' }}>
+                                <View style={styles.selfie_card}>
+                                    <SelfieImage width={207 * scaleFactor} height={207 * scaleFactor} />
+                                </View>
+                            </View>)}
+                        <View style={styles.content_photo}>
+                            <Text style={styles.content_photo_header}>Hey eleanor !</Text>
+                            <Text style={styles.content_photo_main}>Please provide a Photo of the Front of your Driving License</Text>
+                        </View>
+                    </ScrollView>
+
                 </View>
-                <View style={styles.content}>
-                    <View style={styles.content_header} >
-                        <TouchableOpacity style={type == 'license' ? styles.license_header : styles.disabled_license_header} onPress={() => setType('license')}>
-                            <Text style={type == 'license' ? styles.content_header_text : styles.disabled_content_header_text}>License</Text>
-                        </TouchableOpacity>
-                        <TouchableOpacity style={type == 'selfie' ? styles.selfie_header : styles.disabled_selfie_header} onPress={() => setType('selfie')}>
-                            <Text style={type == 'selfie' ? styles.content_header_text : styles.disabled_content_header_text}>Selfie</Text>
-                        </TouchableOpacity>
-                    </View>
-                    {type == "license" ? (<LinearGradient
-                        style={styles.content_card}
-                        colors={['#1BD994', '#0F704D']}
-                        start={{ x: 0, y: 0 }}
-                        end={{ x: 0, y: 1 }}>
-                        <View style={styles.left_content_card}>
-                            <Text style={styles.left_card_header}>564728</Text>
-                            <AvatarImage width={101 * scaleFactor} height={122 * scaleFactor} style={styles.avatar_image} />
-                        </View>
-                        <View style={styles.right_content_card}>
-                            <View style={styles.right_card_item}>
-                                <Text style={styles.right_card_item_header}>Card Name</Text>
-                                <Text style={styles.right_card_item_content}>Eleanar Pena</Text>
-                            </View>
-                            <View style={styles.right_card_item}>
-                                <Text style={styles.right_card_item_header}>Father Name</Text>
-                                <Text style={styles.right_card_item_content}>Pena Janes</Text>
-                            </View>
-                            <View style={styles.right_footer_items}>
-                                <View style={styles.right_fotter_item}>
-                                    <Text style={styles.card_footer_item_header}>Issue Date</Text>
-                                    <Text style={styles.card_footer_item_content}>May-2023</Text>
-                                </View>
-                                <View style={styles.right_fotter_item}>
-                                    <Text style={styles.card_footer_item_header}>Expiry Date</Text>
-                                    <Text style={styles.card_footer_item_content}>May-2026</Text>
-                                </View>
-                            </View>
-                        </View>
-                        {/* <div style={{width: '100%', height: '100%', background: 'linear-gradient(180deg, rgba(255, 255, 255, 0.40) 0%, rgba(255, 255, 255, 0) 100%)'}} /> */}
-                    </LinearGradient>) :
-                        (<View style={{ width: '100%', alignItems: 'center' }}>
-                            <View style={styles.selfie_card}>
-                                <SelfieImage width={207 * scaleFactor} height={207 * scaleFactor} />
-                            </View>
-                        </View>)}
-                    <View style={styles.content_photo}>
-                        <Text style={styles.content_photo_header}>Hey eleanor !</Text>
-                        <Text style={styles.content_photo_main}>Please provide a Photo of the Front of your Driving License</Text>
-                    </View>
-                    <View style={styles.footer}>
-                        <TouchableOpacity style={styles.agree_button} onPress={() => openImagePicker()}>
-                            <UploadImage width={24 * scaleFactor} height={24 * scaleFactor} style={{ marginRight: 20 * scaleFactor }} />
-                            <Text style={styles.button_text}>Upload the photo</Text>
-                        </TouchableOpacity>
-                        {type == "license" ? (<Text style={styles.footer_text}>Scan License Instead?</Text>) :
-                            (<Text style={styles.footer_text}>Scan Selfie Instead?</Text>)}
-                    </View>
+                <View style={styles.footer}>
+                    <TouchableOpacity style={styles.agree_button} onPress={() => openImagePicker()}>
+                        <UploadImage width={24 * scaleFactor} height={24 * scaleFactor} style={{ marginRight: 20 * scaleFactor }} />
+                        <Text style={styles.button_text}>Upload the photo</Text>
+                    </TouchableOpacity>
+                    {type == "license" ? (<Text style={styles.footer_text}>Scan License Instead?</Text>) :
+                        (<Text style={styles.footer_text}>Scan Selfie Instead?</Text>)}
                 </View>
             </View>
-
         </SafeAreaView>
     )
 }
@@ -118,6 +120,9 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         backgroundColor: 'white',
+    },
+    body: {
+        flex: 1,
         paddingLeft: 25 * scaleFactor,
         paddingRight: 25 * scaleFactor,
     },
@@ -305,7 +310,7 @@ const styles = StyleSheet.create({
     },
     footer: {
         width: '100%',
-        marginTop: 46 * scaleFactor,
+        marginBottom: 95 * scaleFactor,
         alignItems: 'center'
     },
     agree_button: {

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react"
-import { Dimensions, View, StyleSheet, TouchableOpacity, TouchableWithoutFeedback, Keyboard, SafeAreaView, Text } from "react-native"
+import { Dimensions, View, StyleSheet, TouchableOpacity, TouchableWithoutFeedback, Keyboard, SafeAreaView, Text, ScrollView } from "react-native"
 import ArrowLeftImage from '../../assets/images/auth/register/arrow-left.svg'
 import AddImage from '../../assets/images/user/payment/add-article.svg'
 import CloseImage from '../../assets/images/user/timer/close.svg'
@@ -24,47 +24,49 @@ const ExtendBookingScreen = ({ route, navigation }) => {
     return (
         <TouchableWithoutFeedback onPress={() => missHandle()}>
             <SafeAreaView style={styles.container}>
-                <View style={{ flex: 1 }}>
-                    <View style={styles.header_view}>
-                        <TouchableOpacity style={styles.header_icon} onPress={() => navigation.navigate("TimerScreen")}>
-                            <ArrowLeftImage width={24 * scaleFactor} height={24 * scaleFactor} />
-                        </TouchableOpacity>
-                        <Text style={styles.header_text}>Booking Details</Text>
-                        <CloseImage />
-                    </View>
-                    <View style={styles.duration_view}>
-                        <View style={styles.duration_header}>
-                            <Text style={styles.duration_text}>Duration</Text>
-                            <View style={styles.slider_range}>
-                                <Text style={styles.slider_range_text}>{duration} Hour</Text>
-                            </View>
+                <View style={styles.body}>
+                    <View style={{ flex: 1 }}>
+                        <View style={styles.header_view}>
+                            <TouchableOpacity style={styles.header_icon} onPress={() => navigation.goBack()}>
+                                <ArrowLeftImage width={24 * scaleFactor} height={24 * scaleFactor} />
+                            </TouchableOpacity>
+                            <Text style={styles.header_text}>Booking Details</Text>
+                            <CloseImage />
                         </View>
+                        <View style={styles.duration_view}>
+                            <View style={styles.duration_header}>
+                                <Text style={styles.duration_text}>Duration</Text>
+                                <View style={styles.slider_range}>
+                                    <Text style={styles.slider_range_text}>{duration} Hour</Text>
+                                </View>
+                            </View>
 
-                        <Slider
-                            style={styles.slider}
-                            minimumValue={0}
-                            maximumValue={24}
-                            minimumTrackTintColor="#00A86B"
-                            maximumTrackTintColor="#CCCCCC"
-                            step={1}
-                            onValueChange={e => setDuration(e)}
-                        />
+                            <Slider
+                                style={styles.slider}
+                                minimumValue={0}
+                                maximumValue={24}
+                                minimumTrackTintColor="#00A86B"
+                                maximumTrackTintColor="#CCCCCC"
+                                step={1}
+                                onValueChange={e => setDuration(e)}
+                            />
+                        </View>
+                        <ScrollView style={styles.content}>
+                            <Text style={styles.content_text}>Select your payment method</Text>
+                            <PaymentCard name="Paypal" method={method} setMethod={setMethod} />
+                            <PaymentCard name="Google" method={method} setMethod={setMethod} />
+                            <PaymentCard name="Apple pay" method={method} setMethod={setMethod} />
+                            <VehicleModal navigation={navigation} modalVisible={modalVisible} setModalVisible={setModalVisible} />
+                        </ScrollView>
                     </View>
-                    <View style={styles.content}>
-                        <Text style={styles.content_text}>Select your payment method</Text>
-                        <PaymentCard name="Paypal" method={method} setMethod={setMethod} />
-                        <PaymentCard name="Google" method={method} setMethod={setMethod} />
-                        <PaymentCard name="Apple pay" method={method} setMethod={setMethod} />
-                        <VehicleModal modalVisible={modalVisible} setModalVisible={setModalVisible} />
+                    <View style={styles.amout_view}>
+                        <Text style={styles.amount_header}>Total Amout</Text>
+                        <Text style={styles.amount_content}>$ 500.00</Text>
                     </View>
+                    <TouchableOpacity style={styles.footer} onPress={() => setModalVisible(true)}>
+                        <Text style={styles.footer_text}>Continue</Text>
+                    </TouchableOpacity>
                 </View>
-                <View style={styles.amout_view}>
-                    <Text style={styles.amount_header}>Total Amout</Text>
-                    <Text style={styles.amount_content}>$ 500.00</Text>
-                </View>
-                <TouchableOpacity style={styles.footer} onPress={() => setModalVisible(true)}>
-                    <Text style={styles.footer_text}>Continue</Text>
-                </TouchableOpacity>
             </SafeAreaView>
         </TouchableWithoutFeedback>
     )
@@ -74,6 +76,9 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         backgroundColor: 'white',
+    },
+    body: {
+        flex: 1,
         paddingTop: 37 * scaleFactor,
         paddingHorizontal: 25 * scaleFactor
     },
@@ -86,10 +91,10 @@ const styles = StyleSheet.create({
     header_text: {
         textAlign: 'center',
         color: 'black',
-        fontSize: 18,
+        fontSize: 18 * scaleFactor,
         fontFamily: 'Montserrat',
         fontWeight: '700',
-        lineHeight: 27.34
+        lineHeight: 27.34 * scaleFactor
 
     },
     header_icon: {
@@ -101,10 +106,10 @@ const styles = StyleSheet.create({
     header_text: {
         textAlign: 'center',
         color: 'black',
-        fontSize: 18,
+        fontSize: 18 * scaleFactor,
         fontFamily: 'Urbanist',
         fontWeight: '700',
-        lineHeight: 24
+        lineHeight: 24 * scaleFactor
 
     },
     duration_view: {
@@ -112,7 +117,7 @@ const styles = StyleSheet.create({
     },
     duration_text: {
         color: 'black',
-        fontSize: 20,
+        fontSize: 20 * scaleFactor,
         fontFamily: 'Urbanist',
         fontWeight: '600'
     },
@@ -132,10 +137,10 @@ const styles = StyleSheet.create({
     },
     slider_range_text: {
         color: 'white',
-        fontSize: 15,
+        fontSize: 15 * scaleFactor,
         fontFamily: 'Urbanist',
         fontWeight: '700',
-        lineHeight: 24
+        lineHeight: 24 * scaleFactor
     },
     duration_header: {
         flexDirection: 'row'
@@ -143,10 +148,10 @@ const styles = StyleSheet.create({
     content_text: {
         marginTop: 48 * scaleFactor,
         color: 'black',
-        fontSize: 20,
+        fontSize: 20 * scaleFactor,
         fontFamily: 'Urbanist',
         fontWeight: '700',
-        lineHeight: 24
+        lineHeight: 24 * scaleFactor
     },
     amout_view: {
         flexDirection: 'row',
@@ -160,13 +165,13 @@ const styles = StyleSheet.create({
     },
     amount_header: {
         color: 'black',
-        fontSize: 20,
+        fontSize: 20 * scaleFactor,
         fontFamily: 'Urbanist',
         fontWeight: '400'
     },
     amount_content: {
         color: '#00A86B',
-        fontSize: 20,
+        fontSize: 20 * scaleFactor,
         fontFamily: 'Urbanist',
         fontWeight: '800',
     },
@@ -189,7 +194,7 @@ const styles = StyleSheet.create({
     },
     footer_text: {
         color: 'white',
-        fontSize: 18,
+        fontSize: 18 * scaleFactor,
         fontFamily: 'Urbanist',
         fontWeight: '700'
     },

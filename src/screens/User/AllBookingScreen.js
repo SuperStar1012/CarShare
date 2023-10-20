@@ -3,18 +3,6 @@ import { Dimensions, View, StyleSheet, ScrollView, TouchableOpacity, TouchableWi
 
 import ArrowLeftImage from '../../assets/images/auth/register/arrow-left.svg'
 import SearchImage from '../../assets/images/user/category/search-normal.svg'
-import VectorImage from '../../assets/images/user/category/vector.svg'
-import DocumentImage from '../../assets/images/user/category/document-filter.svg'
-import DocumentHideImage from '../../assets/images/user/category/document-filter-hide.svg'
-
-import TypeImage from '../../assets/images/user/category/Rectangle.svg'
-import PlaceImage from '../../assets/images/user/category/Placeholder.svg'
-
-
-import CategoryCarTypeCard from '../../components/cards/CategoryCarTypeCard'
-import CategoryAvailableCarCard from "../../components/cards/CategoryAvailableCarCard"
-import CategorySearchView from "../../components/views/CategorySearchView"
-import CategoryFilterView from "../../components/views/CategoryFilterView"
 import BookingCard from "../../components/cards/BookingCard"
 import HomeButton from "../../components/buttons/HomeButton"
 
@@ -30,32 +18,36 @@ const AllBookingScreen = ({ navigation }) => {
     return (
         <TouchableWithoutFeedback onPress={() => missHandle()}>
             <SafeAreaView style={styles.container}>
-                <View style={styles.header}>
-                    <View style={styles.header_view}>
-                        <TouchableOpacity style={styles.header_icon} onPress={() => navigation.goBack()}>
-                            <ArrowLeftImage width={24 * scaleFactor} height={24 * scaleFactor} />
-                        </TouchableOpacity>
-                        <Text style={styles.header_text}>All Bookings</Text>
-                        <TouchableOpacity style={styles.header_search_icon} onPress={() => navigation.navigate('HomeScreen')}>
-                            <SearchImage />
-                        </TouchableOpacity>
+                <View style={styles.body}>
+                    <View style={styles.header}>
+                        <View style={styles.header_view}>
+                            <TouchableOpacity style={styles.header_icon} onPress={() => navigation.goBack()}>
+                                <ArrowLeftImage width={24 * scaleFactor} height={24 * scaleFactor} />
+                            </TouchableOpacity>
+                            <Text style={styles.header_text}>All Bookings</Text>
+                            <TouchableOpacity style={styles.header_search_icon} onPress={() => navigation.navigate('HomeScreen')}>
+                                <SearchImage />
+                            </TouchableOpacity>
+                        </View>
+                    </View>
+                    <View style={styles.content}>
+                        <ScrollView style={styles.type_view} horizontal={true}>
+                            <HomeButton selected={true} value="All" />
+                            <HomeButton selected={false} value="Ongoing" />
+                            <HomeButton selected={false} value="Completed" />
+                            <HomeButton selected={false} value="Cancel" />
+                        </ScrollView>
+                        <ScrollView style={{marginBottom: 60 * scaleFactor}}>
+                            <BookingCard name="BMW 7 Seater" detail="2464 Royal Ln, New Jersey 45463" pay="10" type="Ongoing" />
+                            <BookingCard name="BMW 7 Seater" detail="2464 Royal Ln, New Jersey 45463" pay="10" type="Cancelled" />
+                            <BookingCard name="BMW 7 Seater" detail="2464 Royal Ln, New Jersey 45463" pay="10" type="Completed" />
+                            <BookingCard name="BMW 7 Seater" detail="2464 Royal Ln, New Jersey 45463" pay="10" type="Ongoing" />
+                            <BookingCard name="BMW 7 Seater" detail="2464 Royal Ln, New Jersey 45463" pay="10" type="Ongoing" />
+                            <BookingCard name="BMW 7 Seater" detail="2464 Royal Ln, New Jersey 45463" pay="10" type="Ongoing" />
+                            <BookingCard name="BMW 7 Seater" detail="2464 Royal Ln, New Jersey 45463" pay="10" type="Ongoing" />
+                        </ScrollView>
                     </View>
                 </View>
-                <ScrollView style={styles.content}>
-                    <ScrollView style={styles.type_view} horizontal={true}>
-                        <HomeButton selected={true} value="All" />
-                        <HomeButton selected={false} value="Ongoing" />
-                        <HomeButton selected={false} value="Completed" />
-                        <HomeButton selected={false} value="Cancel" />
-                    </ScrollView>
-                    <BookingCard name="BMW 7 Seater" detail="2464 Royal Ln, New Jersey 45463" pay="10" type="Ongoing" />
-                    <BookingCard name="BMW 7 Seater" detail="2464 Royal Ln, New Jersey 45463" pay="10" type="Cancelled" />
-                    <BookingCard name="BMW 7 Seater" detail="2464 Royal Ln, New Jersey 45463" pay="10" type="Completed" />
-                    <BookingCard name="BMW 7 Seater" detail="2464 Royal Ln, New Jersey 45463" pay="10" type="Ongoing" />
-                    <BookingCard name="BMW 7 Seater" detail="2464 Royal Ln, New Jersey 45463" pay="10" type="Ongoing" />
-                    <BookingCard name="BMW 7 Seater" detail="2464 Royal Ln, New Jersey 45463" pay="10" type="Ongoing" />
-                    <BookingCard name="BMW 7 Seater" detail="2464 Royal Ln, New Jersey 45463" pay="10" type="Ongoing" />
-                </ScrollView>
             </SafeAreaView>
         </TouchableWithoutFeedback>
     )
@@ -65,9 +57,13 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         backgroundColor: 'white',
+    },
+    body: {
+        flex: 1,
         marginTop: 32 * scaleFactor,
         paddingLeft: 25 * scaleFactor,
         paddingRight: 25 * scaleFactor
+
     },
     header_view: {
         flexDirection: 'row',
@@ -87,13 +83,14 @@ const styles = StyleSheet.create({
     header_text: {
         textAlign: 'center',
         color: 'black',
-        fontSize: 18,
+        fontSize: 18 * scaleFactor,
         fontFamily: 'Montserrat',
         fontWeight: '700',
-        lineHeight: 27.34,
+        lineHeight: 27.34 * scaleFactor,
     },
     content: {
-        marginTop: 35 * scaleFactor
+        marginTop: 35 * scaleFactor,
+        height: '100%',
     },
     type_view: {
         flexDirection: 'row',

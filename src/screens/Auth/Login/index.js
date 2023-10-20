@@ -1,5 +1,5 @@
-import React from "react"
-import { Dimensions, View, StyleSheet, TouchableOpacity, SafeAreaView, Text, TextInput, TouchableWithoutFeedback, Keyboard, ScrollView } from "react-native"
+import React, { useEffect, useState } from "react"
+import { Dimensions, View, StyleSheet, TouchableOpacity, SafeAreaView, Text, TextInput,KeyboardAvoidingView,TouchableWithoutFeedback, Keyboard, ScrollView } from "react-native"
 import SplashAvatar from '../../../assets/images/avatar/splash_avatar.svg'
 import EmailImage from '../../../assets/images/social/email.svg'
 import FacebookImage from '../../../assets/images/social/facebook.svg'
@@ -13,47 +13,71 @@ const { width } = Dimensions.get('window')
 const scaleFactor = width / 414
 
 const Login_Screen = ({ navigation }) => {
+    const [keyboardVisible, setKeyboardVisible] = useState(false)
+    useEffect(() => {
+        // Keyboard will show event
+        const keyboardDidShowListener = Keyboard.addListener(
+            'keyboardDidShow',
+            () => {
+                setKeyboardVisible(true);
+            }
+        );
 
+        // Keyboard will hide event
+        const keyboardDidHideListener = Keyboard.addListener(
+            'keyboardDidHide',
+            () => {
+                setKeyboardVisible(false);
+            }
+        );
+        return () => {
+            keyboardDidShowListener.remove();
+            keyboardDidHideListener.remove();
+        };
+    }, []);
     return (
         <SafeAreaView style={styles.container}>
             <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
-                <ScrollView>
-                    <View style={styles.header}>
-                        <View style={styles.splash_avatar}>
-                            <SplashAvatar width={108 * scaleFactor} height={92 * scaleFactor} />
-                        </View>
-                        <View style={styles.header_text}>
-                            <Text style={styles.main_text}>Welcome Back</Text>
-                            <Text style={styles.content_text}>Please provide email & Password</Text>
-                        </View>
-                    </View>
-                    <View style={styles.content}>
-                        <View style={styles.main_content}>
-                            <View style={styles.email_content}>
-                                <Text style={styles.email_text}>Email or username</Text>
-                                <View style={styles.email_input}>
-                                    <UserImage width={20 * scaleFactor} height={20 * scaleFactor} style={styles.user_image} />
-                                    <TextInput style={styles.email_text_input} ></TextInput>
-                                </View>
+                <View style={styles.body}>
+                    <ScrollView style={{ flex: 1 }} scrollEnabled = {Platform.OS === "ios" ? true : false}>
+                        <View style={keyboardVisible == false ? styles.header : styles.disabled_header}>
+                            <View style={styles.splash_avatar}>
+                                <SplashAvatar width={108 * scaleFactor} height={92 * scaleFactor} />
                             </View>
-                            <View style={styles.password_content}>
-                                <Text style={styles.password_text}>Password</Text>
-                                <View style={styles.password_input}>
-                                    <LockImage width={20 * scaleFactor} height={20 * scaleFactor} style={styles.password_image} />
-                                    <TextInput style={styles.email_text_input} secureTextEntry={true} ></TextInput>
-                                </View>
-                                <TouchableOpacity onPress={() => navigation.navigate("ForgetPasswordScreen")}>
-                                    <Text style={styles.forget_text} >Forget Password</Text>
-                                </TouchableOpacity>
+                            <View style={styles.header_text}>
+                                <Text style={styles.main_text}>Welcome Back</Text>
+                                <Text style={styles.content_text}>Please provide email & Password</Text>
                             </View>
                         </View>
+                        <View style={styles.content}>
+                            <View style={styles.main_content}>
+                                <View style={styles.email_content}>
+                                    <Text style={styles.email_text}>Email or username</Text>
+                                    <View style={styles.email_input}>
+                                        <UserImage width={20 * scaleFactor} height={20 * scaleFactor} style={styles.user_image} />
+                                        <TextInput style={styles.email_text_input} ></TextInput>
+                                    </View>
+                                </View>
+                                <View style={styles.password_content}>
+                                    <Text style={styles.password_text}>Password</Text>
+                                    <View style={styles.password_input}>
+                                        <LockImage width={20 * scaleFactor} height={20 * scaleFactor} style={styles.password_image} />
+                                        <TextInput style={styles.email_text_input} secureTextEntry={true} ></TextInput>
+                                    </View>
+                                    <TouchableOpacity onPress={() => navigation.navigate("ForgetPasswordScreen")}>
+                                        <Text style={styles.forget_text} >Forget Password</Text>
+                                    </TouchableOpacity>
+                                </View>
+                            </View>
+
+                        </View>
+                    </ScrollView>
+                    <KeyboardAvoidingView style={styles.footer} behavior={Platform.OS === "ios" ? "padding" : "height"}>
                         <View style={styles.buttons}>
                             <TouchableOpacity style={styles.login_button} onPress={() => navigation.navigate("RegisterScreen")}>
                                 <Text style={styles.login_text}>Log In</Text>
                             </TouchableOpacity>
                         </View>
-                    </View>
-                    <View style={styles.footer}>
                         <View style={styles.other_sign}>
                             <View style={styles.line_left}></View>
                             <Text style={styles.other_sign_text}>Or contine with</Text>
@@ -69,8 +93,8 @@ const Login_Screen = ({ navigation }) => {
                             <Text style={styles.account_text}>Don't have an account?</Text>
                             <Text style={styles.signup_text}>Sign up</Text>
                         </View>
-                    </View>
-                </ScrollView>
+                    </KeyboardAvoidingView>
+                </View>
             </TouchableWithoutFeedback>
         </SafeAreaView>
     )
@@ -80,6 +104,9 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         backgroundColor: 'white',
+    },
+    body: {
+        flex: 1,
         paddingLeft: 25 * scaleFactor,
         paddingRight: 25 * scaleFactor,
         paddingTop: 46 * scaleFactor
@@ -87,13 +114,16 @@ const styles = StyleSheet.create({
     header: {
         alignItems: 'center'
     },
+    disabled_header: {
+        display: 'none'
+    },
     splash_avatar: {
         marginBottom: 21 * scaleFactor
     },
     main_text: {
         textAlign: 'center',
         color: 'black',
-        fontSize: 34,
+        fontSize: 34 * scaleFactor,
         fontFamily: 'Urbanist',
         fontWeight: '700',
         // wordWrap: 'break-word'
@@ -102,7 +132,7 @@ const styles = StyleSheet.create({
     content_text: {
         marginTop: 15 * scaleFactor,
         color: 'rgba(0,0,0 0.70)',
-        fontSize: 16,
+        fontSize: 16 * scaleFactor,
         fontFamily: 'Urbanist',
         fontWeight: '500',
         lineHeight: 24 * scaleFactor,
@@ -113,7 +143,7 @@ const styles = StyleSheet.create({
     },
     email_text: {
         color: 'rgba(0,0,0,0.40)',
-        fontSize: 14,
+        fontSize: 14 * scaleFactor,
         fontFamily: 'Urbanist',
         fontWeight: '500',
         // wordWrap: 'break-word'
@@ -136,13 +166,12 @@ const styles = StyleSheet.create({
     email_text_input: {
         width: 266 * scaleFactor,
         // Email or username
-        color: 'rgba(0,0,0, 0.40)',
-        fontSize: 14,
+        fontSize: 14 * scaleFactor,
         fontFamily: 'Urbanist',
         fontWeight: '500',
         // wordWrap: 'break-word',
         color: 'black',
-        fontSize: 16,
+        fontSize: 16 * scaleFactor,
         fontFamily: 'Urbanist',
         fontWeight: '600',
         // wordWrap: 'break-word'
@@ -150,7 +179,7 @@ const styles = StyleSheet.create({
     password_text: {
         marginTop: 16 * scaleFactor,
         color: 'rgba(0,0,0,0.40)',
-        fontSize: 14,
+        fontSize: 14 * scaleFactor,
         fontFamily: 'Urbanist',
         fontWeight: '500',
         // wordWrap: 'break-word'
@@ -187,7 +216,7 @@ const styles = StyleSheet.create({
         fontWeight: '500',
         // wordWrap: 'break-word',
         color: 'black',
-        fontSize: 16,
+        fontSize: 16 * scaleFactor,
         fontFamily: 'Urbanist',
         fontWeight: '600',
         // wordWrap: 'break-word'
@@ -196,7 +225,7 @@ const styles = StyleSheet.create({
         textAlign: 'right',
         marginTop: 14 * scaleFactor,
         color: '#00A86B',
-        fontSize: 16,
+        fontSize: 16 * scaleFactor,
         fontFamily: 'Urbanist',
         fontWeight: '700',
         lineHeight: 24,
@@ -204,7 +233,7 @@ const styles = StyleSheet.create({
     },
     buttons: {
         width: '100%',
-        marginTop: 24 * scaleFactor
+        marginBottom: 50 * scaleFactor
     },
     login_button: {
         height: 58 * scaleFactor,
@@ -221,7 +250,7 @@ const styles = StyleSheet.create({
     },
     login_text: {
         color: 'white',
-        fontSize: 18,
+        fontSize: 18 * scaleFactor,
         fontFamily: 'Urbanist',
         fontWeight: '700',
         // wordWrap: 'break-word'
@@ -243,14 +272,14 @@ const styles = StyleSheet.create({
     },
     register_text: {
         color: '#00A86B',
-        fontSize: 18,
+        fontSize: 18 * scaleFactor,
         fontFamily: 'Urbanist',
         fontWeight: '700',
         // wordWrap: 'break-word'
     },
     footer: {
         alignItems: 'center',
-        marginTop: 45 * scaleFactor
+        marginBottom: 30 * scaleFactor
     },
     other_sign: {
         display: 'flex',
@@ -264,7 +293,7 @@ const styles = StyleSheet.create({
     other_sign_text: {
 
         color: 'rgba(0, 0,0,0.30)',
-        fontSize: 14,
+        fontSize: 14 * scaleFactor,
         fontFamily: 'Urbanist',
         fontWeight: '600',
         // wordWrap: 'break-word'
@@ -297,7 +326,7 @@ const styles = StyleSheet.create({
     },
     account_text: {
         color: 'rgba(0,0,0,0.80)',
-        fontSize: 16,
+        fontSize: 16 * scaleFactor,
         fontFamily: 'Urbanist',
         fontWeight: '400',
         // wordWrap: 'break-word'
@@ -305,7 +334,7 @@ const styles = StyleSheet.create({
     signup_text: {
         marginLeft: 5 * scaleFactor,
         color: '#00A86B',
-        fontSize: 16,
+        fontSize: 16 * scaleFactor,
         fontFamily: 'Urbanist',
         fontWeight: '700',
         // wordWrap: 'break-word'

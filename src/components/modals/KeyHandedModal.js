@@ -77,7 +77,7 @@ const styles = StyleSheet.create({
         marginBottom: 14 * scaleFactor,
         textAlign: 'center',
         color: '#00A86B',
-        fontSize: 26,
+        fontSize: 26 * scaleFactor,
         fontFamily: 'Montserrat',
         fontWeight: '700',
         // wordWrap: 'break-word'
@@ -86,7 +86,7 @@ const styles = StyleSheet.create({
         marginBottom: 32 * scaleFactor,
         textAlign: 'center',
         color: 'rgba(0,0,0,0.60)',
-        fontSize: 18,
+        fontSize: 18 * scaleFactor,
         fontFamily: 'Montserrat',
         fontWeight: '400',
         // wordWrap: 'break-word'
@@ -107,7 +107,7 @@ const styles = StyleSheet.create({
     },
     login_text: {
         color: 'white',
-        fontSize: 16,
+        fontSize: 16 * scaleFactor,
         fontFamily: 'Montserrat',
         fontWeight: '700',
         // wordWrap: 'break-word'

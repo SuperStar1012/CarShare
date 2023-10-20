@@ -12,23 +12,25 @@ const LocationScreen = ({ navigation }) => {
     const [visible, setVisible] = useState(false)
     return (
         <SafeAreaView style={styles.container}>
-            <View style={{ flex: 1 }}>
-                <View style={styles.header}>
-                    <TouchableOpacity style={styles.header_icon} onPress={() => navigation.navigate('LocationOnScreen')}>
-                        <ArrowLeftImage width={24 * scaleFactor} height={24 * scaleFactor} />
+            <View style={styles.body}>
+                <View style={{ flex: 1 }}>
+                    <View style={styles.header}>
+                        <TouchableOpacity style={styles.header_icon} onPress={() => navigation.goBack()}>
+                            <ArrowLeftImage width={24 * scaleFactor} height={24 * scaleFactor} />
+                        </TouchableOpacity>
+                        <Text style={styles.header_text}>Permission</Text>
+                    </View>
+                    <View style={visible == true ? styles.disabled_content : styles.content}>
+                        <LocationTicketImage width={296 * scaleFactor} height={296 * scaleFactor} />
+                        <Text style={styles.content_text}>Keep Track of where you live in</Text>
+                    </View>
+                </View>
+                <View style={styles.footer}>
+                    <LocationModal navigation={navigation} modalVisible={visible} setModalVisible={setVisible} />
+                    <TouchableOpacity style={styles.agree_button} onPress={() => setVisible(true)}>
+                        <Text style={styles.button_text}>Location On</Text>
                     </TouchableOpacity>
-                    <Text style={styles.header_text}>Permission</Text>
                 </View>
-                <View style={visible == true ? styles.disabled_content : styles.content}>
-                    <LocationTicketImage width={296 * scaleFactor} height={296 * scaleFactor} />
-                    <Text style={styles.content_text}>Keep Track of where you live in</Text>
-                </View>
-            </View>
-            <View style={styles.footer}>
-                <LocationModal navigation={navigation} modalVisible={visible} setModalVisible={setVisible} />
-                <TouchableOpacity style={styles.agree_button} onPress={() => setVisible(true)}>
-                    <Text style={styles.button_text}>Location On</Text>
-                </TouchableOpacity>
             </View>
         </SafeAreaView>
     )
@@ -38,16 +40,18 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         backgroundColor: 'white',
-        paddingLeft: 25 * scaleFactor,
+    },
+    body: {
+        flex: 1,
+        paddingLeft: 25 * scaleFactor,   
         paddingRight: 25 * scaleFactor,
     },
     header: {
-        marginTop: 31 * scaleFactor,
+        marginTop: 40 * scaleFactor,
         flexDirection: 'row',
         alignItems: 'center',
         justifyContent: 'center',
         width: '100%',
-        position: 'relative'
     },
     header_icon: {
         position: 'absolute',
@@ -55,12 +59,11 @@ const styles = StyleSheet.create({
     },
     header_text: {
         textAlign: 'center',
-        marginLeft: -24 * scaleFactor,
         color: 'black',
-        fontSize: 18,
+        fontSize: 18 * scaleFactor,
         fontFamily: 'Montserrat',
         fontWeight: '700',
-        lineHeight: 27.34,
+        lineHeight: 27.34 * scaleFactor,
     },
     content_text: {
         marginTop: 22 * scaleFactor,
@@ -95,7 +98,7 @@ const styles = StyleSheet.create({
     },
     button_text: {
         color: 'white',
-        fontSize: 18,
+        fontSize: 18 * scaleFactor,
         fontFamily: 'Urbanist',
         fontWeight: '700',
     }

@@ -13,41 +13,43 @@ const ForgetPasswordScreen = ({ navigation }) => {
     return (
         <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
             <SafeAreaView style={styles.container}>
-                <View style={{ flex: 1 }}>
-                    <View style={styles.header}>
-                        <TouchableOpacity onPress={() => navigation.navigate('LoginScreen')}>
-                            <ArrowLeftImage style={styles.header_icon} width={24 * scaleFactor} height={24 * scaleFactor} />
+                <View style={styles.body}>
+                    <View style={{ flex: 1 }}>
+                        <View style={styles.header}>
+                            <TouchableOpacity onPress={() => navigation.goBack()}>
+                                <ArrowLeftImage style={styles.header_icon} width={24 * scaleFactor} height={24 * scaleFactor} />
+                            </TouchableOpacity>
+                        </View>
+                        <View style={styles.content}>
+                            <Text style={styles.content_topic}>Forget Password</Text>
+                            <Text style={styles.content_text}>Select which contact details we should use to reset your password.</Text>
+                            <TouchableOpacity style={type == "sms" ? styles.via_selected_type : styles.via_type} onPress={() => setType("sms")}>
+                                <View style={styles.via_image}>
+                                    <MessageImage width={42 * scaleFactor} height={42 * scaleFactor} />
+                                </View>
+
+                                <View style={styles.via_text}>
+                                    <Text style={styles.via_header}>via SMS:</Text>
+                                    <Text style={styles.via_content}>+1 2********99</Text>
+                                </View>
+                            </TouchableOpacity>
+                            <TouchableOpacity style={type == "email" ? styles.via_selected_type : styles.via_type} onPress={() => setType("email")}>
+                                <View style={styles.via_image}>
+                                    <SmsImage width={42 * scaleFactor} height={42 * scaleFactor} />
+                                </View>
+
+                                <View style={styles.via_text}>
+                                    <Text style={styles.via_header}>via Email:</Text>
+                                    <Text style={styles.via_content}>shakeel*****53@gmail.com</Text>
+                                </View>
+                            </TouchableOpacity>
+                        </View>
+                    </View>
+                    <View style={styles.buttons}>
+                        <TouchableOpacity style={styles.login_button} onPress={() => navigation.navigate('OTPScreen')}>
+                            <Text style={styles.login_text}>Continue</Text>
                         </TouchableOpacity>
                     </View>
-                    <View style={styles.content}>
-                        <Text style={styles.content_topic}>Forget Password</Text>
-                        <Text style={styles.content_text}>Select which contact details we should use to reset your password.</Text>
-                        <TouchableOpacity style={type == "sms" ? styles.via_selected_type : styles.via_type} onPress={() => setType("sms")}>
-                            <View style={styles.via_image}>
-                                <MessageImage width={42 * scaleFactor} height={42 * scaleFactor} />
-                            </View>
-
-                            <View style={styles.via_text}>
-                                <Text style={styles.via_header}>via SMS:</Text>
-                                <Text style={styles.via_content}>+1 2********99</Text>
-                            </View>
-                        </TouchableOpacity>
-                        <TouchableOpacity style={type == "email" ? styles.via_selected_type : styles.via_type} onPress={() => setType("email")}>
-                            <View style={styles.via_image}>
-                                <SmsImage width={42 * scaleFactor} height={42 * scaleFactor} />
-                            </View>
-
-                            <View style={styles.via_text}>
-                                <Text style={styles.via_header}>via Email:</Text>
-                                <Text style={styles.via_content}>shakeel*****53@gmail.com</Text>
-                            </View>
-                        </TouchableOpacity>
-                    </View>
-                </View>
-                <View style={styles.buttons}>
-                    <TouchableOpacity style={styles.login_button} onPress={() => navigation.navigate('OTPResetScreen')}>
-                        <Text style={styles.login_text}>Continue</Text>
-                    </TouchableOpacity>
                 </View>
             </SafeAreaView>
         </TouchableWithoutFeedback>
@@ -59,9 +61,14 @@ const styles = StyleSheet.create({
         flex: 1,
         backgroundColor: 'white',
         alignItems: 'center',
+       
+    },
+    body:{
+        flex: 1,
+        width: '100%',
         paddingLeft: 25 * scaleFactor,
         paddingRight: 25 * scaleFactor,
-        paddingTop: 38.7 * scaleFactor
+        paddingTop: 40 * scaleFactor
     },
     header: {
         flexDirection: 'row',
@@ -75,32 +82,28 @@ const styles = StyleSheet.create({
         fontFamily: 'Montserrat',
         fontWeight: '700',
         lineHeight: 27.34 * scaleFactor,
-        wordWrap: 'break-word',
-        textAlign: 'center',
-        marginLeft: -38.7 * scaleFactor / 2
+        textAlign: 'center'
     },
     content: {
         width: '100%',
-        marginTop: 61 * scaleFactor,
+        marginTop: 30 * scaleFactor,
     },
     content_topic: {
         color: 'black',
-        fontSize: 34,
+        fontSize: 30 * scaleFactor,
         fontFamily: 'Montserrat',
         fontWeight: '700',
-        // lineHeight: 24,
-        wordWrap: 'break-word',
+        // lineHeight: 24 * scaleFactor,
         textAlign: 'center',
         marginBottom: 21 * scaleFactor,
 
     },
     content_text: {
         color: 'rgba(0,0,0, 0.40)',
-        fontSize: 16,
+        fontSize: 16 * scaleFactor,
         fontFamily: 'Montserrat',
         fontWeight: '500',
-        lineHeight: 24,
-        wordWrap: 'break-word',
+        lineHeight: 24 * scaleFactor,
         textAlign: 'center'
     },
     via_type: {
@@ -138,19 +141,18 @@ const styles = StyleSheet.create({
     },
     via_header: {
         color: 'rgba(0,0,0,0.50)',
-        fontSize: 16,
+        fontSize: 16 * scaleFactor,
         fontFamily: 'Urbanist',
         fontWeight: '500',
-        lineHeight: 24,
+        lineHeight: 24 * scaleFactor,
         // wordWrap: 'break-word'
     },
     via_content: {
         color: 'black',
-        fontSize: 16,
+        fontSize: 15 * scaleFactor,
         fontFamily: 'Urbanist',
         fontWeight: '700',
-        lineHeight: 24,
-        wordWrap: 'break-word'
+        lineHeight: 24 * scaleFactor,
     },
     buttons: {
         width: '100%'
@@ -171,10 +173,9 @@ const styles = StyleSheet.create({
     },
     login_text: {
         color: 'white',
-        fontSize: 18,
+        fontSize: 18 * scaleFactor,
         fontFamily: 'Urbanist',
         fontWeight: '700',
-        wordWrap: 'break-word'
     },
 
 

@@ -118,10 +118,10 @@ const styles = StyleSheet.create({
     content_header_text: {
         marginTop: 37 * scaleFactor,
         color: 'black',
-        fontSize: 20,
+        fontSize: 20 * scaleFactor,
         fontFamily: 'Urbanist',
         fontWeight: '700',
-        lineHeight: 24
+        lineHeight: 24 * scaleFactor
     },
     header_icon: {
         position: 'absolute',
@@ -131,10 +131,10 @@ const styles = StyleSheet.create({
     header_text: {
         textAlign: 'center',
         color: 'black',
-        fontSize: 16,
+        fontSize: 16 * scaleFactor,
         fontFamily: 'Urbanist',
         fontWeight: '700',
-        lineHeight: 24
+        lineHeight: 24 * scaleFactor
     },
     content_header: {
         flexDirection: 'row'
@@ -151,10 +151,10 @@ const styles = StyleSheet.create({
     },
     name: {
         color: '#212121',
-        fontSize: 18,
+        fontSize: 18 * scaleFactor,
         fontFamily: 'Urbanist',
         fontWeight: '700',
-        lineHeight: 21.60
+        lineHeight: 21.60 * scaleFactor
     },
     status_view: {
         marginTop: 19 * scaleFactor,
@@ -163,7 +163,7 @@ const styles = StyleSheet.create({
     },
     message: {
         color: '#424242',
-        fontSize: 12,
+        fontSize: 12 * scaleFactor,
         fontFamily: 'Urbanist',
         fontWeight: '500',
         letterSpacing: 0.20
@@ -181,7 +181,7 @@ const styles = StyleSheet.create({
     },
     status_text: {
         color: '#00A86B',
-        fontSize: 10,
+        fontSize: 10 * scaleFactor,
         fontFamily: 'Urbanist',
         fontWeight: '600',
         letterSpacing: 0.20
@@ -192,14 +192,14 @@ const styles = StyleSheet.create({
     },
     time_text: {
         color: '#424242',
-        fontSize: 12,
+        fontSize: 12 * scaleFactor,
         fontFamily: 'Urbanist',
         fontWeight: '500',
         letterSpacing: 0.20
     },
     date_text: {
         color: '#424242',
-        fontSize: 12,
+        fontSize: 12 * scaleFactor,
         fontFamily: 'Urbanist',
         fontWeight: '500',
         letterSpacing: 0.20,
@@ -222,10 +222,10 @@ const styles = StyleSheet.create({
     },
     cancel_text: {
         color: '#00A86B',
-        fontSize: 14,
+        fontSize: 14 * scaleFactor,
         fontFamily: 'Urbanist',
         fontWeight: '600',
-        lineHeight: 19.60,
+        lineHeight: 19.60 * scaleFactor,
         letterSpacing: 0.20
     },
     active_button: {
@@ -241,7 +241,7 @@ const styles = StyleSheet.create({
     },
     active_text: {
         color: 'white',
-        fontSize: 14,
+        fontSize: 14 * scaleFactor,
         fontFamily: 'Urbanist',
         fontWeight: '600',
         lineHeight: 19.60,

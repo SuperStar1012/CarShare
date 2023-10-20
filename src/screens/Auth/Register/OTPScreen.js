@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react"
-import { Dimensions, View, StyleSheet, TextInput, TouchableOpacity, SafeAreaView, Text, Keyboard, TouchableWithoutFeedback } from "react-native"
+import { Dimensions, View, StyleSheet, TextInput, TouchableOpacity, SafeAreaView, Text, Keyboard, TouchableWithoutFeedback, KeyboardAvoidingView } from "react-native"
 import ArrowLeftImage from '../../../assets/images/auth/register/arrow-left.svg'
 import OTPModal from "../../../components/modals/OTPModal"
 
@@ -13,36 +13,59 @@ const OTPScreen = ({ navigation }) => {
     const [value3, setValue3] = useState("")
     const [value4, setValue4] = useState("")
     const [modalVisible, setModalVisible] = useState(false);
+    const [keyboardVisible, setKeyboardVisible] = useState(false)
 
+    useEffect(() => {
+        // Keyboard will show event
+        const keyboardDidShowListener = Keyboard.addListener(
+            'keyboardDidShow',
+            () => {
+                setKeyboardVisible(true);
+            }
+        );
+
+        // Keyboard will hide event
+        const keyboardDidHideListener = Keyboard.addListener(
+            'keyboardDidHide',
+            () => {
+                setKeyboardVisible(false);
+            }
+        );
+        return () => {
+            keyboardDidShowListener.remove();
+            keyboardDidHideListener.remove();
+        };
+    }, []);
     return (
-        <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
-            <SafeAreaView style={styles.container}>
-                <View style={{ flex: 1 }}>
-
-                    <View style={styles.header}>
-                        <TouchableOpacity onPress={() => navigation.navigate('RegisterScreen')}>
-                            <ArrowLeftImage style={styles.header_icon} width={24 * scaleFactor} height={24 * scaleFactor} />
-                        </TouchableOpacity>
-                        <Text style={styles.header_text}>Email Verification</Text>
-                    </View>
-                    <View style={styles.content}>
-                        <Text style={styles.content_topic}>Enter OTP</Text>
-                        <Text style={styles.content_text}>Enter the 4 digit OTP verification Code</Text>
-                        <Text style={styles.content_text}>we sent to loremipsum@gmail.com</Text>
-                        <View style={styles.input_field}>
-                            <TextInput style={value1 == "" ? styles.input_number : styles.input_specific_number} keyboardType="numeric" maxLength={1}  onChangeText={(e) => setValue1(e)} />
-                            <TextInput style={value2 == "" ? styles.input_number : styles.input_specific_number} keyboardType="numeric" maxLength={1} onChangeText={(e) => setValue2(e)} />
-                            <TextInput style={value3 == "" ? styles.input_number : styles.input_specific_number} keyboardType="numeric" maxLength={1} onChangeText={(e) => setValue3(e)} />
-                            <TextInput style={value4 == "" ? styles.input_number : styles.input_specific_number} keyboardType="numeric" maxLength={1} onChangeText={(e) => setValue4(e)} />
+        <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()} >
+            <SafeAreaView style={styles.container} behavior={Platform.OS === "ios" ? "padding" : "height"}>
+                <View style={styles.main_content}>
+                    <View style={{ flex: 1 }}>
+                        <View style={styles.header}>
+                            <TouchableOpacity style={styles.header_icon} onPress={() => navigation.goBack()}>
+                                <ArrowLeftImage width={24 * scaleFactor} height={24 * scaleFactor} />
+                            </TouchableOpacity>
                         </View>
-                        <Text style={styles.footer_text}>Did not get the code? <Text style={styles.resend_text}>Resend</Text></Text>
+                        <View style={styles.content}>
+                            <Text style={keyboardVisible == false ? styles.content_topic : styles.disabled_content_topic}>Enter OTP</Text>
+                            <Text style={styles.content_text}>Enter the 4 digit OTP verification Code</Text>
+                            <Text style={styles.content_text}>we sent to loremipsum@gmail.com</Text>
+                            <View style={styles.input_field}>
+                                <TextInput style={value1 == "" ? styles.input_number : styles.input_specific_number} keyboardType="numeric" maxLength={1} onChangeText={(e) => setValue1(e)} />
+                                <TextInput style={value2 == "" ? styles.input_number : styles.input_specific_number} keyboardType="numeric" maxLength={1} onChangeText={(e) => setValue2(e)} />
+                                <TextInput style={value3 == "" ? styles.input_number : styles.input_specific_number} keyboardType="numeric" maxLength={1} onChangeText={(e) => setValue3(e)} />
+                                <TextInput style={value4 == "" ? styles.input_number : styles.input_specific_number} keyboardType="numeric" maxLength={1} onChangeText={(e) => setValue4(e)} />
+                            </View>
+                            <Text style={styles.footer_text}>Did not get the code? <Text style={styles.resend_text}>Resend</Text></Text>
+                            <OTPModal navigation={navigation}  contentText = "Your account is ready to use" buttonText = "Go to homepage"  modalVisible={modalVisible} setModalVisible={setModalVisible} />
+
+                        </View>
                     </View>
-                </View>
-                <OTPModal navigation={navigation} modalVisible={modalVisible} setModalVisible={setModalVisible} />
-                <View style={styles.buttons}>
-                    <TouchableOpacity style={styles.login_button} onPress={() => setModalVisible(true)}>
-                        <Text style={styles.login_text}>Verify</Text>
-                    </TouchableOpacity>
+                    <KeyboardAvoidingView style={styles.buttons} behavior={Platform.OS === "ios" ? "padding" : "height"}>
+                        <TouchableOpacity style={styles.login_button} onPress={() => navigation.navigate("ResetPasswordScreen")}>
+                            <Text style={styles.login_text}>Verify</Text>
+                        </TouchableOpacity>
+                    </KeyboardAvoidingView>
                 </View>
             </SafeAreaView>
         </TouchableWithoutFeedback>
@@ -54,36 +77,47 @@ const styles = StyleSheet.create({
         flex: 1,
         backgroundColor: 'white',
         alignItems: 'center',
+
+    },
+
+    main_content: {
+        flex: 1,
+        width: '100%',
         paddingLeft: 25 * scaleFactor,
         paddingRight: 25 * scaleFactor,
-        paddingTop: 38.7 * scaleFactor
+        paddingTop: 40 * scaleFactor
     },
     header: {
         flexDirection: 'row',
         width: '100%',
+        alignItems: 'center',
+        justifyContent: 'center'
 
     },
+    disabled_content_topic: {
+        display: 'none'
+    },
     header_text: {
-        width: '100%',
         color: 'black',
-        fontSize: 18,
+        fontSize: 18 * scaleFactor,
         fontFamily: 'Montserrat',
         fontWeight: '700',
         lineHeight: 27.34 * scaleFactor,
-        wordWrap: 'break-word',
-        textAlign: 'center',
-        marginLeft: -38.7 * scaleFactor / 2
+        textAlign: 'center'
+    },
+    header_icon: {
+        position: 'absolute',
+        left: 0,
     },
     content: {
         marginTop: 61 * scaleFactor,
     },
     content_topic: {
         color: 'black',
-        fontSize: 34,
+        fontSize: 34 * scaleFactor,
         fontFamily: 'Montserrat',
         fontWeight: '700',
         // lineHeight: 24,
-        wordWrap: 'break-word',
         textAlign: 'center',
         marginBottom: 45 * scaleFactor,
 
@@ -94,7 +128,6 @@ const styles = StyleSheet.create({
         fontFamily: 'Montserrat',
         fontWeight: '500',
         lineHeight: 24,
-        wordWrap: 'break-word',
         textAlign: 'center'
     },
     input_field: {
@@ -112,11 +145,10 @@ const styles = StyleSheet.create({
         borderRadius: 6,
         textAlign: 'center',
         color: '#00A86B',
-        fontSize: 27,
+        fontSize: 27 * scaleFactor,
         fontFamily: 'Urbanist',
         fontWeight: '600',
-        lineHeight: 24,
-        wordWrap: 'break-word'
+        lineHeight: 24 * scaleFactor
     },
     input_specific_number: {
         width: 52 * scaleFactor,
@@ -128,31 +160,29 @@ const styles = StyleSheet.create({
         borderStyle: 'solid',
         textAlign: 'center',
         color: '#00A86B',
-        fontSize: 27,
+        fontSize: 27 * scaleFactor,
         fontFamily: 'Urbanist',
         fontWeight: '600',
-        lineHeight: 24,
-        wordWrap: 'break-word'
+        lineHeight: 24 * scaleFactor,
     },
     footer_text: {
         textAlign: 'center',
         marginTop: 45 * scaleFactor,
         color: 'rgba(0, 0, 0, 0.80)',
-        fontSize: 16,
+        fontSize: 16 * scaleFactor,
         fontFamily: 'Montserrat',
         fontWeight: '400',
-        wordWrap: 'break-word'
 
     },
     resend_text: {
         color: '#00A86B',
-        fontSize: 16,
+        fontSize: 16 * scaleFactor,
         fontFamily: 'Montserrat',
         fontWeight: '600',
-        wordWrap: 'break-word'
     },
     buttons: {
-        width: '100%'
+        width: '100%',
+        marginBottom: 40 * scaleFactor,
     },
     login_button: {
         height: 58 * scaleFactor,
@@ -165,15 +195,13 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         gap: 10,
         display: 'inline-flex',
-        marginBottom: 30 * scaleFactor
 
     },
     login_text: {
         color: 'white',
-        fontSize: 18,
+        fontSize: 18 * scaleFactor,
         fontFamily: 'Urbanist',
         fontWeight: '700',
-        wordWrap: 'break-word'
     },
 
 

@@ -89,10 +89,10 @@ const styles = StyleSheet.create({
     header_text: {
         textAlign: 'center',
         color: 'black',
-        fontSize: 18,
+        fontSize: 18 * scaleFactor,
         fontFamily: 'Montserrat',
         fontWeight: '700',
-        lineHeight: 27.34
+        lineHeight: 27.34 * scaleFactor
 
     },
     content: { flex: 1 },
@@ -111,20 +111,21 @@ const styles = StyleSheet.create({
     name_text: {
         marginTop: 16 * scaleFactor,
         color: 'black',
-        fontSize: 18,
+        fontSize: 18 * scaleFactor,
         fontFamily: 'Montserrat',
         fontWeight: '700',
-        lineHeight: 27.34
+        lineHeight: 27.34 * scaleFactor
     },
     email_text: {
         color: 'rgba(0,0,0,0.60)',
-        fontSize: 13,
+        fontSize: 13 * scaleFactor,
         fontFamily: 'Montserrat',
         fontWeight: '400',
-        lineHeight: 19.75
+        lineHeight: 19.75 * scaleFactor
     },
     content_view: {
-        marginTop: 12 * scaleFactor
+        marginTop: 12 * scaleFactor,
+        marginBottom: 20 * scaleFactor
     }
 })
 

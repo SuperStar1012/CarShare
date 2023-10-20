@@ -31,59 +31,60 @@ const CategoryScreen = ({ navigation }) => {
     return (
         <TouchableWithoutFeedback onPress={() => missHandle()}>
             <SafeAreaView style={styles.container}>
-                <View style={styles.header}>
-                    <View style={styles.header_view}>
-                        <TouchableOpacity style={styles.header_icon} onPress={() => navigation.navigate('HomeScreen')}>
-                            <ArrowLeftImage width={24 * scaleFactor} height={24 * scaleFactor} />
-                        </TouchableOpacity>
-                        <Text style={styles.header_text}>Category</Text>
-                        <TouchableOpacity style={styles.header_search_icon} onPress={() => navigation.navigate('HomeScreen')}>
-                            <SearchImage />
-                        </TouchableOpacity>
+                <View style={styles.body}>
+                    <View style={styles.header}>
+                        <View style={styles.header_view}>
+                            <TouchableOpacity style={styles.header_icon} onPress={() => navigation.goBack()}>
+                                <ArrowLeftImage width={24 * scaleFactor} height={24 * scaleFactor} />
+                            </TouchableOpacity>
+                            <Text style={styles.header_text}>Category</Text>
+                            <TouchableOpacity style={styles.header_search_icon} onPress={() => navigation.navigate('HomeScreen')}>
+                                <SearchImage />
+                            </TouchableOpacity>
+                        </View>
+                        <View style={styles.search_view}>
+                            <VectorImage />
+                            <TextInput style={styles.search_text} placeholder="" placeholderTextColor="white" onChangeText={(e) => setSearchText(e)} />
+                            <TouchableOpacity onPress={() => setFilter(!filter)}>
+                                {filter == true ? <DocumentImage /> : <DocumentHideImage />}
+                            </TouchableOpacity>
+                        </View>
                     </View>
-                    <View style={styles.search_view}>
-                        <VectorImage />
-                        <TextInput style={styles.search_text} placeholder="" placeholderTextColor="white" onChangeText={(e) => setSearchText(e)} />
-                        <TouchableOpacity onPress={()=>setFilter(!filter)}>
-                            {filter == true ? <DocumentImage /> : <DocumentHideImage/>}
-                        </TouchableOpacity>
-                    </View>
-                </View>
-                <ScrollView style={styles.content}>
-                    {searchText == "" ? (
-                        <View style={styles.main_content}>
-                            <View style={styles.car_type}>
-                                <Text style={styles.car_type_text}>Car Type</Text>
-                                <ScrollView style={styles.card_type_items} horizontal={true}>
-                                    <CategoryCarTypeCard ChildComponent={TypeImage} text="Vokswagen" number="8" selected={true} />
-                                    <CategoryCarTypeCard ChildComponent={TypeImage} text="Vokswagen" number="8" selected={false} />
-                                    <CategoryCarTypeCard ChildComponent={TypeImage} text="Vokswagen" number="8" selected={false} />
-                                    <CategoryCarTypeCard ChildComponent={TypeImage} text="Vokswagen" number="8" selected={false} />
-                                </ScrollView>
-                            </View>
-                            <View style={styles.available_cars}>
-                                <Text style={styles.available_text}>BMW Available Cars</Text>
-                                <View style={styles.available_cars_view}>
-                                    <CategoryAvailableCarCard ChildComponent={PlaceImage} />
-                                    <CategoryAvailableCarCard ChildComponent={PlaceImage} />
-                                    <CategoryAvailableCarCard ChildComponent={PlaceImage} />
-                                    <CategoryAvailableCarCard ChildComponent={PlaceImage} />
+                    <ScrollView style={styles.content}>
+                        {searchText == "" ? (
+                            <View style={styles.main_content}>
+                                <View style={styles.car_type}>
+                                    <Text style={styles.car_type_text}>Car Type</Text>
+                                    <ScrollView style={styles.card_type_items} horizontal={true}>
+                                        <CategoryCarTypeCard ChildComponent={TypeImage} text="Vokswagen" number="8" selected={true} />
+                                        <CategoryCarTypeCard ChildComponent={TypeImage} text="Vokswagen" number="8" selected={false} />
+                                        <CategoryCarTypeCard ChildComponent={TypeImage} text="Vokswagen" number="8" selected={false} />
+                                        <CategoryCarTypeCard ChildComponent={TypeImage} text="Vokswagen" number="8" selected={false} />
+                                    </ScrollView>
+                                </View>
+                                <View style={styles.available_cars}>
+                                    <Text style={styles.available_text}>BMW Available Cars</Text>
+                                    <View style={styles.available_cars_view}>
+                                        <CategoryAvailableCarCard ChildComponent={PlaceImage} />
+                                        <CategoryAvailableCarCard ChildComponent={PlaceImage} />
+                                        <CategoryAvailableCarCard ChildComponent={PlaceImage} />
+                                        <CategoryAvailableCarCard ChildComponent={PlaceImage} />
+                                    </View>
                                 </View>
                             </View>
-                        </View>
-                    ) : (
-                        filter == false ? <CategorySearchView /> : <CategoryFilterView />
-                    )}
-                </ScrollView>
-                {filter == true ? <View style={styles.footer}>
-                    <TouchableOpacity style={styles.cancel_button}>
-                        <Text style={styles.cancel_text}>Cancel</Text>
-                    </TouchableOpacity>
-                    <TouchableOpacity style={styles.apply_button}>
-                        <Text style={styles.apply_text}>Apply</Text>
-                    </TouchableOpacity>
-                </View> : (<></>)}
-
+                        ) : (
+                            filter == false ? <CategorySearchView /> : <CategoryFilterView />
+                        )}
+                    </ScrollView>
+                    {filter == true ? <View style={styles.footer}>
+                        <TouchableOpacity style={styles.cancel_button}>
+                            <Text style={styles.cancel_text}>Cancel</Text>
+                        </TouchableOpacity>
+                        <TouchableOpacity style={styles.apply_button} onPress={()=>navigation.navigate("SearchResultScreen")}>
+                            <Text style={styles.apply_text}>Apply</Text>
+                        </TouchableOpacity>
+                    </View> : (<></>)}
+                </View>
             </SafeAreaView>
         </TouchableWithoutFeedback>
     )
@@ -93,6 +94,9 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         backgroundColor: 'white',
+    },
+    body:{
+        flex: 1,
         marginTop: 32 * scaleFactor,
         paddingLeft: 25 * scaleFactor,
         paddingRight: 25 * scaleFactor
@@ -115,20 +119,18 @@ const styles = StyleSheet.create({
     header_text: {
         textAlign: 'center',
         color: 'black',
-        fontSize: 18,
+        fontSize: 18 * scaleFactor,
         fontFamily: 'Montserrat',
         fontWeight: '700',
         lineHeight: 27.34,
     },
     search_text: {
         marginLeft: 8 * scaleFactor,
-        height: 50 * scaleFactor,
         width: 280 * scaleFactor,
         color: 'black',
-        fontSize: 16,
+        fontSize: 16 * scaleFactor,
         fontFamily: 'Montserrat',
         fontWeight: '500',
-        lineHeight: 24
     },
     search_view: {
         flexDirection: 'row',
@@ -160,7 +162,7 @@ const styles = StyleSheet.create({
     available_text: {
         marginTop: 27 * scaleFactor,
         color: 'rgba(0,0,0,0.90)',
-        fontSize: 16,
+        fontSize: 16 * scaleFactor,
         fontFamily: 'Montserrat',
         fontWeight: '700',
         lineHeight: 24
@@ -183,7 +185,7 @@ const styles = StyleSheet.create({
     },
     cancel_text: {
         color: '#E93535',
-        fontSize: 14,
+        fontSize: 14 * scaleFactor,
         fontFamily: 'SF Pro Text',
         fontWeight: '700'
     },
@@ -198,7 +200,7 @@ const styles = StyleSheet.create({
     },
     apply_text: {
         color: 'white',
-        fontSize: 14,
+        fontSize: 14 * scaleFactor,
         fontFamily: 'Poppins',
         fontWeight: '700'
     }

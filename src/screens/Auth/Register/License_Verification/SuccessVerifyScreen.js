@@ -10,23 +10,25 @@ const SuccessVerifyScreen = ({ navigation }) => {
 
     return (
         <SafeAreaView style={styles.container}>
-            <View style={{ flex: 1 }}>
-                <View style={styles.header}>
-                    <TouchableOpacity style={styles.header_icon} onPress={() => navigation.navigate('LicenseVerifyScreen')}>
-                        <ArrowLeftImage width={24 * scaleFactor} height={24 * scaleFactor} />
+            <View style={styles.body}>
+                <View style={{ flex: 1 }}>
+                    <View style={styles.header}>
+                        <TouchableOpacity style={styles.header_icon} onPress={() => navigation.navigate('LicenseVerifyScreen')}>
+                            <ArrowLeftImage width={24 * scaleFactor} height={24 * scaleFactor} />
+                        </TouchableOpacity>
+                    </View>
+                    <View style={styles.content}>
+                        <AvatarImage style={styles.avatar_image} width={246 * scaleFactor} height={246 * scaleFactor} />
+                        <Text style={styles.content_header_text}>License verified successfully</Text>
+                        <Text style={styles.content_main_text}>Your license is verified. Now, Click continue to proceed further.</Text>
+
+                    </View>
+                </View>
+                <View style={styles.footer}>
+                    <TouchableOpacity style={styles.agree_button} onPress={() => navigation.navigate("HomeScreen")}>
+                        <Text style={styles.button_text}>Finish</Text>
                     </TouchableOpacity>
                 </View>
-                <View style={styles.content}>
-                    <AvatarImage style={styles.avatar_image} width={246 * scaleFactor} height={246 * scaleFactor} />
-                    <Text style={styles.content_header_text}>License verified successfully</Text>
-                    <Text style={styles.content_main_text}>Your license is verified. Now, Click continue to proceed further.</Text>
-
-                </View>
-            </View>
-            <View style={styles.footer}>
-                <TouchableOpacity style={styles.agree_button} onPress={()=>navigation.navigate("HomeScreen")}>
-                    <Text style={styles.button_text}>Finish</Text>
-                </TouchableOpacity>
             </View>
         </SafeAreaView>
     )
@@ -36,6 +38,9 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         backgroundColor: 'white',
+    },
+    body:{
+        flex: 1,
         paddingLeft: 25 * scaleFactor,
         paddingRight: 25 * scaleFactor,
     },
@@ -53,7 +58,6 @@ const styles = StyleSheet.create({
     },
     content: {
         width: '100%',
-        marginTop: 38 * scaleFactor,
         alignItems: 'center'
     },
     avatar_image: {

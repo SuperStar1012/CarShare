@@ -26,38 +26,41 @@ const MessageScreen = ({ route, navigation }) => {
 
     return (
         <TouchableWithoutFeedback onPress={() => missHandle()}>
-            <SafeAreaView style={{flex: 1}}>
-                <View style={styles.main_content}>
-                    <View style={styles.header_view}>
-                        <TouchableOpacity style={styles.header_icon} onPress={() => navigation.goBack()}>
-                            <ArrowLeftImage width={24 * scaleFactor} height={24 * scaleFactor} />
-                        </TouchableOpacity>
-                        <Text style={styles.header_text}>Messages</Text>
-                    </View>
-                    <View style={styles.content}>
-                        <View style={styles.content_header}>
-                            <View style={styles.search_view}>
-                                <SearchImage />
-                                <TextInput style={styles.search_text} placeholder="Search" placeholderTextColor="black" onChangeText={(e) => setSearchText(e)} />
-                            </View>
+            <SafeAreaView style={{ flex: 1 }}>
+                <View style={styles.body}>
+                    <View style={styles.main_content}>
+                        <View style={styles.header_view}>
+                            <TouchableOpacity style={styles.header_icon} onPress={() => navigation.goBack()}>
+                                <ArrowLeftImage width={24 * scaleFactor} height={24 * scaleFactor} />
+                            </TouchableOpacity>
+                            <Text style={styles.header_text}>Messages</Text>
                         </View>
-                        <ScrollView style={styles.content_view}>
-                            <MessageCard navigation={navigation}/>
-                            <MessageCard />
-                            <MessageCard />
-                            <MessageCard />
-                            <MessageCard />
-                            <MessageCard />
-                            <MessageCard />
-                            <MessageCard />
-                            <MessageCard />
-                            <MessageCard />
-                            <MessageCard />
-                        </ScrollView>
+                        <View style={styles.content}>
+                            <View style={styles.content_header}>
+                                <View style={styles.search_view}>
+                                    <SearchImage />
+                                    <TextInput style={styles.search_text} placeholder="Search" placeholderTextColor="black" onChangeText={(e) => setSearchText(e)} />
+                                </View>
+                            </View>
+                            <ScrollView style={styles.content_view}>
+                                <MessageCard navigation={navigation} />
+                                <MessageCard />
+                                <MessageCard />
+                                <MessageCard />
+                                <MessageCard />
+                                <MessageCard />
+                                <MessageCard />
+                                <MessageCard />
+                                <MessageCard />
+                                <MessageCard />
+                                <MessageCard />
+                            </ScrollView>
+                        </View>
                     </View>
                 </View>
+
                 <View style={styles.footer}>
-                    <FooterMenu navigation={navigation}/>
+                    <FooterMenu navigation={navigation} />
                 </View>
             </SafeAreaView>
         </TouchableWithoutFeedback>
@@ -67,9 +70,12 @@ const MessageScreen = ({ route, navigation }) => {
 const styles = StyleSheet.create({
     main_content: {
         flex: 1,
+        backgroundColor: 'white'
+    },
+    body: {
+        flex: 1,
         paddingTop: 37 * scaleFactor,
         paddingHorizontal: 25 * scaleFactor,
-        backgroundColor: 'white'
     },
     header_view: {
         flexDirection: 'row',
@@ -85,10 +91,10 @@ const styles = StyleSheet.create({
     header_text: {
         textAlign: 'center',
         color: 'black',
-        fontSize: 18,
+        fontSize: 18 * scaleFactor,
         fontFamily: 'Urbanist',
         fontWeight: '700',
-        lineHeight: 24
+        lineHeight: 24 * scaleFactor
     },
     content: { flex: 1 },
 
@@ -115,10 +121,10 @@ const styles = StyleSheet.create({
         height: 50 * scaleFactor,
         width: 280 * scaleFactor,
         color: 'black',
-        fontSize: 16,
+        fontSize: 16 * scaleFactor,
         fontFamily: 'Montserrat',
         fontWeight: '500',
-        lineHeight: 24
+        lineHeight: 24 * scaleFactor
     },
 })
 

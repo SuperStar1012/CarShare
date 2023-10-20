@@ -1,6 +1,8 @@
 import React, { useEffect } from "react"
-import { Dimensions, View, StyleSheet, TouchableOpacity, SafeAreaView, Text } from "react-native"
+import { Dimensions, View, StyleSheet, TouchableOpacity, Text } from "react-native"
 import SplashAvatar from '../../assets/images/avatar/splash_avatar.svg'
+import { SafeAreaProvider } from "react-native-safe-area-context"
+
 
 const { width } = Dimensions.get('window')
 const scaleFactor = width / 414
@@ -8,7 +10,7 @@ const scaleFactor = width / 414
 const Login_RegisterScreen = ({ navigation }) => {
 
     return (
-        <SafeAreaView style={styles.container}>
+        <SafeAreaProvider style={styles.container}>
             <View style={styles.splash_avatar}>
                 <SplashAvatar width={168 * scaleFactor} height={144 * scaleFactor} />
             </View>
@@ -20,7 +22,7 @@ const Login_RegisterScreen = ({ navigation }) => {
                     <Text style={styles.register_text}>Register</Text>
                 </TouchableOpacity>
             </View>
-        </SafeAreaView>
+        </SafeAreaProvider>
     )
 }
 
@@ -31,13 +33,16 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         paddingLeft: 25 * scaleFactor,
         paddingRight: 25 * scaleFactor,
-        paddingTop: 316 * scaleFactor
     },
     splash_avatar: {
-        marginBottom: 214 * scaleFactor
+        flex: 1,
+        height: '100%',
+        justifyContent: 'center'
     },
     buttons: {
-        width: '100%'
+        width: '100%',
+        marginBottom: 40 * scaleFactor
+
     },
     login_button: {
         height: 58 * scaleFactor,
@@ -55,7 +60,7 @@ const styles = StyleSheet.create({
     },
     login_text: {
         color: 'white',
-        fontSize: 18,
+        fontSize: 18 * scaleFactor,
         fontFamily: 'Urbanist',
         fontWeight: '700',
         // wordWrap: 'break-word'
@@ -77,7 +82,7 @@ const styles = StyleSheet.create({
     },
     register_text: {
         color: '#00A86B',
-        fontSize: 18,
+        fontSize: 18 * scaleFactor,
         fontFamily: 'Urbanist',
         fontWeight: '700',
         // wordWrap: 'break-word'

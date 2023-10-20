@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react"
-import { Dimensions, View, StyleSheet, TouchableOpacity, SafeAreaView, TouchableWithoutFeedback, Text, TextInput, Keyboard } from "react-native"
+import { Dimensions, View, StyleSheet, TouchableOpacity,ScrollView, KeyboardAvoidingView,SafeAreaView, TouchableWithoutFeedback, Text, TextInput, Keyboard } from "react-native"
 import ArrowLeftImage from '../../../assets/images/auth/register/arrow-left.svg'
 import EnterOTPImage from '../../../assets/images/auth/register/Enter-OTP.svg'
 import CountryImage from '../../../assets/images/auth/register/country-image.svg'
@@ -36,41 +36,43 @@ const AddPhoneNumberScreen = ({ navigation }) => {
     return (
         <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
             <SafeAreaView style={styles.container}>
-                <View style={{ flex: 1 }}>
-                    <View style={styles.header}>
-                        <TouchableOpacity style={styles.header_icon} onPress={() => navigation.navigate('TermScreen')}>
-                            <ArrowLeftImage width={24 * scaleFactor} height={24 * scaleFactor} />
+                <View style={styles.body}>
+                    <View style={{ flex: 1 }}>
+                        <View style={styles.header}>
+                            <TouchableOpacity style={styles.header_icon} onPress={() => navigation.goBack()}>
+                                <ArrowLeftImage width={24 * scaleFactor} height={24 * scaleFactor} />
+                            </TouchableOpacity>
+                        </View>
+                        <ScrollView contentContainerStyle={styles.content} scrollEnabled = {Platform.OS === "ios" ? true : false}>
+                            <EnterOTPImage width={260 * scaleFactor} height={260 * scaleFactor} style={keyboardVisible == false ? styles.avatar_image : styles.disabled_avatar_image} />
+                            <Text style={styles.content_header_text}>Add Phone Number</Text>
+                            <Text style={styles.content_main_text}>Enter your phone number in order to send you OTP security code</Text>
+                            <View style={styles.phone_number_field}>
+                                <View style={styles.country_code}>
+                                    <CountryImage width={38 * scaleFactor} height={23 * scaleFactor} />
+                                    <Text style={styles.country_text}>+1</Text>
+                                </View>
+                                <TextInput style={styles.phone_number} />
+                            </View>
+                            <View style={styles.phone_number_marker}>
+                                <Text style={styles.phone_number_marker_header}>Phone Number must contain</Text>
+                                <View style={styles.phone_number_marker_item}>
+                                    <TicketCircleImage />
+                                    <Text style={styles.phone_number_mark_text}>An area code</Text>
+                                </View>
+                                <View style={styles.phone_number_marker_item}>
+                                    <TicketCircleImage />
+                                    <Text style={styles.phone_number_mark_text}>A 11 digit phone number for OTP Verification</Text>
+                                </View>
+                            </View>
+                        </ScrollView>
+                    </View>
+                    <KeyboardAvoidingView style={styles.footer} behavior={Platform.OS === "ios" ? "padding" : "height"}>
+                        <TouchableOpacity style={styles.agree_button} onPress={() => navigation.navigate("OTPVerificationScreen")}>
+                            <Text style={styles.button_text}>Continue</Text>
                         </TouchableOpacity>
-                    </View>
-                    <View style={styles.content}>
-                        <EnterOTPImage width={260 * scaleFactor} height={260 * scaleFactor} style={keyboardVisible == false ? styles.avatar_image : styles.disabled_avatar_image} />
-                        <Text style={styles.content_header_text}>Add Phone Number</Text>
-                        <Text style={styles.content_main_text}>Enter your phone number in order to send you OTP security code</Text>
-                        <View style={styles.phone_number_field}>
-                            <View style={styles.country_code}>
-                                <CountryImage width={38 * scaleFactor} height={23 * scaleFactor} />
-                                <Text style={styles.country_text}>+1</Text>
-                            </View>
-                            <TextInput style={styles.phone_number} />
-                        </View>
-                        <View style={styles.phone_number_marker}>
-                            <Text style={styles.phone_number_marker_header}>Phone Number must contain</Text>
-                            <View style={styles.phone_number_marker_item}>
-                                <TicketCircleImage />
-                                <Text style={styles.phone_number_mark_text}>An area code</Text>
-                            </View>
-                            <View style={styles.phone_number_marker_item}>
-                                <TicketCircleImage />
-                                <Text style={styles.phone_number_mark_text}>A 11 digit phone number for OTP Verification</Text>
-                            </View>
-                        </View>
-                    </View>
-                </View>
-                <View style={styles.footer}>
-                    <TouchableOpacity style={styles.agree_button} onPress={() => navigation.navigate("OTPVerificationScreen")}>
-                        <Text style={styles.button_text}>Continue</Text>
-                    </TouchableOpacity>
-                    <Text style={styles.footer_text}>I accept <Text style={styles.term_text}>Terms & Conditions</Text></Text>
+                        <Text style={styles.footer_text}>I accept <Text style={styles.term_text}>Terms & Conditions</Text></Text>
+                    </KeyboardAvoidingView>
                 </View>
             </SafeAreaView>
         </TouchableWithoutFeedback>
@@ -81,18 +83,25 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         backgroundColor: 'white',
-        paddingLeft: 25 * scaleFactor,
-        paddingRight: 25 * scaleFactor,
     },
     header: {
-        marginTop: 38 * scaleFactor,
+        marginTop: 40 * scaleFactor,
         flexDirection: 'row',
         width: '100%',
     },
+    body: {
+        flex: 1,
+        paddingLeft: 25 * scaleFactor,
+        paddingRight: 25 * scaleFactor,
+        justifyContent: 'center'
+    },
     content: {
+        flexGrow: 1,
         width: '100%',
+        marginTop: 12 * scaleFactor,
         alignItems: 'center',
-        marginTop: 12 * scaleFactor
+        paddingBottom: 20 * scaleFactor,
+
     },
     avatar_image: {
         display: 'block',
@@ -104,7 +113,7 @@ const styles = StyleSheet.create({
     content_header_text: {
         // Add Phone Number
         color: 'black',
-        fontSize: 34,
+        fontSize: 34 * scaleFactor,
         fontFamily: 'Urbanist',
         fontWeight: '700',
         // lineHeight: 24,
@@ -113,10 +122,10 @@ const styles = StyleSheet.create({
         width: 316 * scaleFactor,
         marginTop: 25 * scaleFactor,
         color: 'rgba(0,0,0,0.40)',
-        fontSize: 16,
+        fontSize: 16 * scaleFactor,
         fontFamily: 'Urbanist',
         fontWeight: '500',
-        lineHeight: 24,
+        lineHeight: 24 * scaleFactor,
         textAlign: 'center'
     },
     phone_number_field: {
@@ -139,7 +148,7 @@ const styles = StyleSheet.create({
     country_text: {
         marginLeft: 11 * scaleFactor,
         color: 'rgba(0,0,0,0.90)',
-        fontSize: 18,
+        fontSize: 18 * scaleFactor,
         fontFamily: 'Urbanist',
         fontWeight: '700',
         // wordWrap: 'break-word'
@@ -153,7 +162,7 @@ const styles = StyleSheet.create({
         borderStyle: 'solid',
         borderRadius: 18 * scaleFactor,
         color: '#00A86B',
-        fontSize: 18,
+        fontSize: 18 * scaleFactor,
         fontFamily: 'Urbanist',
         fontWeight: '700',
         letterSpacing: 4,
@@ -166,11 +175,10 @@ const styles = StyleSheet.create({
     },
     phone_number_marker_header: {
         color: 'rgba(0, 0, 0,0.30)',
-        fontSize: 14,
+        fontSize: 14 * scaleFactor,
         fontFamily: 'Urbanist',
         fontWeight: '500',
-        lineHeight: 24,
-        wordWrap: 'break-word'
+        lineHeight: 24 * scaleFactor,
     },
     phone_number_marker_item: {
         flexDirection: 'row',
@@ -179,14 +187,14 @@ const styles = StyleSheet.create({
     phone_number_mark_text: {
         marginLeft: 8 * scaleFactor,
         color: 'rgba(0,0,0,0.20)',
-        fontSize: 14,
+        fontSize: 14 * scaleFactor,
         fontFamily: 'Urbanist',
         fontWeight: '500',
-        lineHeight: 24,
-        wordWrap: 'break-word'
+        lineHeight: 24 * scaleFactor,
     },
     footer: {
         width: '100%',
+        marginTop: 10 * scaleFactor,
         marginBottom: 25 * scaleFactor,
     },
     agree_button: {
@@ -209,14 +217,14 @@ const styles = StyleSheet.create({
     },
     button_text: {
         color: 'white',
-        fontSize: 18,
+        fontSize: 18 * scaleFactor,
         fontFamily: 'Urbanist',
         fontWeight: '700',
         // wordWrap: 'break-word'
     },
     footer_text: {
         color: 'rgba(0,0,0,0.80)',
-        fontSize: 16,
+        fontSize: 16 * scaleFactor,
         fontFamily: 'Urbanist',
         fontWeight: '400',
         // wordWrap: 'break-word',
@@ -225,7 +233,7 @@ const styles = StyleSheet.create({
     },
     term_text: {
         color: '#00A86B',
-        fontSize: 16,
+        fontSize: 16 * scaleFactor,
         fontFamily: 'Urbanist',
         fontWeight: '600',
     }

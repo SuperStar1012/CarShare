@@ -55,7 +55,7 @@ const Stack = createNativeStackNavigator()
 const Routes = () => {
     return (
         <NavigationContainer>
-            <Stack.Navigator initialRouteName = "InspectionReportScreen" screenOptions = {{headerShown: false}}>
+            <Stack.Navigator initialRouteName = "SplashScreen" screenOptions = {{headerShown: false}}>
                 <Stack.Screen name = "SplashScreen" component = {SplashScreen} />
                 <Stack.Screen name = "OnBoardingScreen_1" component = {OnBoardingScreen_1} />
                 <Stack.Screen name = "OnBoardingScreen_2" component = {OnBoardingScreen_2} />

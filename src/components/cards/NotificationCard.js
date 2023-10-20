@@ -59,29 +59,29 @@ const styles = StyleSheet.create({
     },
     name_text: {
         color: '#00A86B',
-        fontSize: 12,
+        fontSize: 12 * scaleFactor,
         fontFamily: 'Montserrat',
         fontWeight: '700',
-        lineHeight: 20,
+        lineHeight: 20 * scaleFactor,
     },
     content_text: {
         color: 'black',
-        fontSize: 12,
+        fontSize: 12 * scaleFactor,
         fontFamily: 'Montserrat',
         fontWeight: '700',
-        lineHeight: 20,
+        lineHeight: 20 * scaleFactor,
         width: 200 * scaleFactor
     },
     type_text: {
         marginTop: 4 * scaleFactor,
         color: '#A7A9B7',
-        fontSize: 10,
+        fontSize: 10 * scaleFactor,
         fontFamily: 'Montserrat',
         fontWeight: '400',
     },
     detail_text: {
         color: '#A7A9B7',
-        fontSize: 10,
+        fontSize: 10 * scaleFactor,
         fontFamily: 'Montserrat',
         fontWeight: '400'
     },
@@ -100,7 +100,7 @@ const styles = StyleSheet.create({
         textAlign: 'center',
         lineHeight: 28 * scaleFactor,
         color: 'white',
-        fontSize: 12,
+        fontSize: 12 * scaleFactor,
         fontFamily: 'Montserrat',
         fontWeight: '700'
     },
@@ -115,7 +115,7 @@ const styles = StyleSheet.create({
         textAlign: 'center',
         lineHeight: 28 * scaleFactor,
         color: 'rgba(0,0,0,0.80)',
-        fontSize: 12,
+        fontSize: 12 * scaleFactor,
         fontFamily: 'Montserrat',
         fontWeight: '400'
     },

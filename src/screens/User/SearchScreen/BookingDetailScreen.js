@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react"
-import { Dimensions, View, StyleSheet, ScrollView, Button, TouchableOpacity, TouchableWithoutFeedback, Keyboard, SafeAreaView, Text, TextInput } from "react-native"
+import { Dimensions, View,  StyleSheet, ScrollView, Button, TouchableOpacity, TouchableWithoutFeedback, Keyboard, SafeAreaView, Text, TextInput } from "react-native"
 import LinearGradient from 'react-native-linear-gradient';
 import { Calendar, LocaleConfig } from 'react-native-calendars'
 import DateTimePicker from '@react-native-community/datetimepicker'
@@ -20,36 +20,22 @@ const BookingDetailScreen = ({ navigation }) => {
     }
     LocaleConfig.locales['fr'] = {
         monthNames: [
-            'Janvier',
-            'Février',
-            'Mars',
-            'Avril',
-            'Mai',
-            'Juin',
-            'Juillet',
-            'Août',
-            'Septembre',
-            'Octobre',
-            'Novembre',
-            'Décembre'
-        ],
-        monthNames: [
-            'Janvier',
-            'Février',
-            'Mars',
-            'Avril',
-            'Mai',
-            'Juin',
-            'Juillet',
-            'Août',
-            'Septembre',
-            'Octobre',
-            'Novembre',
-            'Décembre'
+            'Jan',
+            'Feb',
+            'Mar',
+            'Apr',
+            'May',
+            'Jun',
+            'Jul',
+            'Agu',
+            'Sep',
+            'Oct',
+            'Nov',
+            'Dec'
         ],
         monthNamesShort: ['Janv.', 'Févr.', 'Mars', 'Avril', 'Mai', 'Juin', 'Juil.', 'Août', 'Sept.', 'Oct.', 'Nov.', 'Déc.'],
-        dayNames: ['Dimanche', 'Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi'],
-        dayNamesShort: ['Dim.', 'Lun.', 'Mar.', 'Mer.', 'Jeu.', 'Ven.', 'Sam.'],
+        dayNames: ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sta'],
+        dayNamesShort: ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sta'],
         today: "Aujourd'hui"
     };
 
@@ -58,7 +44,7 @@ const BookingDetailScreen = ({ navigation }) => {
     const [mydate, setDate] = useState(new Date());
     const [myenddate, setEndDate] = useState(new Date());
     const [isDisplayDate, setShow] = useState(false);
-    const [duration,setDuration] = useState(0)
+    const [duration, setDuration] = useState(0)
     const changeSelectedDate = (event, selectedDate, type) => {
         const currentDate = selectedDate || mydate;
         if (event.type == "set") {
@@ -76,89 +62,91 @@ const BookingDetailScreen = ({ navigation }) => {
     return (
         <TouchableWithoutFeedback onPress={() => missHandle()}>
             <SafeAreaView style={styles.container}>
-                <View style={{ flex: 1 }}>
-                    <View style={styles.header_view}>
-                        <TouchableOpacity style={styles.header_icon} onPress={() => navigation.navigate('CarDetailScreen')}>
-                            <ArrowLeftImage width={24 * scaleFactor} height={24 * scaleFactor} />
-                        </TouchableOpacity>
-                        <Text style={styles.header_text}>Booking Detail</Text>
+                <View style={styles.body}>
+                    <View style={{ flex: 1 }}>
+                        <View style={styles.header_view}>
+                            <TouchableOpacity style={styles.header_icon} onPress={() => navigation.navigate('CarDetailScreen')}>
+                                <ArrowLeftImage width={24 * scaleFactor} height={24 * scaleFactor} />
+                            </TouchableOpacity>
+                            <Text style={styles.header_text}>Booking Detail</Text>
+                        </View>
+                        <ScrollView style={styles.content}>
+                            <View style={styles.calendar_view}>
+                                <Calendar
+
+                                    onDayPress={day => {
+                                        setSelected(day.dateString);
+                                    }}
+                                    markedDates={{
+                                        [selected]: { selected: true, disableTouchEvent: true, selectedDotColor: 'orange' }
+                                    }}
+                                />
+                            </View>
+                            <View style={styles.duration_view}>
+                                <View style={styles.duration_header}>
+                                    <Text style={styles.duration_text}>Duration</Text>
+                                    <View style={styles.slider_range}>
+                                        <Text style={styles.slider_range_text}>{duration} Hour</Text>
+                                    </View>
+                                </View>
+
+                                <Slider
+                                    style={styles.slider}
+                                    minimumValue={0}
+                                    maximumValue={24}
+                                    minimumTrackTintColor="#00A86B"
+                                    maximumTrackTintColor="#CCCCCC"
+                                    step={1}
+                                    onValueChange={e => setDuration(e)}
+                                />
+                            </View>
+                            <View style={styles.start_end_view}>
+                                <View style={styles.start_view}>
+                                    <Text style={styles.start_text}>Start</Text>
+                                    <View style={styles.start_time}>
+                                        <Text style={styles.start_time_text}>{mydate.getHours() + ":" + mydate.getMinutes()}</Text>
+                                        <TouchableOpacity onPress={() => displayTimepicker()}>
+                                            <ClockImage />
+                                        </TouchableOpacity>
+                                        {
+                                            isDisplayDate == true ? (
+                                                <DateTimePicker
+                                                    value={mydate}
+                                                    mode="time"
+                                                    is24Hour={false}
+                                                    display="default"
+                                                    onChange={(event, date) => changeSelectedDate(event, date, "start")}
+                                                />
+                                            ) : (<></>)
+                                        }
+
+                                    </View>
+                                </View>
+                                <View style={styles.swap_image}>
+                                    <ArrowSwapImage />
+                                </View>
+                                <View style={styles.end_view}>
+                                    <Text style={styles.start_text}>End</Text>
+                                    <View style={styles.start_time}>
+                                        <Text style={styles.start_time_text}>{myenddate.getHours() + ":" + myenddate.getMinutes()}</Text>
+                                        <TouchableOpacity onPress={() => displayTimepicker()}>
+                                            <ClockImage />
+                                        </TouchableOpacity>
+                                    </View>
+                                </View>
+
+                            </View>
+                            <View style={styles.amount_view}>
+                                <Text style={styles.amount_text}>Total Amount</Text>
+                                <Text style={styles.amount_value}>$ 400.00</Text>
+                            </View>
+                        </ScrollView>
                     </View>
-                    <View style={styles.content}>
-                        <View style={styles.calendar_view}>
-                            <Calendar
 
-                                onDayPress={day => {
-                                    setSelected(day.dateString);
-                                }}
-                                markedDates={{
-                                    [selected]: { selected: true, disableTouchEvent: true, selectedDotColor: 'orange' }
-                                }}
-                            />
-                        </View>
-                        <View style={styles.duration_view}>
-                            <View style={styles.duration_header}>
-                                <Text style={styles.duration_text}>Duration</Text>
-                                <View style={styles.slider_range}>
-                                    <Text style={styles.slider_range_text}>{duration} Hour</Text>
-                                </View>
-                            </View>
-
-                            <Slider
-                                style={styles.slider}
-                                minimumValue={0}
-                                maximumValue={24}
-                                minimumTrackTintColor="#00A86B"
-                                maximumTrackTintColor="#CCCCCC"
-                                step={1}
-                                onValueChange={e => setDuration(e)}
-                            />
-                        </View>
-                        <View style={styles.start_end_view}>
-                            <View style={styles.start_view}>
-                                <Text style={styles.start_text}>Start</Text>
-                                <View style={styles.start_time}>
-                                    <Text style={styles.start_time_text}>{mydate.getHours() + ":" + mydate.getMinutes()}</Text>
-                                    <TouchableOpacity onPress={() => displayTimepicker()}>
-                                        <ClockImage />
-                                    </TouchableOpacity>
-                                    {
-                                        isDisplayDate == true ? (
-                                            <DateTimePicker
-                                                value={mydate}
-                                                mode="time"
-                                                is24Hour={false}
-                                                display="default"
-                                                onChange={(event, date) => changeSelectedDate(event, date, "start")}
-                                            />
-                                        ) : (<></>)
-                                    }
-
-                                </View>
-                            </View>
-                            <View style={styles.swap_image}>
-                                <ArrowSwapImage />
-                            </View>
-                            <View style={styles.end_view}>
-                                <Text style={styles.start_text}>End</Text>
-                                <View style={styles.start_time}>
-                                    <Text style={styles.start_time_text}>{myenddate.getHours() + ":" + myenddate.getMinutes()}</Text>
-                                    <TouchableOpacity onPress={() => displayTimepicker()}>
-                                        <ClockImage />
-                                    </TouchableOpacity>
-                                </View>
-                            </View>
-
-                        </View>
-                        <View style={styles.amount_view}>
-                            <Text style={styles.amount_text}>Total Amount</Text>
-                            <Text style={styles.amount_value}>$ 400.00</Text>
-                        </View>
-                    </View>
+                    <TouchableOpacity style={styles.footer} onPress={() => navigation.navigate("SummaryScreen", { type: "beforeadded" })}>
+                        <Text style={styles.footer_text}>Continue</Text>
+                    </TouchableOpacity>
                 </View>
-
-                <TouchableOpacity style={styles.footer} onPress={()=>navigation.navigate("SummaryScreen",{type: "beforeadded"})}>
-                    <Text style={styles.footer_text}>Continue</Text>
-                </TouchableOpacity>
             </SafeAreaView>
         </TouchableWithoutFeedback>
     )
@@ -168,8 +156,6 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         backgroundColor: 'white',
-        paddingTop: 37 * scaleFactor,
-        paddingHorizontal: 25 * scaleFactor
     },
     header_view: {
         flexDirection: 'row',
@@ -177,6 +163,11 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         width: '100%',
         position: 'relative'
+    },
+    body:{
+        flex: 1,
+        paddingTop: 37 * scaleFactor,
+        paddingHorizontal: 25 * scaleFactor
     },
     header_icon: {
         position: 'absolute',
@@ -189,14 +180,15 @@ const styles = StyleSheet.create({
     header_text: {
         textAlign: 'center',
         color: 'black',
-        fontSize: 16,
+        fontSize: 16 * scaleFactor,
         fontFamily: 'Urbanist',
         fontWeight: '700',
-        lineHeight: 24
+        lineHeight: 24 * scaleFactor
 
     },
     content: {
         marginTop: 56 * scaleFactor,
+        marginBottom: 20 * scaleFactor,
         width: '100%'
     },
     calendar_view: {
@@ -207,7 +199,7 @@ const styles = StyleSheet.create({
     },
     duration_text: {
         color: 'black',
-        fontSize: 20,
+        fontSize: 20 * scaleFactor,
         fontFamily: 'Urbanist',
         fontWeight: '600'
     },
@@ -235,7 +227,7 @@ const styles = StyleSheet.create({
     },
     footer_text: {
         color: 'white',
-        fontSize: 18,
+        fontSize: 18 * scaleFactor,
         fontFamily: 'Urbanist',
         fontWeight: '700'
     },
@@ -250,10 +242,10 @@ const styles = StyleSheet.create({
     },
     slider_range_text: {
         color: 'white',
-        fontSize: 15,
+        fontSize: 15 * scaleFactor,
         fontFamily: 'Urbanist',
         fontWeight: '700',
-        lineHeight: 24
+        lineHeight: 24 * scaleFactor
     },
     duration_header: {
         flexDirection: 'row'
@@ -265,7 +257,7 @@ const styles = StyleSheet.create({
     },
     start_text: {
         color: 'black',
-        fontSize: 20,
+        fontSize: 20 * scaleFactor,
         fontFamily: 'Urbanist',
         fontWeight: '600'
     },
@@ -278,7 +270,7 @@ const styles = StyleSheet.create({
     start_time_text: {
         marginRight: 38 * scaleFactor,
         color: 'rgba(0,0,0,0.80)',
-        fontSize: 16,
+        fontSize: 16 * scaleFactor,
         fontFamily: 'Urbanist',
         fontWeight: '600'
     },
@@ -299,14 +291,14 @@ const styles = StyleSheet.create({
     amount_text: {
         // Total Amount
         color: 'black',
-        fontSize: 20,
+        fontSize: 20 * scaleFactor,
         fontFamily: 'Urbanist',
         fontWeight: '400'
     },
     amount_value: {
         // Total Amount
         color: '#00A86B',
-        fontSize: 20,
+        fontSize: 20 * scaleFactor,
         fontFamily: 'Urbanist',
         fontWeight: '800'
     }

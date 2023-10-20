@@ -40,6 +40,7 @@ const SearchCarCard = () => {
 
 const styles = StyleSheet.create({
     rec_item: {
+        width: '100%',
         paddingHorizontal: 11 * scaleFactor,
         paddingVertical: 13 * scaleFactor,
         backgroundColor: 'white',
@@ -57,7 +58,7 @@ const styles = StyleSheet.create({
         flexDirection: 'row'
     },
     rec_content_right: {
-        marginLeft: 23 * scaleFactor
+        marginLeft: 20 * scaleFactor
     },
     rec_content_right_header: {
         flexDirection: 'row',
@@ -65,9 +66,9 @@ const styles = StyleSheet.create({
         justifyContent: 'center'
     },
     rec_car_name: {
-        marginRight: 29 * scaleFactor,
+        marginRight: 20 * scaleFactor,
         color: '#1E2022',
-        fontSize: 13,
+        fontSize: 13 * scaleFactor,
         fontFamily: 'Montserrat',
         fontWeight: '700',
         letterSpacing: 1
@@ -80,7 +81,7 @@ const styles = StyleSheet.create({
     location_text: {
         marginLeft: 8 * scaleFactor,
         color: 'rgba(0,0,0,0.60)',
-        fontSize: 12,
+        fontSize: 12 * scaleFactor,
         fontFamily: 'Montserrat',
         fontWeight: '400'
     },
@@ -90,20 +91,20 @@ const styles = StyleSheet.create({
     },
     day_text: {
         color: '#00A86B',
-        fontSize: 16,
+        fontSize: 16 * scaleFactor,
         fontFamily: 'Montserrat',
         fontWeight: '700',
-        lineHeight: 24
+        lineHeight: 24 * scaleFactor
     },
     days_text: {
         color: 'black',
-        fontSize: 16,
+        fontSize: 16 * scaleFactor,
         fontFamily: 'Montserrat',
         fontWeight: '400',
-        lineHeight: 24
+        lineHeight: 24 * scaleFactor
     },
     car_button: {
-        marginLeft: 40 * scaleFactor,
+        marginLeft: 30 * scaleFactor,
         backgroundColor: '#00A86B',
         borderRadius: 10,
         width: 120 * scaleFactor,

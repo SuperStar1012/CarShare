@@ -16,35 +16,37 @@ const InspectionReportScreen = ({ route, navigation }) => {
     return (
         <TouchableWithoutFeedback onPress={() => missHandle()}>
             <SafeAreaView style={styles.container}>
-                <View style={{ flex: 1 }}>
-                    <View style={styles.header_view}>
-                        <TouchableOpacity style={styles.header_icon} onPress={() => navigation.navigate("HomeScreen")}>
-                            <ArrowLeftImage width={24 * scaleFactor} height={24 * scaleFactor} />
-                        </TouchableOpacity>
-                        <Text style={styles.header_text}>Inspection Report</Text>
-                        <CloseImage />
-                    </View>
-                    <View style={styles.content}>
-                        <Text style={styles.report_header_text}>Here is the inspection report.</Text>
-                        <View style={styles.footer_content}>
-                            <View style={styles.footer_item}>
-                                <Text style={styles.footer_left_text}>Service Cost</Text>
-                                <Text style={styles.footer_right_text}>$ 400.00</Text>
-                            </View>
-                            <View style={styles.footer_item}>
-                                <Text style={styles.footer_left_text}>Taxes & Fees</Text>
-                                <Text style={styles.footer_right_text}>$ 20.00</Text>
-                            </View>
-                            <View style={styles.footer_last_item}>
-                                <Text style={styles.footer_last_left_text}>Total</Text>
-                                <Text style={styles.footer_last_right_text}>$ 420.00</Text>
+                <View style={styles.body}>
+                    <View style={{ flex: 1 }}>
+                        <View style={styles.header_view}>
+                            <TouchableOpacity style={styles.header_icon} onPress={() => navigation.navigate("HomeScreen")}>
+                                <ArrowLeftImage width={24 * scaleFactor} height={24 * scaleFactor} />
+                            </TouchableOpacity>
+                            <Text style={styles.header_text}>Inspection Report</Text>
+                            <CloseImage />
+                        </View>
+                        <View style={styles.content}>
+                            <Text style={styles.report_header_text}>Here is the inspection report.</Text>
+                            <View style={styles.footer_content}>
+                                <View style={styles.footer_item}>
+                                    <Text style={styles.footer_left_text}>Service Cost</Text>
+                                    <Text style={styles.footer_right_text}>$ 400.00</Text>
+                                </View>
+                                <View style={styles.footer_item}>
+                                    <Text style={styles.footer_left_text}>Taxes & Fees</Text>
+                                    <Text style={styles.footer_right_text}>$ 20.00</Text>
+                                </View>
+                                <View style={styles.footer_last_item}>
+                                    <Text style={styles.footer_last_left_text}>Total</Text>
+                                    <Text style={styles.footer_last_right_text}>$ 420.00</Text>
+                                </View>
                             </View>
                         </View>
                     </View>
+                    <TouchableOpacity style={styles.footer} onPress={() => navigation.navigate("PersonalFeedbackScreen")}>
+                        <Text style={styles.footer_text}>Confirm Payment</Text>
+                    </TouchableOpacity>
                 </View>
-                <TouchableOpacity style={styles.footer} onPress={() => navigation.navigate("PersonalFeedbackScreen")}>
-                    <Text style={styles.footer_text}>Confirm Payment</Text>
-                </TouchableOpacity>
             </SafeAreaView>
         </TouchableWithoutFeedback>
     )
@@ -54,6 +56,9 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         backgroundColor: 'white',
+    },
+    body: {
+        flex: 1,
         paddingTop: 37 * scaleFactor,
         paddingHorizontal: 25 * scaleFactor
     },
@@ -66,10 +71,10 @@ const styles = StyleSheet.create({
     header_text: {
         textAlign: 'center',
         color: 'black',
-        fontSize: 18,
+        fontSize: 18 * scaleFactor,
         fontFamily: 'Montserrat',
         fontWeight: '700',
-        lineHeight: 27.34
+        lineHeight: 27.34 * scaleFactor
 
     },
     content: {
@@ -78,10 +83,10 @@ const styles = StyleSheet.create({
     },
     report_header_text: {
         color: 'black',
-        fontSize: 16,
+        fontSize: 16 * scaleFactor,
         fontFamily: 'Montserrat',
         fontWeight: '700',
-        lineHeight: 24.30
+        lineHeight: 24.30 * scaleFactor
     },
     footer_content: {
         marginTop: 30 * scaleFactor,
@@ -94,17 +99,17 @@ const styles = StyleSheet.create({
     },
     footer_left_text: {
         color: 'rgba(0,0,0,0.50)',
-        fontSize: 16,
+        fontSize: 16 * scaleFactor,
         fontFamily: 'Urbanist',
         fontWeight: '500',
-        lineHeight: 24
+        lineHeight: 24 * scaleFactor
     },
     footer_right_text: {
         color: 'black',
-        fontSize: 16,
+        fontSize: 16 * scaleFactor,
         fontFamily: 'Urbanist',
         fontWeight: '700',
-        lineHeight: 24
+        lineHeight: 24 * scaleFactor
     },
     footer_last_item: {
         marginTop: 29 * scaleFactor,
@@ -113,17 +118,17 @@ const styles = StyleSheet.create({
     },
     footer_last_left_text: {
         color: 'rgba(0,0,0,0.50)',
-        fontSize: 16,
+        fontSize: 16 * scaleFactor,
         fontFamily: 'Urbanist',
         fontWeight: '900',
-        lineHeight: 24
+        lineHeight: 24 * scaleFactor
     },
     footer_last_right_text: {
         color: '#00A86B',
-        fontSize: 16,
+        fontSize: 16 * scaleFactor,
         fontFamily: 'Urbanist',
         fontWeight: '900',
-        lineHeight: 24
+        lineHeight: 24 * scaleFactor
     },
     footer: {
         width: '100%',
@@ -144,7 +149,7 @@ const styles = StyleSheet.create({
     },
     footer_text: {
         color: 'white',
-        fontSize: 18,
+        fontSize: 18 * scaleFactor,
         fontFamily: 'Urbanist',
         fontWeight: '700'
     },

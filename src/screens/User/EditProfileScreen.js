@@ -46,95 +46,96 @@ const EditProfileScreen = ({ navigation }) => {
 
     return (
         <SafeAreaView style={styles.container}>
-            <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
-                <View style={{ flex: 1 }}>
-                <View style={styles.header_view}>
-                    <TouchableOpacity style={styles.header_icon} onPress={() => navigation.goBack()}>
-                        <ArrowLeftImage width={24 * scaleFactor} height={24 * scaleFactor} />
-                    </TouchableOpacity>
-                    <Text style={styles.header_text}>Edit Profile Details</Text>
-                </View>
-                    {keyboardVisible == false ? (
-                        <View style={styles.header}>
-                            <View style={styles.splash_avatar}>
-                                <SplashAvatar width={108 * scaleFactor} height={92 * scaleFactor} />
-                            </View>
-                            <View style={styles.header_text}>
-                                <Text style={styles.main_text}>Edit Profile Details</Text>
-                            </View>
-                        </View>) : null}
-                    <ScrollView style={{ flex: 1 }}>
-                        <View style={styles.content}>
-                            <View style={styles.input_content}>
-                                <Text style={styles.email_text}>First Name</Text>
-                                <View style={styles.email_input}>
-                                    <UserImage width={20 * scaleFactor} height={20 * scaleFactor} style={styles.user_image} />
-                                    <TextInput style={styles.email_text_input} ></TextInput>
+            <View style={styles.body}>
+                <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
+                    <View style={{ flex: 1 }}>
+                        <View style={styles.header_view}>
+                            <TouchableOpacity style={styles.header_icon} onPress={() => navigation.goBack()}>
+                                <ArrowLeftImage width={24 * scaleFactor} height={24 * scaleFactor} />
+                            </TouchableOpacity>
+                            <Text style={styles.header_text}>Edit Profile Details</Text>
+                        </View>
+                        {keyboardVisible == false ? (
+                            <View style={styles.header}>
+                                <View style={styles.splash_avatar}>
+                                    <SplashAvatar width={108 * scaleFactor} height={92 * scaleFactor} />
                                 </View>
-                            </View>
-                            <View style={styles.input_content}>
-                                <Text style={styles.email_text}>Last Name</Text>
-                                <View style={styles.email_input}>
-                                    <UserImage width={20 * scaleFactor} height={20 * scaleFactor} style={styles.user_image} />
-                                    <TextInput style={styles.email_text_input} ></TextInput>
+                                <View style={styles.header_text}>
+                                    <Text style={styles.main_text}>Edit Profile Details</Text>
                                 </View>
-                            </View>
-                            <View style={styles.input_content}>
-                                <Text style={styles.email_text}>Phone Number</Text>
-                                <View style={styles.email_input}>
-                                    <PhoneImage width={20 * scaleFactor} height={20 * scaleFactor} style={styles.user_image} />
-                                    <TextInput style={styles.email_text_input} ></TextInput>
-                                </View>
-                            </View>
-                            <View style={styles.input_content}>
-                                <Text style={styles.email_text}>Email</Text>
-                                <View style={styles.email_input}>
-                                    <SmsImage width={20 * scaleFactor} height={20 * scaleFactor} style={styles.user_image} />
-                                    <TextInput style={styles.email_text_input} ></TextInput>
-                                </View>
-                            </View>
-                            <View style={styles.input_content}>
-                                <Text style={styles.email_text}>Driving License Number</Text>
-                                <View style={styles.email_input}>
-                                    <PersonalImage width={20 * scaleFactor} height={20 * scaleFactor} style={styles.user_image} />
-                                    <TextInput style={styles.email_text_input} keyboardType="numeric" ></TextInput>
-                                </View>
-                            </View>
-                            <View style={styles.input_content}>
-                                <Text style={styles.email_text}>Payment Details</Text>
-                                <View style={styles.email_input}>
-                                    <CardImage width={20 * scaleFactor} height={20 * scaleFactor} style={styles.user_image} />
-                                    <TextInput style={styles.email_text_input} ></TextInput>
-                                </View>
-                            </View>
-                            <View style={styles.date_cvv}>
-                                <View style={styles.date_input}>
-                                    <Text style={styles.email_text}>Expiry Date</Text>
+                            </View>) : null}
+                        <ScrollView style={{ flex: 1 }}>
+                            <View style={styles.content}>
+                                <View style={styles.input_content}>
+                                    <Text style={styles.email_text}>First Name</Text>
                                     <View style={styles.email_input}>
-                                        <CalendarImage width={20 * scaleFactor} height={20 * scaleFactor} style={styles.user_image} />
+                                        <UserImage width={20 * scaleFactor} height={20 * scaleFactor} style={styles.user_image} />
                                         <TextInput style={styles.email_text_input} ></TextInput>
                                     </View>
                                 </View>
-                                <View style={styles.cvv_input}>
-                                    <Text style={styles.email_text}>CVV</Text>
+                                <View style={styles.input_content}>
+                                    <Text style={styles.email_text}>Last Name</Text>
                                     <View style={styles.email_input}>
-                                        <CardAddImage width={20 * scaleFactor} height={20 * scaleFactor} style={styles.user_image} />
+                                        <UserImage width={20 * scaleFactor} height={20 * scaleFactor} style={styles.user_image} />
+                                        <TextInput style={styles.email_text_input} ></TextInput>
+                                    </View>
+                                </View>
+                                <View style={styles.input_content}>
+                                    <Text style={styles.email_text}>Phone Number</Text>
+                                    <View style={styles.email_input}>
+                                        <PhoneImage width={20 * scaleFactor} height={20 * scaleFactor} style={styles.user_image} />
+                                        <TextInput style={styles.email_text_input} ></TextInput>
+                                    </View>
+                                </View>
+                                <View style={styles.input_content}>
+                                    <Text style={styles.email_text}>Email</Text>
+                                    <View style={styles.email_input}>
+                                        <SmsImage width={20 * scaleFactor} height={20 * scaleFactor} style={styles.user_image} />
+                                        <TextInput style={styles.email_text_input} ></TextInput>
+                                    </View>
+                                </View>
+                                <View style={styles.input_content}>
+                                    <Text style={styles.email_text}>Driving License Number</Text>
+                                    <View style={styles.email_input}>
+                                        <PersonalImage width={20 * scaleFactor} height={20 * scaleFactor} style={styles.user_image} />
                                         <TextInput style={styles.email_text_input} keyboardType="numeric" ></TextInput>
                                     </View>
                                 </View>
+                                <View style={styles.input_content}>
+                                    <Text style={styles.email_text}>Payment Details</Text>
+                                    <View style={styles.email_input}>
+                                        <CardImage width={20 * scaleFactor} height={20 * scaleFactor} style={styles.user_image} />
+                                        <TextInput style={styles.email_text_input} ></TextInput>
+                                    </View>
+                                </View>
+                                <View style={styles.date_cvv}>
+                                    <View style={styles.date_input}>
+                                        <Text style={styles.email_text}>Expiry Date</Text>
+                                        <View style={styles.email_input}>
+                                            <CalendarImage width={20 * scaleFactor} height={20 * scaleFactor} style={styles.user_image} />
+                                            <TextInput style={styles.email_text_input} ></TextInput>
+                                        </View>
+                                    </View>
+                                    <View style={styles.cvv_input}>
+                                        <Text style={styles.email_text}>CVV</Text>
+                                        <View style={styles.email_input}>
+                                            <CardAddImage width={20 * scaleFactor} height={20 * scaleFactor} style={styles.user_image} />
+                                            <TextInput style={styles.email_text_input} keyboardType="numeric" ></TextInput>
+                                        </View>
+                                    </View>
+                                </View>
+                            </View>
+                        </ScrollView>
+                        <View style={styles.footer}>
+                            <View style={styles.buttons}>
+                                <TouchableOpacity style={styles.login_button} onPress={() => navigation.navigate("ProfileScreen")}>
+                                    <Text style={styles.login_text}>Save Changes</Text>
+                                </TouchableOpacity>
                             </View>
                         </View>
-                    </ScrollView>
-                    <View style={styles.footer}>
-                        <View style={styles.buttons}>
-                            <TouchableOpacity style={styles.login_button} onPress={()=>navigation.navigate("ProfileScreen")}>
-                                <Text style={styles.login_text}>Save Changes</Text>
-                            </TouchableOpacity>
-                        </View>
                     </View>
-                </View>
-            </TouchableWithoutFeedback>
-
+                </TouchableWithoutFeedback>
+            </View>
         </SafeAreaView>
     )
 }
@@ -143,6 +144,10 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         backgroundColor: 'white',
+       
+    },
+    body: {
+        flex: 1,
         paddingLeft: 25 * scaleFactor,
         paddingRight: 25 * scaleFactor,
         paddingTop: 46 * scaleFactor
@@ -162,10 +167,10 @@ const styles = StyleSheet.create({
     header_text: {
         textAlign: 'center',
         color: 'black',
-        fontSize: 18,
+        fontSize: 18 * scaleFactor,
         fontFamily: 'Montserrat',
         fontWeight: '700',
-        lineHeight: 27.34
+        lineHeight: 27.34 * scaleFactor
 
     },
     header: {
@@ -178,7 +183,7 @@ const styles = StyleSheet.create({
     main_text: {
         textAlign: 'center',
         color: 'black',
-        fontSize: 26,
+        fontSize: 26 * scaleFactor,
         fontFamily: 'Urbanist',
         fontWeight: '700',
     },
@@ -186,7 +191,7 @@ const styles = StyleSheet.create({
     content_text: {
         marginTop: 15 * scaleFactor,
         color: 'rgba(0,0,0 0.70)',
-        fontSize: 16,
+        fontSize: 16 * scaleFactor,
         fontFamily: 'Urbanist',
         fontWeight: '500',
         lineHeight: 24 * scaleFactor,
@@ -196,7 +201,7 @@ const styles = StyleSheet.create({
     },
     email_text: {
         color: 'rgba(0,0,0,0.40)',
-        fontSize: 14,
+        fontSize: 14 * scaleFactor,
         fontFamily: 'Urbanist',
         fontWeight: '500',
     },
@@ -219,11 +224,11 @@ const styles = StyleSheet.create({
         width: 266 * scaleFactor,
         // Email or username
         color: 'rgba(0,0,0, 0.40)',
-        fontSize: 14,
+        fontSize: 14 * scaleFactor,
         fontFamily: 'Urbanist',
         fontWeight: '500',
         color: 'black',
-        fontSize: 16,
+        fontSize: 16 * scaleFactor,
         fontWeight: '600',
         // wordWrap: 'break-word'
     },
@@ -266,7 +271,7 @@ const styles = StyleSheet.create({
         fontFamily: 'Urbanist',
         fontWeight: '500',
         color: 'black',
-        fontSize: 16,
+        fontSize: 16 * scaleFactor,
         fontFamily: 'Urbanist',
         fontWeight: '600',
         // wordWrap: 'break-word'
@@ -275,7 +280,7 @@ const styles = StyleSheet.create({
         textAlign: 'right',
         marginTop: 14 * scaleFactor,
         color: '#00A86B',
-        fontSize: 16,
+        fontSize: 16 * scaleFactor,
         fontFamily: 'Urbanist',
         fontWeight: '700',
         lineHeight: 24,
@@ -305,18 +310,18 @@ const styles = StyleSheet.create({
     agree_text: {
         marginLeft: 5 * scaleFactor,
         color: 'black',
-        fontSize: 12,
+        fontSize: 12 * scaleFactor,
         fontFamily: 'Open Sans',
         fontWeight: '400',
-        lineHeight: 22,
+        lineHeight: 22 * scaleFactor,
 
     },
     agree_bold_text: {
         color: 'black',
-        fontSize: 12,
+        fontSize: 12 * scaleFactor,
         fontFamily: 'Open Sans',
         fontWeight: '700',
-        lineHeight: 22,
+        lineHeight: 22 * scaleFactor,
     },
 
     login_button: {
@@ -334,7 +339,7 @@ const styles = StyleSheet.create({
     },
     login_text: {
         color: 'white',
-        fontSize: 18,
+        fontSize: 18 * scaleFactor,
         fontFamily: 'Urbanist',
         fontWeight: '700',
         // wordWrap: 'break-word'
@@ -356,7 +361,7 @@ const styles = StyleSheet.create({
     },
     register_text: {
         color: '#00A86B',
-        fontSize: 18,
+        fontSize: 18 * scaleFactor,
         fontFamily: 'Urbanist',
         fontWeight: '700',
         // wordWrap: 'break-word'
@@ -377,7 +382,7 @@ const styles = StyleSheet.create({
     other_sign_text: {
 
         color: 'rgba(0, 0,0,0.30)',
-        fontSize: 14,
+        fontSize: 14 * scaleFactor,
         fontFamily: 'Urbanist',
         fontWeight: '600',
         // wordWrap: 'break-word'
@@ -410,7 +415,7 @@ const styles = StyleSheet.create({
     },
     account_text: {
         color: 'rgba(0,0,0,0.80)',
-        fontSize: 16,
+        fontSize: 16 * scaleFactor,
         fontFamily: 'Urbanist',
         fontWeight: '400',
         // wordWrap: 'break-word'
@@ -418,7 +423,7 @@ const styles = StyleSheet.create({
     signup_text: {
         marginLeft: 5 * scaleFactor,
         color: '#00A86B',
-        fontSize: 16,
+        fontSize: 16 * scaleFactor,
         fontFamily: 'Urbanist',
         fontWeight: '700',
         // wordWrap: 'break-word'

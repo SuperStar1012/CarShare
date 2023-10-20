@@ -9,8 +9,8 @@ import PaymentCard from "../../../components/cards/PaymentCard"
 const { width } = Dimensions.get('window')
 const scaleFactor = width / 414
 
-const SelectPaymentScreen = ({ route,navigation }) => {
-    const [method,setMethod] = useState("Paypal")
+const SelectPaymentScreen = ({ route, navigation }) => {
+    const [method, setMethod] = useState("Paypal")
     const type = route.params && route.params.type
     const missHandle = () => {
         Keyboard.dismiss()
@@ -18,28 +18,30 @@ const SelectPaymentScreen = ({ route,navigation }) => {
     return (
         <TouchableWithoutFeedback onPress={() => missHandle()}>
             <SafeAreaView style={styles.container}>
-                <View style={{ flex: 1 }}>
-                    <View style={styles.header_view}>
-                        <TouchableOpacity style={styles.header_icon} onPress={() => navigation.goBack()}>
-                            <ArrowLeftImage width={24 * scaleFactor} height={24 * scaleFactor} />
-                        </TouchableOpacity>
-                        <Text style={styles.header_text}>Payment Method</Text>
+                <View style={styles.body}>
+                    <View style={{ flex: 1 }}>
+                        <View style={styles.header_view}>
+                            <TouchableOpacity style={styles.header_icon} onPress={() => navigation.goBack()}>
+                                <ArrowLeftImage width={24 * scaleFactor} height={24 * scaleFactor} />
+                            </TouchableOpacity>
+                            <Text style={styles.header_text}>Payment Method</Text>
+                        </View>
+                        <View style={styles.content}>
+                            <Text style={styles.content_text}>Select your payment method</Text>
+                            <PaymentCard name="Paypal" method={method} setMethod={setMethod} />
+                            <PaymentCard name="Google" method={method} setMethod={setMethod} />
+                            <PaymentCard name="Apple pay" method={method} setMethod={setMethod} />
+                            <TouchableOpacity style={styles.add_button}>
+                                <AddImage />
+                                <Text style={styles.add_button_text}>Add New Card</Text>
+                            </TouchableOpacity>
+                        </View>
                     </View>
-                    <View style={styles.content}>
-                        <Text style={styles.content_text}>Select your payment method</Text>
-                        <PaymentCard name = "Paypal" method={method} setMethod={setMethod}/>
-                        <PaymentCard name = "Google" method={method} setMethod={setMethod}/>
-                        <PaymentCard name = "Apple pay" method={method} setMethod={setMethod}/>
-                        <TouchableOpacity style={styles.add_button}> 
-                            <AddImage />
-                            <Text style={styles.add_button_text}>Add New Card</Text>
-                        </TouchableOpacity>
-                    </View>
+
+                    <TouchableOpacity style={styles.footer} onPress={() => { type == "added" ? navigation.navigate("SummaryScreen", { type: "added" }) : navigation.navigate("AddPaymentScreen", { type: "added" }) }}>
+                        <Text style={styles.footer_text}>Continue</Text>
+                    </TouchableOpacity>
                 </View>
-             
-                <TouchableOpacity style={styles.footer} onPress={() => {type == "added" ? navigation.navigate("SummaryScreen",{type: "added"}) : navigation.navigate("AddPaymentScreen",{type: "added"})}}>
-                    <Text style={styles.footer_text}>Continue</Text>
-                </TouchableOpacity>
             </SafeAreaView>
         </TouchableWithoutFeedback>
     )
@@ -49,6 +51,10 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         backgroundColor: 'white',
+        
+    },
+    body: {
+        flex: 1,
         paddingTop: 37 * scaleFactor,
         paddingHorizontal: 25 * scaleFactor
     },
@@ -70,26 +76,26 @@ const styles = StyleSheet.create({
     header_text: {
         textAlign: 'center',
         color: 'black',
-        fontSize: 16,
+        fontSize: 16 * scaleFactor,
         fontFamily: 'Urbanist',
         fontWeight: '700',
-        lineHeight: 24
+        lineHeight: 24 * scaleFactor
 
     },
     content_text: {
         marginTop: 48 * scaleFactor,
         color: 'black',
-        fontSize: 20,
+        fontSize: 20 * scaleFactor,
         fontFamily: 'Urbanist',
         fontWeight: '700',
-        lineHeight: 24
+        lineHeight: 24 * scaleFactor
     },
     add_button: {
         marginTop: 32 * scaleFactor,
         height: 72 * scaleFactor,
         width: '100%',
         background: 'rgba(0, 168, 107, 0.05)',
-        borderRadius: 20, 
+        borderRadius: 20,
         borderStyle: 'solid',
         borderWidth: 1 * scaleFactor,
         borderColor: 'rgba(0, 168, 107, 0.40)',
@@ -100,10 +106,10 @@ const styles = StyleSheet.create({
     add_button_text: {
         marginLeft: 10 * scaleFactor,
         color: 'black',
-        fontSize: 16,
+        fontSize: 16 * scaleFactor,
         fontFamily: 'Urbanist',
         fontWeight: '700',
-        lineHeight: 24
+        lineHeight: 24 * scaleFactor
     },
     footer: {
         width: '100%',

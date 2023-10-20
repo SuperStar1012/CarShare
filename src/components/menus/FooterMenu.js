@@ -58,18 +58,18 @@ const styles = StyleSheet.create({
     },
     selected_footer_menu_text: {
         color: '#00A86B',
-        fontSize: 10,
+        fontSize: 10 * scaleFactor,
         fontFamily: 'Montserrat',
         fontWeight: '600',
-        lineHeight: 18,
+        lineHeight: 18 * scaleFactor,
         textAlign: 'center'
     },
     footer_menu_text: {
         color: 'rgba(0,0,0,0.30)',
-        fontSize: 8,
+        fontSize: 8 * scaleFactor,
         fontFamily: 'Montserrat',
         fontWeight: '600',
-        lineHeight: 18,
+        lineHeight: 18 * scaleFactor,
     }
 
 });

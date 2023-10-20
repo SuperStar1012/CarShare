@@ -39,6 +39,7 @@ const AboutScreen = ({ navigation }) => {
 
     return (
         <SafeAreaView style={styles.container}>
+            <View style={styles.body}>
             <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
                 <View style={{ flex: 1 }}>
                     <View style={styles.header_view}>
@@ -54,7 +55,7 @@ const AboutScreen = ({ navigation }) => {
                             </View>
                         </View>) : null}
                     <ScrollView style={{ flex: 1 }}>
-                        <View style={styles.content}>
+                        <TouchableOpacity style={styles.content}>
                             <View style={styles.over_view}>
                                 <Text style={styles.over_header_text}>Overview</Text>
                                 <Text style={styles.over_content_text}>Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor.</Text>
@@ -67,12 +68,12 @@ const AboutScreen = ({ navigation }) => {
                                 <Text style={styles.over_header_text}>Background</Text>
                                 <Text style={styles.over_content_text}>Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source. Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of "de Finibus Bonorum et Malorum" (The Extremes of Good and Evil) by Cicero</Text>
                             </View>
-                        </View>
+                        </TouchableOpacity>
                     </ScrollView>
 
                 </View>
             </TouchableWithoutFeedback>
-
+            </View>
         </SafeAreaView>
     )
 }
@@ -81,9 +82,13 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         backgroundColor: 'white',
+       
+    },
+    body:{
+        flex: 1,
         paddingLeft: 25 * scaleFactor,
         paddingRight: 25 * scaleFactor,
-        paddingTop: 46 * scaleFactor
+        paddingTop: 30 * scaleFactor
     },
     header_view: {
         flexDirection: 'row',

@@ -6,7 +6,7 @@ import KeySVG from '../../assets/images/user/chat/key.svg'
 
 
 
-const { width } = Dimensions.get('window')
+const { width,height } = Dimensions.get('window')
 const scaleFactor = width / 414
 
 const ChatAssetModal = ({ modalVisible, setModalVisible }) => {
@@ -76,7 +76,7 @@ const styles = StyleSheet.create({
         backgroundColor: 'rgba(0, 0, 0, 0.70)',
     },
     modalView: {
-        marginTop: 600 * scaleFactor,
+        marginTop: height * scaleFactor * 0.75,
         width: 304 * scaleFactor,
         paddingLeft: 21 * scaleFactor,
         paddingRight: 21 * scaleFactor,

@@ -8,7 +8,7 @@ const scaleFactor = width / 414
 const VehicleModal = ({ navigation, modalVisible, setModalVisible }) => {
     const goToHomePage = () => {
         setModalVisible(false)
-        // navigation.navigate("TimerScreen")
+        navigation.navigate("InspectionReportScreen")
     }
     return (
 

@@ -186,10 +186,10 @@ const styles = StyleSheet.create({
     header_text: {
         textAlign: 'center',
         color: 'black',
-        fontSize: 18,
+        fontSize: 18 * scaleFactor,
         fontFamily: 'Urbanist',
         fontWeight: '700',
-        lineHeight: 24
+        lineHeight: 24 * scaleFactor
     },
     content: { flex: 1 },
     input_content: {
@@ -197,7 +197,7 @@ const styles = StyleSheet.create({
     },
     email_text: {
         color: 'rgba(0,0,0,0.40)',
-        fontSize: 14,
+        fontSize: 14 * scaleFactor,
         fontFamily: 'Montserrat',
         fontWeight: '500'
         // wordWrap: 'break-word'
@@ -222,11 +222,11 @@ const styles = StyleSheet.create({
         width: 266 * scaleFactor,
         // Email or username
         color: 'rgba(0,0,0, 0.40)',
-        fontSize: 14,
+        fontSize: 14 * scaleFactor,
         fontFamily: 'Urbanist',
         fontWeight: '500',
         color: 'black',
-        fontSize: 16,
+        fontSize: 16 * scaleFactor,
         fontFamily: 'Urbanist',
         fontWeight: '600',
         // wordWrap: 'break-word'
@@ -256,7 +256,7 @@ const styles = StyleSheet.create({
     },
     footer_text: {
         color: 'white',
-        fontSize: 18,
+        fontSize: 18 * scaleFactor,
         fontFamily: 'Urbanist',
         fontWeight: '700'
     },
@@ -265,10 +265,10 @@ const styles = StyleSheet.create({
     },
     car_type_header: {
         color: 'rgba(0,0,0,0.90)',
-        fontSize: 16,
+        fontSize: 16 * scaleFactor,
         fontFamily: 'Montserrat',
         fontWeight: '700',
-        lineHeight: 24
+        lineHeight: 24 * scaleFactor
     },
     car_type_content: {
         width: '100%',
@@ -318,7 +318,7 @@ const styles = StyleSheet.create({
     add_text: {
         marginLeft: 9 * scaleFactor,
         color: 'black',
-        fontSize: 16,
+        fontSize: 16 * scaleFactor,
         fontFamily: 'Poppins',
         fontWeight: '500'
     },

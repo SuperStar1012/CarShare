@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react"
-import { Dimensions, View, StyleSheet, TouchableOpacity, SafeAreaView, TouchableWithoutFeedback, Text, TextInput, Keyboard } from "react-native"
+import { Dimensions, View, StyleSheet,KeyboardAvoidingView, TouchableOpacity,ScrollView, SafeAreaView, TouchableWithoutFeedback, Text, TextInput, Keyboard } from "react-native"
 import ArrowLeftImage from '../../../../assets/images/auth/register/arrow-left.svg'
 import EnterOTPImage from '../../../../assets/images/auth/register/Enter-OTP.svg'
 import UserImage from '../../../../assets/images/auth/login/user.svg'
@@ -38,57 +38,59 @@ const EnterLicenseScreen = ({ navigation }) => {
     return (
         <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
             <SafeAreaView style={styles.container}>
-                <View style={{ flex: 1 }}>
-                    <View style={styles.header}>
-                        <TouchableOpacity style={styles.header_icon} onPress={() => navigation.navigate('RegisterScreen')}>
-                            <ArrowLeftImage width={24 * scaleFactor} height={24 * scaleFactor} />
-                        </TouchableOpacity>
-                    </View>
-                    <View style={styles.content}>
-                        <EnterOTPImage width={260 * scaleFactor} height={260 * scaleFactor} style={keyboardVisible == false ? styles.avatar_image : styles.disabled_avatar_image} />
-                        <Text style={styles.content_header_text}>"Enter License Details"</Text>
-                        <View style={styles.content_main}>
-                            <View style={styles.content_main_item}>
-                                <View style={styles.input_content}>
-                                    <Text style={styles.email_text}>Name on license</Text>
-                                    <View style={styles.email_input}>
-                                        <UserImage width={20 * scaleFactor} height={20 * scaleFactor} style={styles.user_image} />
-                                        <TextInput style={styles.email_text_input} ></TextInput>
-                                    </View>
-                                </View>
-                            </View>
-                            <View style={styles.content_main_item}>
-                                <View style={styles.input_content}>
-                                    <Text style={styles.email_text}>License Number</Text>
-                                    <View style={styles.email_input}>
-                                        <CheckImage width={20 * scaleFactor} height={20 * scaleFactor} style={styles.user_image} />
-                                        <TextInput style={styles.email_text_input} keyboardType="numeric"></TextInput>
-                                    </View>
-                                </View>
-                            </View>
-                            <View style={styles.date_cvv}>
-                                <View style={styles.date_input}>
-                                    <Text style={styles.email_text}>Issue Date</Text>
-                                    <View style={styles.email_input}>
-                                        <CalendarImage width={20 * scaleFactor} height={20 * scaleFactor} style={styles.user_image} />
-                                        <TextInput style={styles.email_text_input} keyboardType="numeric" ></TextInput>
-                                    </View>
-                                </View>
-                                <View style={styles.cvv_input}>
-                                    <Text style={styles.email_text}>Expiry Date</Text>
-                                    <View style={styles.email_input}>
-                                        <CalendarImage width={20 * scaleFactor} height={20 * scaleFactor} style={styles.user_image} />
-                                        <TextInput style={styles.email_text_input} keyboardType="numeric" ></TextInput>
-                                    </View>
-                                </View>
-                            </View>
+                <View style={styles.body}>
+                    <View style={{ flex: 1 }}>
+                        <View style={styles.header}>
+                            <TouchableOpacity style={styles.header_icon} onPress={() => navigation.navigate('RegisterScreen')}>
+                                <ArrowLeftImage width={24 * scaleFactor} height={24 * scaleFactor} />
+                            </TouchableOpacity>
                         </View>
+                        <ScrollView contentContainerStyle={styles.content} scrollEnabled = {Platform.OS === "ios" ? true : false}>
+                            <EnterOTPImage width={260 * scaleFactor} height={260 * scaleFactor} style={keyboardVisible == false ? styles.avatar_image : styles.disabled_avatar_image} />
+                            <Text style={styles.content_header_text}>"Enter License Details"</Text>
+                            <View style={styles.content_main}>
+                                <View style={styles.content_main_item}>
+                                    <View style={styles.input_content}>
+                                        <Text style={styles.email_text}>Name on license</Text>
+                                        <View style={styles.email_input}>
+                                            <UserImage width={20 * scaleFactor} height={20 * scaleFactor} style={styles.user_image} />
+                                            <TextInput style={styles.email_text_input} ></TextInput>
+                                        </View>
+                                    </View>
+                                </View>
+                                <View style={styles.content_main_item}>
+                                    <View style={styles.input_content}>
+                                        <Text style={styles.email_text}>License Number</Text>
+                                        <View style={styles.email_input}>
+                                            <CheckImage width={20 * scaleFactor} height={20 * scaleFactor} style={styles.user_image} />
+                                            <TextInput style={styles.email_text_input} keyboardType="numeric"></TextInput>
+                                        </View>
+                                    </View>
+                                </View>
+                                <View style={styles.date_cvv}>
+                                    <View style={styles.date_input}>
+                                        <Text style={styles.email_text}>Issue Date</Text>
+                                        <View style={styles.email_input}>
+                                            <CalendarImage width={20 * scaleFactor} height={20 * scaleFactor} style={styles.user_image} />
+                                            <TextInput style={styles.email_text_input} keyboardType="numeric" ></TextInput>
+                                        </View>
+                                    </View>
+                                    <View style={styles.cvv_input}>
+                                        <Text style={styles.email_text}>Expiry Date</Text>
+                                        <View style={styles.email_input}>
+                                            <CalendarImage width={20 * scaleFactor} height={20 * scaleFactor} style={styles.user_image} />
+                                            <TextInput style={styles.email_text_input} keyboardType="numeric" ></TextInput>
+                                        </View>
+                                    </View>
+                                </View>
+                            </View>
+                        </ScrollView>
                     </View>
-                </View>
-                <View style={styles.footer}>
-                    <TouchableOpacity style={styles.agree_button} onPress={() => navigation.navigate("LicenseVerifyScreen")}>
-                        <Text style={styles.button_text}>Verify</Text>
-                    </TouchableOpacity>
+                    <KeyboardAvoidingView style={styles.footer} behavior={Platform.OS === "ios" ? "padding" : "height"}>
+                        <TouchableOpacity style={styles.agree_button} onPress={() => navigation.navigate("LicenseVerifyScreen")}>
+                            <Text style={styles.button_text}>Verify</Text>
+                        </TouchableOpacity>
+                    </KeyboardAvoidingView>
                 </View>
             </SafeAreaView>
         </TouchableWithoutFeedback>
@@ -99,6 +101,9 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         backgroundColor: 'white',
+    },
+    body:{
+        flex: 1,
         paddingLeft: 25 * scaleFactor,
         paddingRight: 25 * scaleFactor,
     },
@@ -110,7 +115,8 @@ const styles = StyleSheet.create({
     content: {
         width: '100%',
         alignItems: 'center',
-        marginTop: 12 * scaleFactor
+        marginTop: 12 * scaleFactor,
+        paddingBottom: 50 * scaleFactor
     },
     avatar_image: {
         display: 'block',

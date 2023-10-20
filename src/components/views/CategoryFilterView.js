@@ -119,27 +119,27 @@ const styles = StyleSheet.create({
     },
     filter_header_sort: {
         color: 'rgba(0,0,0,0.70)',
-        fontSize: 18,
+        fontSize: 18 * scaleFactor,
         fontFamily: 'Montserrat',
         fontWeight: '700',
         lineHeight: 24
     },
     filter_header_results: {
         color: '#00A86B',
-        fontSize: 14,
+        fontSize: 14 * scaleFactor,
         fontFamily: 'Montserrat',
         fontWeight: '700',
-        lineHeight: 24
+        lineHeight: 24 * scaleFactor
     },
     car_type: {
         marginTop: 28 * scaleFactor
     },
     car_type_header: {
         color: 'rgba(0,0,0,0.90)',
-        fontSize: 16,
+        fontSize: 16 * scaleFactor,
         fontFamily: 'Montserrat',
         fontWeight: '700',
-        lineHeight: 24
+        lineHeight: 24 * scaleFactor
     },
     car_type_content: {
         flexDirection: 'row',

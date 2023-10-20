@@ -45,18 +45,18 @@ const styles = StyleSheet.create({
     },
     search_topic: {
         color: 'black',
-        fontSize: 16,
+        fontSize: 16 * scaleFactor,
         fontFamily: 'Montserrat',
         fontWeight: '700',
-        lineHeight: 24
+        lineHeight: 24 * scaleFactor
     },
     distance: {
-        marginLeft: 70 * scaleFactor,
+        marginLeft: 50 * scaleFactor,
         color: 'black',
-        fontSize: 16,
+        fontSize: 16 * scaleFactor,
         fontFamily: 'Montserrat',
         fontWeight: '700',
-        lineHeight: 24
+        lineHeight: 24 * scaleFactor
     },
     search_right_top: {
         flexDirection: 'row',
@@ -66,22 +66,22 @@ const styles = StyleSheet.create({
     },
     state: {
         color: 'rgba(0,0,0,0.50)',
-        fontSize: 15,
+        fontSize: 15 * scaleFactor,
         fontFamily: 'Montserrat',
         fontWeight: '400',
         lineHeight: 24
     },
     price: {
-        marginLeft: 98 * scaleFactor,
+        marginLeft: 85 * scaleFactor,
         color: '#00A86B',
-        fontSize: 15,
+        fontSize: 15 * scaleFactor,
         fontFamily: 'Montserrat',
         fontWeight: '700',
-        lineHeight: 24,
+        lineHeight: 24 * scaleFactor,
     },
     hour: {
         color: 'rgba(0,0,0,0.70)',
-        fontSize: 15,
+        fontSize: 15 * scaleFactor,
         fontFamily: 'Montserrat'
     }
 });

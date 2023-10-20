@@ -19,8 +19,6 @@ const HomeButton = ({ selected, value }) => {
 const styles = StyleSheet.create({
     button: {
         backgroundColor: 'white',
-        paddingHorizontal: 24 * scaleFactor,
-        paddingVertical: 10 * scaleFactor,
         borderRadius: 12 * scaleFactor,
         borderWidth: 2 * scaleFactor,
         borderStyle: "solid",
@@ -28,14 +26,17 @@ const styles = StyleSheet.create({
         marginRight: 10 * scaleFactor
     },
     button_text: {
+
+        paddingHorizontal: 24 * scaleFactor,
+        paddingVertical: 10 * scaleFactor,
         color: '#00A86B',
-        fontSize: 14,
+        fontSize: 14 * scaleFactor,
         fontFamily: 'Urbanist',
         fontWeight: '700',
     },
     selected_button_text: {
         color: 'white',
-        fontSize: 14,
+        fontSize: 14 * scaleFactor,
         fontFamily: 'Urbanist',
         fontWeight: '700',
         paddingHorizontal: 24 * scaleFactor,

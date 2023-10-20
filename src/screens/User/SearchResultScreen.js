@@ -21,47 +21,49 @@ const SearchResultScreen = ({ navigation }) => {
     return (
         <TouchableWithoutFeedback onPress={() => missHandle()}>
             <SafeAreaView style={styles.container}>
-                <View style={styles.header}>
-                    <View style={styles.header_view}>
-                        <TouchableOpacity style={styles.header_icon} onPress={() => navigation.navigate('HomeScreen')}>
-                            <ArrowLeftImage width={24 * scaleFactor} height={24 * scaleFactor} />
-                        </TouchableOpacity>
-                        <Text style={styles.header_text}>Category</Text>
-                        <TouchableOpacity style={styles.header_search_icon} onPress={() => navigation.navigate('HomeScreen')}>
-                            <SearchImage />
-                        </TouchableOpacity>
-                    </View>
-                    <View style={styles.search_view}>
-                        <VectorImage />
-                        <TextInput style={styles.search_text} placeholder="Search results" placeholderTextColor="black" onChangeText={(e) => setSearchText(e)} />
-                        <DocumentImage />
-                    </View>
-                </View>
-                <ScrollView style={styles.content}>
-                    <View style={styles.result_content}>
-                        <View style={styles.result_header}>
-                            <Text style={styles.result_text}>Search results</Text>
-                            <Text style={styles.show_text}>Show on Map</Text>
+                <View style={styles.body}>
+                    <View style={styles.header}>
+                        <View style={styles.header_view}>
+                            <TouchableOpacity style={styles.header_icon} onPress={() => navigation.navigate('HomeScreen')}>
+                                <ArrowLeftImage width={24 * scaleFactor} height={24 * scaleFactor} />
+                            </TouchableOpacity>
+                            <Text style={styles.header_text}>Category</Text>
+                            <TouchableOpacity style={styles.header_search_icon} onPress={() => navigation.navigate('HomeScreen')}>
+                                <SearchImage />
+                            </TouchableOpacity>
                         </View>
+                        <View style={styles.search_view}>
+                            <VectorImage />
+                            <TextInput style={styles.search_text} placeholder="Search results" placeholderTextColor="black" onChangeText={(e) => setSearchText(e)} />
+                            <DocumentImage />
+                        </View>
+                    </View>
+                    <ScrollView style={styles.content}>
                         <View style={styles.result_content}>
-                            <SearchResultCard />
-                            <SearchResultCard />
+                            <View style={styles.result_header}>
+                                <Text style={styles.result_text}>Search results</Text>
+                                <Text style={styles.show_text}>Show on Map</Text>
+                            </View>
+                            <View style={styles.result_content}>
+                                <SearchResultCard />
+                                <SearchResultCard />
+                            </View>
                         </View>
-                    </View>
-                    <View style={styles.car_view}>
-                        <View style={styles.car_header}>
-                            <Text style={styles.car_text}>Cars Found!</Text>
+                        <View style={styles.car_view}>
+                            <View style={styles.car_header}>
+                                <Text style={styles.car_text}>Cars Found!</Text>
+                            </View>
+                            <View style={styles.car_content}>
+                                <SearchCarCard />
+                                <SearchCarCard />
+                                <SearchCarCard />
+                                <SearchCarCard />
+                                <SearchCarCard />
+                                <SearchCarCard />
+                            </View>
                         </View>
-                        <View style={styles.car_content}>
-                            <SearchCarCard />
-                            <SearchCarCard />
-                            <SearchCarCard />
-                            <SearchCarCard />
-                            <SearchCarCard />
-                            <SearchCarCard />
-                        </View>
-                    </View>
-                </ScrollView>
+                    </ScrollView>
+                </View>
             </SafeAreaView>
         </TouchableWithoutFeedback>
     )
@@ -71,6 +73,9 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         backgroundColor: 'white',
+       
+    },
+    body:{
         marginTop: 32 * scaleFactor,
         paddingLeft: 25 * scaleFactor,
         paddingRight: 25 * scaleFactor
@@ -93,20 +98,20 @@ const styles = StyleSheet.create({
     header_text: {
         textAlign: 'center',
         color: 'black',
-        fontSize: 18,
+        fontSize: 18 * scaleFactor,
         fontFamily: 'Montserrat',
         fontWeight: '700',
-        lineHeight: 27.34,
+        lineHeight: 27.34 * scaleFactor,
     },
     search_text: {
         marginLeft: 8 * scaleFactor,
         height: 50 * scaleFactor,
         width: 280 * scaleFactor,
         color: 'black',
-        fontSize: 16,
+        fontSize: 16 * scaleFactor,
         fontFamily: 'Montserrat',
         fontWeight: '500',
-        lineHeight: 24
+        lineHeight: 24 * scaleFactor
     },
     search_view: {
         flexDirection: 'row',
@@ -130,28 +135,28 @@ const styles = StyleSheet.create({
     },
     result_text: {
         color: 'black',
-        fontSize: 16,
+        fontSize: 16 * scaleFactor,
         fontFamily: 'Montserrat',
         fontWeight: '700',
-        lineHeight: 24
+        lineHeight: 24 * scaleFactor
     },
     show_text: {
         color: '#00A86B',
-        fontSize: 14,
+        fontSize: 14 * scaleFactor,
         fontFamily: 'Montserrat',
         fontWeight: '700',
         textDecoration: 'underline',
-        lineHeight: 24
+        lineHeight: 24 * scaleFactor
     },
     car_view: {
         marginTop: 32 * scaleFactor
     },
     car_text: {
         color: 'black',
-        fontSize: 16,
+        fontSize: 16 * scaleFactor,
         fontFamily: 'Montserrat',
         fontWeight: '700',
-        lineHeight: 24,
+        lineHeight: 24 * scaleFactor,
         marginBottom: 25 * scaleFactor
     }
 })

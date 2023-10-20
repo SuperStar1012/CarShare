@@ -1,6 +1,6 @@
-import React, { useEffect,useState } from "react"
+import React, { useEffect, useState } from "react"
 import { Dimensions, TextInput, View, StyleSheet, TouchableOpacity, SafeAreaView, Text, Keyboard, TouchableWithoutFeedback } from "react-native"
-import OTPResetModal from "../../../components/modals/OTPResetModal"
+import OTPModal from "../../../components/modals/OTPModal"
 import ArrowLeftImage from '../../../assets/images/auth/register/arrow-left.svg'
 import LockImage from '../../../assets/images/auth/login/lock.svg'
 
@@ -9,44 +9,46 @@ const { width } = Dimensions.get('window')
 const scaleFactor = width / 414
 
 const ResetPasswordScreen = ({ navigation }) => {
-    const [type,setType] = useState('new');
-    const [visible,setVisible] = useState(false);
+    const [type, setType] = useState('new');
+    const [visible, setVisible] = useState(false);
 
     return (
         <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
             <SafeAreaView style={styles.container}>
-                <View style={{ flex: 1 }}>
-                    <View style={styles.header}>
-                        <TouchableOpacity onPress={() => navigation.navigate('ForgetPasswordScreen')}>
-                            <ArrowLeftImage style={styles.header_icon} width={24 * scaleFactor} height={24 * scaleFactor} />
-                        </TouchableOpacity>
-                    </View>
-                    <View style={styles.content}>
-                        <Text style={styles.content_topic}>Change Password</Text>
-                        <Text style={styles.content_text}>Enter  your new password to change old password.</Text>
-                        <View style={styles.input_field}>
-                            <View style={styles.password_field}>
-                                <Text style={type == "news" ? styles.selected_password_text : styles.password_text}> New Password </Text>
-                                <View style={type == "news"? styles.selected_password_input : styles.password_input}>
-                                    <LockImage width={20 * scaleFactor} height={20 * scaleFactor} style={styles.lock_image} />
-                                    <TextInput style={styles.password_text_input} secureTextEntry={true} onFocus={()=> setType('news')}/>
+                <View style={styles.body}>
+                    <View style={{ flex: 1 }}>
+                        <View style={styles.header}>
+                            <TouchableOpacity onPress={() => navigation.navigate('ForgetPasswordScreen')}>
+                                <ArrowLeftImage style={styles.header_icon} width={24 * scaleFactor} height={24 * scaleFactor} />
+                            </TouchableOpacity>
+                        </View>
+                        <View style={styles.content}>
+                            <Text style={styles.content_topic}>Change Password</Text>
+                            <Text style={styles.content_text}>Enter  your new password to change old password.</Text>
+                            <View style={styles.input_field}>
+                                <View style={styles.password_field}>
+                                    <Text style={type == "news" ? styles.selected_password_text : styles.password_text}> New Password </Text>
+                                    <View style={type == "news" ? styles.selected_password_input : styles.password_input}>
+                                        <LockImage width={20 * scaleFactor} height={20 * scaleFactor} style={styles.lock_image} />
+                                        <TextInput style={styles.password_text_input} secureTextEntry={true} onFocus={() => setType('news')} />
+                                    </View>
                                 </View>
-                            </View>
-                            <View style={styles.password_field}>
-                                <Text style={type == "password" ? styles.selected_password_text : styles.password_text}> Confirm Password </Text>
-                                <View style={type == "password" ? styles.selected_password_input : styles.password_input}>
-                                    <LockImage width={20 * scaleFactor} height={20 * scaleFactor} style={styles.lock_image} />
-                                    <TextInput style={styles.password_text_input} secureTextEntry={true} onFocus={()=> setType('password')} />
+                                <View style={styles.password_field}>
+                                    <Text style={type == "password" ? styles.selected_password_text : styles.password_text}> Confirm Password </Text>
+                                    <View style={type == "password" ? styles.selected_password_input : styles.password_input}>
+                                        <LockImage width={20 * scaleFactor} height={20 * scaleFactor} style={styles.lock_image} />
+                                        <TextInput style={styles.password_text_input} secureTextEntry={true} onFocus={() => setType('password')} />
+                                    </View>
+                                    <OTPModal navigation={navigation} contentText="Your account is ready to use" buttonText="Go to homepage" modalVisible={visible} setModalVisible={setVisible} />
                                 </View>
                             </View>
                         </View>
                     </View>
-                </View>
-                <OTPResetModal navigation = {navigation} modalVisible = {visible} setModalVisible={setVisible}/>
-                <View style={styles.buttons}>
-                    <TouchableOpacity style={styles.login_button} onPress={() => setVisible(true)}>
-                        <Text style={styles.login_text}>Continue</Text>
-                    </TouchableOpacity>
+                    <View style={styles.buttons}>
+                        <TouchableOpacity style={styles.login_button} onPress={() => setVisible(true)}>
+                            <Text style={styles.login_text}>Continue</Text>
+                        </TouchableOpacity>
+                    </View>
                 </View>
             </SafeAreaView>
         </TouchableWithoutFeedback>
@@ -58,9 +60,14 @@ const styles = StyleSheet.create({
         flex: 1,
         backgroundColor: 'white',
         alignItems: 'center',
+
+    },
+    body: {
+        flex: 1,
+        width: '100%',
         paddingLeft: 25 * scaleFactor,
         paddingRight: 25 * scaleFactor,
-        paddingTop: 38.7 * scaleFactor
+        paddingTop: 40 * scaleFactor
     },
     header: {
         flexDirection: 'row',
@@ -69,7 +76,7 @@ const styles = StyleSheet.create({
     header_text: {
         width: '100%',
         color: 'black',
-        fontSize: 18,
+        fontSize: 18 * scaleFactor,
         fontFamily: 'Montserrat',
         fontWeight: '700',
         lineHeight: 27.34 * scaleFactor,
@@ -83,7 +90,7 @@ const styles = StyleSheet.create({
     content_topic: {
         alignSelf: 'center',
         color: 'black',
-        fontSize: 30,
+        fontSize: 30 * scaleFactor,
         fontFamily: 'Urbanist',
         fontWeight: '700',
         // lineHeight: 24,
@@ -95,7 +102,7 @@ const styles = StyleSheet.create({
         alignSelf: 'center',
         // Enter your new password to change old password.
         color: 'rgba(0,0,0,0.40)',
-        fontSize: 16,
+        fontSize: 16 * scaleFactor,
         fontFamily: 'Urbanist',
         fontWeight: '500',
         lineHeight: 24,
@@ -111,7 +118,7 @@ const styles = StyleSheet.create({
     },
     selected_password_text: {
         color: '#00A86B',
-        fontSize: 14,
+        fontSize: 14 * scaleFactor,
         fontFamily: 'Urbanist',
         fontWeight: '500',
         wordWrap: 'break-word',
@@ -119,7 +126,7 @@ const styles = StyleSheet.create({
     },
     password_text: {
         color: 'rgba(0,0,0,0.40)',
-        fontSize: 14,
+        fontSize: 14 * scaleFactor,
         fontFamily: 'Urbanist',
         fontWeight: '500',
         wordWrap: 'break-word',
@@ -173,7 +180,7 @@ const styles = StyleSheet.create({
     },
     login_text: {
         color: 'white',
-        fontSize: 18,
+        fontSize: 18 * scaleFactor,
         fontFamily: 'Urbanist',
         fontWeight: '700',
         wordWrap: 'break-word'

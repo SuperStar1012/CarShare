@@ -5,10 +5,13 @@ import ClipboardImage from '../../assets/images/auth/register/clipboard-tick.svg
 const { width } = Dimensions.get('window')
 const scaleFactor = width / 414
 
-const OTPModal = ({ navigation, modalVisible, setModalVisible }) => {
+const OTPModal = ({ navigation, contentText, buttonText, modalVisible, setModalVisible }) => {
     const continueHandler = () => {
         setModalVisible(false)
-        navigation.navigate('TermScreen')
+        if (buttonText == "Continue")
+            navigation.navigate('TermScreen')
+        else
+            navigation.navigate("LoginScreen")
     }
 
     return (
@@ -24,10 +27,10 @@ const OTPModal = ({ navigation, modalVisible, setModalVisible }) => {
                     <View style={styles.modalView}>
                         <ClipboardImage width={143 * scaleFactor} height={143 * scaleFactor} />
                         <Text style={styles.modalText}>Congratulations!</Text>
-                        <Text style={styles.modalContent}>Your E-mail is verified now.</Text>
+                        <Text style={styles.modalContent}>{contentText}</Text>
 
                         <TouchableOpacity style={styles.login_button} onPress={() => continueHandler()}>
-                            <Text style={styles.login_text}>continue</Text>
+                            <Text style={styles.login_text}>{buttonText}</Text>
                         </TouchableOpacity>
                     </View>
                 </View>
@@ -78,7 +81,7 @@ const styles = StyleSheet.create({
         marginBottom: 41 * scaleFactor,
         textAlign: 'center',
         color: '#00A86B',
-        fontSize: 26,
+        fontSize: 26 * scaleFactor,
         fontFamily: 'Montserrat',
         fontWeight: '700',
         // wordWrap: 'break-word'
@@ -87,7 +90,7 @@ const styles = StyleSheet.create({
         marginBottom: 41 * scaleFactor,
         textAlign: 'center',
         color: 'rgba(0,0,0,0.60)',
-        fontSize: 18,
+        fontSize: 18 * scaleFactor,
         fontFamily: 'Montserrat',
         fontWeight: '400',
         // wordWrap: 'break-word'
@@ -108,7 +111,7 @@ const styles = StyleSheet.create({
     },
     login_text: {
         color: 'white',
-        fontSize: 16,
+        fontSize: 16 * scaleFactor,
         fontFamily: 'Montserrat',
         fontWeight: '700',
         // wordWrap: 'break-word'

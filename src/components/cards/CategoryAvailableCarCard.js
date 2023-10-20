@@ -12,7 +12,7 @@ const CategoryAvailableCarCard = ({ ChildComponent }) => {
     return (
         <TouchableOpacity style={{ marginBottom: 18 * scaleFactor }}>
             <View style={styles.card_view}>
-                <ChildComponent />
+                <ChildComponent width="100%"/>
                 <View style={styles.card_content}>
                     <View style={styles.card_content_left}>
                         <Text style={styles.car_name}>BMW X5</Text>
@@ -44,7 +44,7 @@ const CategoryAvailableCarCard = ({ ChildComponent }) => {
 
 const styles = StyleSheet.create({
     card_view: {
-        padding: 13 * scaleFactor,
+        padding: 8 * scaleFactor,
         paddingBottom: 15 * scaleFactor,
         backgroundColor: 'white', // background
         shadowColor: '#000', // boxShadow
@@ -65,7 +65,7 @@ const styles = StyleSheet.create({
     },
     car_name: {
         color: 'black',
-        fontSize: 18,
+        fontSize: 18 * scaleFactor,
         fontFamily: 'Montserrat',
         fontWeight: '700'
     },
@@ -82,19 +82,19 @@ const styles = StyleSheet.create({
     },
     car_price: {
         color: 'white',
-        fontSize: 13,
+        fontSize: 13 * scaleFactor,
         fontFamily: 'DM Sans',
         fontWeight: '500'
     },
     card_content_right: {
-        marginLeft: 30 * scaleFactor
+        marginLeft: 25 * scaleFactor
     },
     car_attributes: {
         flexDirection: 'row'
     },
     car_attribute: {
         color: '#545454',
-        fontSize: 14,
+        fontSize: 14 * scaleFactor,
         fontFamily: 'DM Sans',
         fontWeight: '400',
         marginRight: 25 * scaleFactor
@@ -108,7 +108,7 @@ const styles = StyleSheet.create({
     },
     car_review_text: {
         color: 'rgba(0,0,0,0.40)',
-        fontSize: 8,
+        fontSize: 8 * scaleFactor,
         fontFamily: 'Inter',
         fontWeight: '700',
         marginBottom: 5 * scaleFactor

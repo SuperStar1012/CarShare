@@ -1,10 +1,5 @@
 import React, { useEffect, useState } from "react"
 import { Dimensions, Modal, View, StyleSheet, TouchableOpacity, SafeAreaView, Text, Keyboard, TouchableWithoutFeedback } from "react-native"
-import ImageSVG from '../../assets/images/user/chat/image.svg'
-import DocumentSVG from '../../assets/images/user/chat/document.svg'
-import KeySVG from '../../assets/images/user/chat/key.svg'
-
-
 
 const { width } = Dimensions.get('window')
 const scaleFactor = width / 414
@@ -29,10 +24,10 @@ const ProfileSettingModal = ({ navigation,modalVisible, setModalVisible }) => {
                             <TouchableOpacity style={styles.asset_item}>
                                 <Text style={styles.item_text}>Contact Support</Text>
                             </TouchableOpacity>
-                            <TouchableOpacity style={styles.asset_item} onPress={()=>navigation.navigate("AboutScreen")}>
+                            <TouchableOpacity style={styles.asset_item} onPress={()=>{navigation.navigate("AboutScreen"),setModalVisible(false)}}>
                                 <Text style={styles.item_text}>About</Text>
                             </TouchableOpacity>
-                            <TouchableOpacity style={styles.asset_item} onPress={()=>navigation.navigate("LanguageScreen")}>
+                            <TouchableOpacity style={styles.asset_item} onPress={()=>{navigation.navigate("LanguageScreen"),setModalVisible(false)}}>
                                 <Text style={styles.item_text}>Languages Settings</Text>
                             </TouchableOpacity><TouchableOpacity style={styles.asset_last_item}>
                                 <Text style={styles.item_last_text}>Delete Acccount</Text>

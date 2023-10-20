@@ -8,7 +8,7 @@ const scaleFactor = width / 414
 const PaymentSuccessModal = ({ navigation, modalVisible, setModalVisible }) => {
     const goToHomePage = () => {
         setModalVisible(false)
-        navigation.navigate('ChatScreen')
+        navigation.navigate('HomeScreen')
     }
     return (
 

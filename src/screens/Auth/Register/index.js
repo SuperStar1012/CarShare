@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from "react"
 import {
-    Dimensions, View, StyleSheet, TouchableOpacity, SafeAreaView, Text, TextInput, TouchableWithoutFeedback,
-    Keyboard, ScrollView
+    Dimensions, View, StyleSheet, TouchableOpacity, Text, TextInput, TouchableWithoutFeedback, KeyboardAvoidingView,
+    Keyboard, ScrollView, SafeAreaView
 } from "react-native"
+
 import CheckBox from '@react-native-community/checkbox';
 import SplashAvatar from '../../../assets/images/avatar/splash_avatar.svg'
 import UserImage from '../../../assets/images/auth/login/user.svg'
@@ -45,7 +46,8 @@ const Register_Screen = ({ navigation }) => {
 
     return (
         <SafeAreaView style={styles.container}>
-            <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
+            <View style={styles.body}>
+            <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()} >
                 <View style={{ flex: 1 }}>
                     {keyboardVisible == false ? (
                         <View style={styles.header}>
@@ -57,7 +59,7 @@ const Register_Screen = ({ navigation }) => {
                                 <Text style={styles.content_text}>Please provide following details</Text>
                             </View>
                         </View>) : null}
-                    <ScrollView style={{ flex: 1 }}>
+                    <ScrollView style={{ flex: 1 }} scrollEnabled = {Platform.OS === "ios" ? true : false}>
                         <View style={styles.content}>
                             <View style={styles.input_content}>
                                 <Text style={styles.email_text}>First Name</Text>
@@ -119,13 +121,15 @@ const Register_Screen = ({ navigation }) => {
                             </View>
                         </View>
                     </ScrollView>
-                    <View style={styles.footer}>
+                    <KeyboardAvoidingView style={styles.footer} behavior={Platform.OS === "ios" ? "padding" : "height"}>
                         <View style={styles.agree_field}>
-                            <CheckBox
-                                disabled={false}
-                                value={checked}
-                                onChange={() => setChecked(!checked)}
-                            />
+                            <View>
+                                <CheckBox
+                                    disabled={false}
+                                    value={checked}
+                                    onChange={() => setChecked(!checked)}
+                                />
+                            </View>
                             <Text style={styles.agree_text}>
                                 By selecting
                                 <Text style={styles.agree_bold_text}> Agree and continue</Text>  below, I agree to <Text style={styles.agree_bold_text}>CarShare</Text> Terms of Service, Payments Terms of Service, Privacy Policy, and Nondiscrimination Policy.
@@ -133,15 +137,15 @@ const Register_Screen = ({ navigation }) => {
                             </Text>
                         </View>
                         <View style={styles.buttons}>
-                            <TouchableOpacity style={styles.login_button} onPress={() => navigation.navigate("OTPScreen")}>
+                            <TouchableOpacity style={styles.login_button} onPress={() => navigation.navigate("OTPResetScreen")}>
                                 <Text style={styles.login_text}>Register</Text>
                             </TouchableOpacity>
                         </View>
-                    </View>
+                    </KeyboardAvoidingView>
 
                 </View>
             </TouchableWithoutFeedback>
-
+            </View>
         </SafeAreaView>
     )
 }
@@ -150,6 +154,9 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         backgroundColor: 'white',
+    },
+    body: {
+        flex: 1,
         paddingLeft: 25 * scaleFactor,
         paddingRight: 25 * scaleFactor,
         paddingTop: 46 * scaleFactor
@@ -164,7 +171,7 @@ const styles = StyleSheet.create({
     main_text: {
         textAlign: 'center',
         color: 'black',
-        fontSize: 34,
+        fontSize: 34 * scaleFactor,
         fontFamily: 'Urbanist',
         fontWeight: '700',
         // wordWrap: 'break-word'
@@ -173,7 +180,7 @@ const styles = StyleSheet.create({
     content_text: {
         marginTop: 15 * scaleFactor,
         color: 'rgba(0,0,0 0.70)',
-        fontSize: 16,
+        fontSize: 16 * scaleFactor,
         fontFamily: 'Urbanist',
         fontWeight: '500',
         lineHeight: 24 * scaleFactor,
@@ -208,10 +215,9 @@ const styles = StyleSheet.create({
         width: 266 * scaleFactor,
         // Email or username
         color: 'rgba(0,0,0, 0.40)',
-        fontSize: 14,
+        fontSize: 14 * scaleFactor,
         fontFamily: 'Urbanist',
         fontWeight: '500',
-        wordWrap: 'break-word',
         color: 'black',
         fontSize: 16,
         fontFamily: 'Urbanist',
@@ -256,9 +262,8 @@ const styles = StyleSheet.create({
         fontSize: 14,
         fontFamily: 'Urbanist',
         fontWeight: '500',
-        wordWrap: 'break-word',
         color: 'black',
-        fontSize: 16,
+        fontSize: 16 * scaleFactor,
         fontFamily: 'Urbanist',
         fontWeight: '600',
         // wordWrap: 'break-word'
@@ -267,7 +272,7 @@ const styles = StyleSheet.create({
         textAlign: 'right',
         marginTop: 14 * scaleFactor,
         color: '#00A86B',
-        fontSize: 16,
+        fontSize: 16 * scaleFactor,
         fontFamily: 'Urbanist',
         fontWeight: '700',
         lineHeight: 24,
@@ -295,22 +300,19 @@ const styles = StyleSheet.create({
         width: 172 * scaleFactor
     },
     agree_text: {
-        marginLeft: 5 * scaleFactor,
+        marginLeft: 10 * scaleFactor,
         color: 'black',
-        fontSize: 12,
+        fontSize: 12 * scaleFactor,
         fontFamily: 'Open Sans',
         fontWeight: '400',
-        lineHeight: 22,
-        wordWrap: 'break-word',
-
+        lineHeight: 22 * scaleFactor
     },
     agree_bold_text: {
         color: 'black',
-        fontSize: 12,
+        fontSize: 12 * scaleFactor,
         fontFamily: 'Open Sans',
         fontWeight: '700',
-        lineHeight: 22,
-        wordWrap: 'break-word'
+        lineHeight: 22 * scaleFactor,
     },
 
     login_button: {
@@ -328,10 +330,9 @@ const styles = StyleSheet.create({
     },
     login_text: {
         color: 'white',
-        fontSize: 18,
+        fontSize: 18 * scaleFactor,
         fontFamily: 'Urbanist',
         fontWeight: '700',
-        // wordWrap: 'break-word'
     },
     register_button: {
         height: 58 * scaleFactor,
@@ -350,14 +351,14 @@ const styles = StyleSheet.create({
     },
     register_text: {
         color: '#00A86B',
-        fontSize: 18,
+        fontSize: 18 * scaleFactor,
         fontFamily: 'Urbanist',
         fontWeight: '700',
         // wordWrap: 'break-word'
     },
     footer: {
         alignItems: 'center',
-        marginTop: 45 * scaleFactor
+        marginTop: 10 * scaleFactor
     },
     other_sign: {
         display: 'flex',
@@ -371,7 +372,7 @@ const styles = StyleSheet.create({
     other_sign_text: {
 
         color: 'rgba(0, 0,0,0.30)',
-        fontSize: 14,
+        fontSize: 14 * scaleFactor,
         fontFamily: 'Urbanist',
         fontWeight: '600',
         // wordWrap: 'break-word'
@@ -412,7 +413,7 @@ const styles = StyleSheet.create({
     signup_text: {
         marginLeft: 5 * scaleFactor,
         color: '#00A86B',
-        fontSize: 16,
+        fontSize: 16 * scaleFactor,
         fontFamily: 'Urbanist',
         fontWeight: '700',
         // wordWrap: 'break-word'

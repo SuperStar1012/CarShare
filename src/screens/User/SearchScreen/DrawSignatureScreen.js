@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react"
-import { Dimensions, View, StyleSheet, TouchableWithoutFeedback, Keyboard, TouchableOpacity, SafeAreaView, Text } from "react-native"
+import { Dimensions, View, StyleSheet, TouchableWithoutFeedback,KeyboardAvoidingView, Keyboard,ScrollView, TouchableOpacity, SafeAreaView, Text } from "react-native"
 import ArrowLeftImage from '../../../assets/images/auth/register/arrow-left.svg'
 import CheckBox from '@react-native-community/checkbox';
 
@@ -43,45 +43,46 @@ const DrawSignatureScreen = ({ navigation }) => {
     return (
         <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
             <SafeAreaView style={styles.container}>
-                <View style={{ flex: 1 }}>
-                    <View style={styles.header}>
-                        <TouchableOpacity style={styles.header_icon} onPress={() => navigation.navigate('BookingDetailScreen')}>
-                            <ArrowLeftImage width={24 * scaleFactor} height={24 * scaleFactor} />
-                        </TouchableOpacity>
-                        <Text style={styles.header_text}>Contact</Text>
-                    </View>
-                    <View style={styles.content}>
-                        <View style={styles.content_header} >
-                            <TouchableOpacity style={type == 'license' ? styles.license_header : styles.disabled_license_header} onPress={() => setType('license')}>
-                                <Text style={type == 'license' ? styles.content_header_text : styles.disabled_content_header_text}>Draw Sign</Text>
+                <View style={styles.body}>
+                    <View style={{ flex: 1 , marginBottom: 20 * scaleFactor}}>
+                        <View style={styles.header}>
+                            <TouchableOpacity style={styles.header_icon} onPress={() => navigation.goBack()}>
+                                <ArrowLeftImage width={24 * scaleFactor} height={24 * scaleFactor} />
                             </TouchableOpacity>
-                            <TouchableOpacity style={type == 'selfie' ? styles.selfie_header : styles.disabled_selfie_header} onPress={() => setType('selfie')}>
-                                <Text style={type == 'selfie' ? styles.content_header_text : styles.disabled_content_header_text}>Type Sign</Text>
-                            </TouchableOpacity>
+                            <Text style={styles.header_text}>Contact</Text>
                         </View>
-                        {type == "license" ? (<DrawSignView />) :
-                            (<TypeSignView />)}
+                        <ScrollView style={styles.content}>
+                            <View style={styles.content_header} >
+                                <TouchableOpacity style={type == 'license' ? styles.license_header : styles.disabled_license_header} onPress={() => setType('license')}>
+                                    <Text style={type == 'license' ? styles.content_header_text : styles.disabled_content_header_text}>Draw Sign</Text>
+                                </TouchableOpacity>
+                                <TouchableOpacity style={type == 'selfie' ? styles.selfie_header : styles.disabled_selfie_header} onPress={() => setType('selfie')}>
+                                    <Text style={type == 'selfie' ? styles.content_header_text : styles.disabled_content_header_text}>Type Sign</Text>
+                                </TouchableOpacity>
+                            </View>
+                            {type == "license" ? (<DrawSignView />) :
+                                (<TypeSignView />)}
+                        </ScrollView>
                     </View>
+                    <KeyboardAvoidingView style={styles.footer} behavior={Platform.OS === "ios" ? "padding" : "height"}>
+                        <View style={styles.agree_field}>
+                            <CheckBox
+                                disabled={false}
+                                value={checked}
+                                onChange={() => setChecked(!checked)}
+                            />
+                            <Text style={styles.agree_text}>
+                                I agree to
+                                <Text style={styles.agree_bold_text}> Terms & Conditions</Text>
+                            </Text>
+                        </View>
+                        <TouchableOpacity style={styles.agree_button} onPress={() => navigation.navigate("SelectPaymentMethodScreen", { type: "beforeadd" })} >
+                            <Text style={styles.button_text}>Confirm & Submit</Text>
+                        </TouchableOpacity>
+                    </KeyboardAvoidingView>
                 </View>
-                <View style={styles.footer}>
-                    <View style={styles.agree_field}>
-                        <CheckBox
-                            disabled={false}
-                            value={checked}
-                            onChange={() => setChecked(!checked)}
-                        />
-                        <Text style={styles.agree_text}>
-                            I agree to
-                            <Text style={styles.agree_bold_text}> Terms & Conditions</Text>
-                        </Text>
-                    </View>
-                    <TouchableOpacity style={styles.agree_button} onPress={() => navigation.navigate("SelectPaymentMethodScreen", { type: "beforeadd" })} >
-                        <Text style={styles.button_text}>Confirm & Submit</Text>
-                    </TouchableOpacity>
-                </View>
-
             </SafeAreaView>
-        </TouchableWithoutFeedback>
+    </TouchableWithoutFeedback>
     )
 }
 
@@ -89,6 +90,9 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         backgroundColor: 'white',
+    },
+    body:{
+        flex : 1,
         paddingLeft: 25 * scaleFactor,
         paddingRight: 25 * scaleFactor,
     },
@@ -108,7 +112,7 @@ const styles = StyleSheet.create({
         textAlign: 'center',
         marginLeft: -12 * scaleFactor,
         color: 'black',
-        fontSize: 18,
+        fontSize: 18 * scaleFactor,
         fontFamily: 'Montserrat',
         fontWeight: '700',
         lineHeight: 27.34,
@@ -116,7 +120,7 @@ const styles = StyleSheet.create({
     content_text: {
         marginTop: 22 * scaleFactor,
         color: 'rgba(27.63,27.63,27.63,0.70)',
-        fontSize: 18,
+        fontSize: 18 * scaleFactor,
         fontFamily: 'Montserrat',
         fontWeight: '600',
     },
@@ -147,7 +151,7 @@ const styles = StyleSheet.create({
     },
     content_header_text: {
         color: 'white',
-        fontSize: 18,
+        fontSize: 18 * scaleFactor,
         fontFamily: 'Montserrat',
         fontWeight: '700',
     },
@@ -186,7 +190,7 @@ const styles = StyleSheet.create({
     },
     disabled_content_header_text: {
         color: '#7E6161',
-        fontSize: 18,
+        fontSize: 18 * scaleFactor, 
         fontFamily: 'Montserrat',
         fontWeight: '500',
     },
@@ -208,15 +212,15 @@ const styles = StyleSheet.create({
         textAlign: 'center',
         marginTop: 43 * scaleFactor,
         color: '#00A86B',
-        fontSize: 18,
+        fontSize: 18 * scaleFactor,
         fontFamily: 'Montserrat',
         fontWeight: '700',
-        lineHeight: 27.34,
+        lineHeight: 27.34 * scaleFactor,
     },
 
     button_text: {
         color: 'white',
-        fontSize: 18,
+        fontSize: 18 * scaleFactor,
         fontFamily: 'Urbanist',
         fontWeight: '700'
     },
@@ -228,15 +232,16 @@ const styles = StyleSheet.create({
         alignItems: 'center'
     },
     agree_text: {
+        marginLeft: 10 * scaleFactor,
         color: 'black',
-        fontSize: 18,
+        fontSize: 18 * scaleFactor,
         fontFamily: 'Montserrat',
         fontWeight: '500',
 
     },
     agree_bold_text: {
         color: '#00A86B',
-        fontSize: 18,
+        fontSize: 18 * scaleFactor,
         fontFamily: 'Montserrat',
         fontWeight: '700',
     },

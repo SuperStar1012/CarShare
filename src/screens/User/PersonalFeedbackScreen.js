@@ -37,53 +37,54 @@ const PersonalFeedbackScreen = ({ route, navigation }) => {
     return (
         <TouchableWithoutFeedback onPress={() => missHandle()}>
             <SafeAreaView style={styles.container}>
-                <View style={!keyboardVisible ? styles.main_content : styles.disabled_main_content}>
-                    <View style={styles.header_view}>
-                        <TouchableOpacity style={styles.header_icon} onPress={()=>navigation.goBack()}>
-                            <ArrowLeftImage width={24 * scaleFactor} height={24 * scaleFactor} />
-                        </TouchableOpacity>
-                        <Text style={styles.header_text}>Personal Feedback</Text>
-                    </View>
-                    <View style={styles.content}>
-                        <View style={styles.content_profile}>
-                            <AvatarImage width={116 * scaleFactor} height={116 * scaleFactor} />
-                            <Text style={styles.user_type}>BMW & Seater</Text>
-                            <Text style={styles.user_detail}>8502 Preston Rd. Inglewood, Maine 98380</Text>
+                <View style={styles.body}>
+                    <View style={!keyboardVisible ? styles.main_content : styles.disabled_main_content}>
+                        <View style={styles.header_view}>
+                            <TouchableOpacity style={styles.header_icon} onPress={() => navigation.goBack()}>
+                                <ArrowLeftImage width={24 * scaleFactor} height={24 * scaleFactor} />
+                            </TouchableOpacity>
+                            <Text style={styles.header_text}>Personal Feedback</Text>
                         </View>
-                        <View style={styles.content_view}>
-                            <View style={styles.content_item}>
-                                <View style={styles.content_left_item}>
-                                    <Text style={styles.content_left_text}>Service</Text>
-                                    <StarImage />
-                                </View>
-                                <View style={styles.content_right_item}>
-                                    <Text style={styles.content_left_text}>On-Time</Text>
-                                    <StarImage />
-                                </View>
+                        <ScrollView style={styles.content}>
+                            <View style={styles.content_profile}>
+                                <AvatarImage width={116 * scaleFactor} height={116 * scaleFactor} />
+                                <Text style={styles.user_type}>BMW & Seater</Text>
+                                <Text style={styles.user_detail}>8502 Preston Rd. Inglewood, Maine 98380</Text>
                             </View>
-                            <View style={styles.content_bottom_item}>
-                                <View style={styles.content_left_item}>
-                                    <Text style={styles.content_left_text}>Service</Text>
-                                    <StarImage />
+                            <TouchableOpacity style={styles.content_view}>
+                                <View style={styles.content_item}>
+                                    <View style={styles.content_left_item}>
+                                        <Text style={styles.content_left_text}>Service</Text>
+                                        <StarImage />
+                                    </View>
+                                    <View style={styles.content_right_item}>
+                                        <Text style={styles.content_left_text}>On-Time</Text>
+                                        <StarImage />
+                                    </View>
                                 </View>
-                                <View style={styles.content_right_item}>
-                                    <Text style={styles.content_left_text}>On-Time</Text>
-                                    <StarImage />
+                                <View style={styles.content_bottom_item}>
+                                    <View style={styles.content_left_item}>
+                                        <Text style={styles.content_left_text}>Service</Text>
+                                        <StarImage />
+                                    </View>
+                                    <View style={styles.content_right_item}>
+                                        <Text style={styles.content_left_text}>On-Time</Text>
+                                        <StarImage />
+                                    </View>
                                 </View>
-                            </View>
+                            </TouchableOpacity>
+                        </ScrollView>
+                    </View>
+                    <View style={styles.footer_content}>
+                        <Text style={styles.footer_content_header_text}>Leave a comment</Text>
+                        <View style={styles.footer_content_view}>
+                            <TextInput style={styles.footer_content_input} />
                         </View>
-
                     </View>
+                    <TouchableOpacity style={styles.footer_button} onPress={() => navigation.navigate("RatingScreen")}>
+                        <Text style={styles.footer_text}>Leave a review</Text>
+                    </TouchableOpacity>
                 </View>
-                <View style={styles.footer_content}>
-                    <Text style={styles.footer_content_header_text}>Leave a comment</Text>
-                    <View style={styles.footer_content_view}>
-                        <TextInput style={styles.footer_content_input} />
-                    </View>
-                </View>
-                <TouchableOpacity style={styles.footer_button} onPress={() => navigation.navigate("RatingScreen")}>
-                    <Text style={styles.footer_text}>Leave a review</Text>
-                </TouchableOpacity>
             </SafeAreaView>
         </TouchableWithoutFeedback>
     )
@@ -93,6 +94,9 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         backgroundColor: 'white',
+    },
+    body: {
+        flex: 1,  
         paddingTop: 37 * scaleFactor,
         paddingHorizontal: 25 * scaleFactor
     },
@@ -121,10 +125,10 @@ const styles = StyleSheet.create({
     header_text: {
         textAlign: 'center',
         color: 'black',
-        fontSize: 18,
+        fontSize: 18 * scaleFactor,
         fontFamily: 'Urbanist',
         fontWeight: '700',
-        lineHeight: 24
+        lineHeight: 24 * scaleFactor
 
     },
     content_profile: {
@@ -134,7 +138,7 @@ const styles = StyleSheet.create({
     user_type: {
         marginTop: 15 * scaleFactor,
         color: 'black',
-        fontSize: 20,
+        fontSize: 20 * scaleFactor,
         fontFamily: 'Montserrat',
         fontWeight: '700',
         letterSpacing: 0.50
@@ -142,13 +146,14 @@ const styles = StyleSheet.create({
     user_detail: {
         marginTop: 5 * scaleFactor,
         color: 'rgba(0,0,0,0.60)',
-        fontSize: 16,
+        fontSize: 16 * scaleFactor,
         fontFamily: 'Montserrat',
         fontWeight: '400',
         letterSpacing: 0.50,
     },
     content_view: {
         marginTop: 34 * scaleFactor,
+        marginBottom: 30 * scaleFactor,
         backgroundColor: 'white',
         boxShadow: '0px 4px 14px ',
         paddingVertical: 20 * scaleFactor,
@@ -174,14 +179,14 @@ const styles = StyleSheet.create({
     },
     content_left_text: {
         color: 'rgba(0,0,0,0.70)',
-        fontSize: 13,
+        fontSize: 13 * scaleFactor,
         fontFamily: 'Montserrat',
         fontWeight: '500',
-        lineHeight: 23,
+        lineHeight: 23 * scaleFactor,
         letterSpacing: 0.50
     },
     footer_content: {
-        marginBottom: 50 * scaleFactor  
+        marginBottom: 50 * scaleFactor
     },
     footer_content_view: {
         marginTop: 25 * scaleFactor,
@@ -196,7 +201,7 @@ const styles = StyleSheet.create({
     },
     footer_content_header_text: {
         color: 'black',
-        fontSize: 18,
+        fontSize: 18 * scaleFactor,
         fontFamily: 'Montserrat',
         fontWeight: '700',
         letterSpacing: 0.50
@@ -204,7 +209,7 @@ const styles = StyleSheet.create({
     footer_content_input: {
         width: '100%',
         color: 'rgba(0,0,0,0.90)',
-        fontSize: 16,
+        fontSize: 16 * scaleFactor,
         fontFamily: 'Montserrat',
         fontWeight: '500',
     },
@@ -227,7 +232,7 @@ const styles = StyleSheet.create({
     },
     footer_text: {
         color: 'white',
-        fontSize: 18,
+        fontSize: 18 * scaleFactor,
         fontFamily: 'Urbanist',
         fontWeight: '700'
     },

@@ -4,14 +4,15 @@ import AvatarImage from '../../assets/images/user/feedback/avatar.svg'
 import StarImage from '../../assets/images/user/feedback/stars.svg'
 import ThumbsDownImage from '../../assets/images/user/feedback/thumbs-down.svg'
 import ThumbsUpImage from '../../assets/images/user/feedback/thumbs-up.svg'
+import { NavigationContainer } from "@react-navigation/native"
 
 const { width } = Dimensions.get('window')
 const scaleFactor = width / 414
 
-const RatingCard = ({ name, method, setMethod }) => {
+const RatingCard = ({ navigation,name, method, setMethod }) => {
 
     return (
-        <TouchableOpacity style={styles.content_item}>
+        <TouchableOpacity style={styles.content_item} onPress={()=>navigation.navigate("HomeScreen")}>
             <View style={styles.content_item_header}>
                 <View style={styles.content_item_header_left}>
                     <AvatarImage width={52 * scaleFactor} height={52 * scaleFactor} style={{marginTop: 5 * scaleFactor}} />
@@ -71,22 +72,22 @@ const styles = StyleSheet.create({
     },
     content_text: {
         color: '#808080',
-        fontSize: 12,
+        fontSize: 12 * scaleFactor,
         fontFamily: 'Montserrat',
         fontWeight: '400',
-        lineHeight: 23,
+        lineHeight: 23 * scaleFactor,
         marginTop: 18 * scaleFactor
     },
     name_text: {
         color: 'black',
-        fontSize: 15,
+        fontSize: 15 * scaleFactor,
         fontFamily: 'Montserrat',
         fontWeight: '600',
-        lineHeight: 25
+        lineHeight: 25 * scaleFactor
     },
     date_text: {
         color: '#808080',
-        fontSize: 11,
+        fontSize: 11 * scaleFactor,
         fontFamily: 'Montserrat',
         fontWeight: '400',
         marginTop: 6 * scaleFactor

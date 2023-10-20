@@ -96,10 +96,10 @@ const styles = StyleSheet.create({
     header_text: {
         textAlign: 'center',
         color: 'black',
-        fontSize: 18,
+        fontSize: 18 * scaleFactor,
         fontFamily: 'Urbanist',
         fontWeight: '700',
-        lineHeight: 24
+        lineHeight: 24 * scaleFactor
     },
     content: { flex: 1 },
 
@@ -125,10 +125,10 @@ const styles = StyleSheet.create({
         height: 50 * scaleFactor,
         width: 280 * scaleFactor,
         color: 'black',
-        fontSize: 16,
+        fontSize: 16 * scaleFactor,
         fontFamily: 'Montserrat',
         fontWeight: '500',
-        lineHeight: 24
+        lineHeight: 24 * scaleFactor
     },
     content_view: {
         marginTop: 22 * scaleFactor
@@ -148,7 +148,7 @@ const styles = StyleSheet.create({
     item_text: {
         marginLeft: 15 * scaleFactor,
         color: '#121826',
-        fontSize: 18.59,
+        fontSize: 18.59 * scaleFactor,
         fontFamily: 'Montserrat',
         fontWeight: '500',
     }

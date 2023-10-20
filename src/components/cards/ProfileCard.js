@@ -27,10 +27,10 @@ const styles = StyleSheet.create({
     },
     card_text: {
         color: 'rgba(0,0,0,0.80)',
-        fontSize: 16,
+        fontSize: 16 * scaleFactor,
         fontFamily: 'Montserrat',
         fontWeight: '500',
-        lineHeight: 24.30,
+        lineHeight: 24.30 * scaleFactor,
         marginLeft: 29 * scaleFactor
     }
 });
