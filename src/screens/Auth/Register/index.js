@@ -3,6 +3,7 @@ import {
     Dimensions, View, StyleSheet, TouchableOpacity, Text, TextInput, TouchableWithoutFeedback, KeyboardAvoidingView,
     Keyboard, ScrollView, SafeAreaView
 } from "react-native"
+import { useDispatch } from "react-redux";
 
 import CheckBox from '@react-native-community/checkbox';
 import SplashAvatar from '../../../assets/images/avatar/splash_avatar.svg'
@@ -13,6 +14,7 @@ import PersonalImage from '../../../assets/images/auth/register/personalcard.svg
 import CardImage from '../../../assets/images/auth/register/cards.svg'
 import CalendarImage from '../../../assets/images/auth/register/calendar.svg'
 import CardAddImage from '../../../assets/images/auth/register/card-add.svg'
+import {register} from '../../../states/redux/auth/actions'
 
 
 const { width } = Dimensions.get('window')
@@ -21,6 +23,12 @@ const scaleFactor = width / 414
 const Register_Screen = ({ navigation }) => {
     const [keyboardVisible, setKeyboardVisible] = useState(false);
     const [checked, setChecked] = useState(false)
+    const [firstName,setFirstName] = useState("")
+    const [lastName,setLastName] = useState("")
+    const [email,setEmail] = useState("")
+    const [phone,setPhone] = useState("")
+
+    const dispatch = useDispatch();
 
     useEffect(() => {
         // Keyboard will show event
@@ -44,6 +52,16 @@ const Register_Screen = ({ navigation }) => {
         };
     }, []);
 
+    const onRegister = () => {
+        values = {
+            firstName: firstName,
+            lastName: lastName,
+            email: email,
+            phone: phone
+        };
+        console.log(values);
+        dispatch(register({registerData: values}));
+    }
     return (
         <SafeAreaView style={styles.container}>
             <View style={styles.body}>
@@ -59,34 +77,34 @@ const Register_Screen = ({ navigation }) => {
                                 <Text style={styles.content_text}>Please provide following details</Text>
                             </View>
                         </View>) : null}
-                    <ScrollView style={{ flex: 1 }} scrollEnabled = {Platform.OS === "ios" ? true : false}>
+                    <ScrollView style={{ flex: 1 }}>
                         <View style={styles.content}>
                             <View style={styles.input_content}>
                                 <Text style={styles.email_text}>First Name</Text>
                                 <View style={styles.email_input}>
                                     <UserImage width={20 * scaleFactor} height={20 * scaleFactor} style={styles.user_image} />
-                                    <TextInput style={styles.email_text_input} ></TextInput>
+                                    <TextInput style={styles.email_text_input} onChangeText={(e)=>setFirstName(e)}></TextInput>
                                 </View>
                             </View>
                             <View style={styles.input_content}>
                                 <Text style={styles.email_text}>Last Name</Text>
                                 <View style={styles.email_input}>
                                     <UserImage width={20 * scaleFactor} height={20 * scaleFactor} style={styles.user_image} />
-                                    <TextInput style={styles.email_text_input} ></TextInput>
+                                    <TextInput style={styles.email_text_input} onChangeText={(e)=>setLastName(e)} ></TextInput>
                                 </View>
                             </View>
                             <View style={styles.input_content}>
                                 <Text style={styles.email_text}>Phone Number</Text>
                                 <View style={styles.email_input}>
                                     <PhoneImage width={20 * scaleFactor} height={20 * scaleFactor} style={styles.user_image} />
-                                    <TextInput style={styles.email_text_input} ></TextInput>
+                                    <TextInput style={styles.email_text_input} onChangeText={(e)=>setPhone(e)} ></TextInput>
                                 </View>
                             </View>
                             <View style={styles.input_content}>
                                 <Text style={styles.email_text}>Email</Text>
                                 <View style={styles.email_input}>
                                     <SmsImage width={20 * scaleFactor} height={20 * scaleFactor} style={styles.user_image} />
-                                    <TextInput style={styles.email_text_input} ></TextInput>
+                                    <TextInput style={styles.email_text_input} onChangeText={(e)=>setEmail(e)}></TextInput>
                                 </View>
                             </View>
                             <View style={styles.input_content}>
@@ -137,7 +155,7 @@ const Register_Screen = ({ navigation }) => {
                             </Text>
                         </View>
                         <View style={styles.buttons}>
-                            <TouchableOpacity style={styles.login_button} onPress={() => navigation.navigate("OTPResetScreen")}>
+                            <TouchableOpacity style={styles.login_button} onPress={()=> onRegister()}>
                                 <Text style={styles.login_text}>Register</Text>
                             </TouchableOpacity>
                         </View>

@@ -131,7 +131,7 @@ const styles = StyleSheet.create({
 
     content_text: {
         marginTop: 15 * scaleFactor,
-        color: 'rgba(0,0,0 0.70)',
+        color: 'rgba(0,0,0,0.70)',
         fontSize: 16 * scaleFactor,
         fontFamily: 'Urbanist',
         fontWeight: '500',
