@@ -1,6 +1,13 @@
 #import "AppDelegate.h"
 
 #import <React/RCTBundleURLProvider.h>
+#import <GoogleMaps/GoogleMaps.h>
+
+- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
+{
+  [GMSServices provideAPIKey:@"YOUR_GOOGLE_MAPS_API_KEY"];
+  // ... other configurations ...
+}
 
 @implementation AppDelegate
 

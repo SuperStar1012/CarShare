@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react"
+import React, { useEffect, useState, useRef } from "react"
 import { Dimensions, View, StyleSheet, TouchableOpacity, SafeAreaView, ScrollView, Text } from "react-native"
 import ArrowLeftImage from '../../../../assets/images/auth/register/arrow-left.svg'
 import AvatarImage from '../../../../assets/images/auth/register/Rectangle_34625954.svg'
@@ -6,18 +6,67 @@ import SelfieImage from '../../../../assets/images/auth/register/Rectangle_34625
 import UploadImage from '../../../../assets/images/auth/register/document-upload.svg'
 
 import LinearGradient from 'react-native-linear-gradient';
-import { launchImageLibrary } from 'react-native-image-picker';
+// import {  } from 'react-native-image-picker';
+import { launchCamera, launchImageLibrary } from 'react-native-image-picker';
+// import RNTesseractOcr from 'react-native-tesseract-ocr';
 import { Image } from "react-native-svg"
 
 const { width } = Dimensions.get('window')
 const scaleFactor = width / 414
 
 const LicenseVerifyScreen = ({ navigation }) => {
+    const cameraRef = useRef(null);
     const [visible, setVisible] = useState(false)
     const [type, setType] = useState('license')
     const [selectedImage, setSelectedImage] = useState('')
 
+    const tessOptions = {
+        whitelist: null,  // Add any character whitelisting if needed
+        blacklist: null,
+    };
 
+
+    // const takePicture = () => {
+    //     const options = {
+    //       noData: true,
+    //     };
+
+    //     launchCamera(options, response => {
+    //       if (response.didCancel) {
+    //         console.log('User cancelled image picker');
+    //       } else if (response.error) {
+    //         console.log('ImagePicker Error: ', response.error);
+    //       } else if (response.customButton) {
+    //         console.log('User tapped custom button: ', response.customButton);
+    //       } else {
+    //         const source = { uri: response.assets[0].uri };
+    //         console.log(source.uri)
+    //         // You can also display the image using data:
+    //         // const source = { uri: 'data:image/jpeg;base64,' + response.data };
+    //         // uploadImage(source.uri);
+    //       }
+    //     });
+    //   };
+    // const performOCR = (imagePath) => {
+    //     const tessOptions = {
+    //       whitelist: null,  // Add any character whitelisting if needed
+    //       blacklist: null,
+    //     };
+    
+    //     RNTesseractOcr.recognize(imagePath, RNTesseractOcr.LANG_ENGLISH, tessOptions)
+    //       .then((result) => {
+    //         console.log('OCR Result: ', result);
+    //         // Here, you would parse the result with your regex
+    //         const dlNumber = extractDLNumber(result);
+    //         if (dlNumber) {
+    //           setLicenseNumber(dlNumber);
+    //         }
+    //       })
+    //       .catch((err) => {
+    //         console.error(err);
+    //         setLicenseNumber('');
+    //       });
+    //   };
     const openImagePicker = () => {
         const options = {
             mediaType: 'photo',
@@ -34,11 +83,12 @@ const LicenseVerifyScreen = ({ navigation }) => {
                 console.log('Image picker error: ', response.error);
             } else {
                 let imageUri = response.uri || response.assets?.[0]?.uri;
-                setSelectedImage(imageUri);
-                navigation.navigate("ScanScreen", {
-                    navigation: navigation,
-                    selectedImage: imageUri
-                })
+                // performOCR(imageUri)
+                // setSelectedImage(imageUri);
+                // navigation.navigate("ScanScreen", {
+                //     navigation: navigation,
+                //     selectedImage: imageUri
+                // })
             }
         });
     };

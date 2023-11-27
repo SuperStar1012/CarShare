@@ -1,20 +1,38 @@
-import React, { useEffect, useState } from "react"
+import React, { useEffect, useState, useRef } from "react"
 import { Dimensions, View, StyleSheet, TextInput, TouchableOpacity, SafeAreaView, Text, Keyboard, TouchableWithoutFeedback, KeyboardAvoidingView } from "react-native"
 import ArrowLeftImage from '../../../assets/images/auth/register/arrow-left.svg'
 import OTPModal from "../../../components/modals/OTPModal"
+import { phoneVerify, verifySuccess } from '../../../states/redux/auth/actions'
+
+import { useDispatch, useSelector } from "react-redux"
 
 const { width } = Dimensions.get('window')
 const scaleFactor = width / 414
 
-const OTPScreen = ({ navigation }) => {
+const OTPScreen = ({ route, navigation }) => {
+
+    const dispatch = useDispatch();
+    const auth = useSelector(state => state.auth);
+    const [verifyNumber, setVerifyNumber] = useState("");
 
     const [value1, setValue1] = useState("")
     const [value2, setValue2] = useState("")
     const [value3, setValue3] = useState("")
     const [value4, setValue4] = useState("")
-    const [modalVisible, setModalVisible] = useState(false);
-    const [keyboardVisible, setKeyboardVisible] = useState(false)
 
+    const input1 = useRef(null);
+    const input2 = useRef(null);
+    const input3 = useRef(null);
+    const input4 = useRef(null);
+
+    const [modalVisible, setModalVisible] = useState(false);
+    const [keyboardVisible, setKeyboardVisible] = useState(false);
+    const values = route.params && route.params.values;
+
+    useEffect(() => {
+        setVerifyNumber(auth.phoneVerifyNumber);
+        // setEmail(auth.registerData.email);
+    }, [auth])
     useEffect(() => {
         // Keyboard will show event
         const keyboardDidShowListener = Keyboard.addListener(
@@ -36,6 +54,20 @@ const OTPScreen = ({ navigation }) => {
             keyboardDidHideListener.remove();
         };
     }, []);
+    const onVerifyHandler = () => {
+        const number = verifyNumber.toString();
+        if (number[0] == value1 && number[1] == value2 && number[2] == value3 && number[3] == value4) {
+            dispatch(verifySuccess("email"));
+            setModalVisible(true);
+        }
+        else {
+            input1.current.focus();
+            setValue1("");
+            setValue2("");
+            setValue3("");
+            setValue4("");
+        }
+    }
     return (
         <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()} >
             <SafeAreaView style={styles.container} behavior={Platform.OS === "ios" ? "padding" : "height"}>
@@ -51,20 +83,25 @@ const OTPScreen = ({ navigation }) => {
                             <Text style={styles.content_text}>Enter the 4 digit OTP verification Code</Text>
                             <Text style={styles.content_text}>we sent to loremipsum@gmail.com</Text>
                             <View style={styles.input_field}>
-                                <TextInput style={value1 == "" ? styles.input_number : styles.input_specific_number} keyboardType="numeric" maxLength={1} onChangeText={(e) => setValue1(e)} />
-                                <TextInput style={value2 == "" ? styles.input_number : styles.input_specific_number} keyboardType="numeric" maxLength={1} onChangeText={(e) => setValue2(e)} />
-                                <TextInput style={value3 == "" ? styles.input_number : styles.input_specific_number} keyboardType="numeric" maxLength={1} onChangeText={(e) => setValue3(e)} />
-                                <TextInput style={value4 == "" ? styles.input_number : styles.input_specific_number} keyboardType="numeric" maxLength={1} onChangeText={(e) => setValue4(e)} />
+                                <TextInput autoFocus={true} ref={input1} style={value1 == "" ? styles.input_number : styles.input_specific_number} keyboardType="numeric" maxLength={1} onChangeText={(e) => { setValue1(e); if (e != "") input2.current.focus() }} value={value1} />
+                                <TextInput ref={input2} style={value2 == "" ? styles.input_number : styles.input_specific_number} keyboardType="numeric" maxLength={1} onChangeText={(e) => { setValue2(e); if (e != "") input3.current.focus() }} value={value2} />
+                                <TextInput ref={input3} style={value3 == "" ? styles.input_number : styles.input_specific_number} keyboardType="numeric" maxLength={1} onChangeText={(e) => { setValue3(e); if (e != "") input4.current.focus() }} value={value3} />
+                                <TextInput ref={input4} style={value4 == "" ? styles.input_number : styles.input_specific_number} keyboardType="numeric" maxLength={1} onChangeText={(e) => { setValue4(e); if (e != "") input4.current.focus() }} value={value4} />
                             </View>
-                            <Text style={styles.footer_text}>Did not get the code? <Text style={styles.resend_text}>Resend</Text></Text>
-                            <OTPModal navigation={navigation}  contentText = "Your account is ready to use" buttonText = "Go to homepage"  modalVisible={modalVisible} setModalVisible={setModalVisible} />
+                            <View style={{ flexDirection: 'row', alignItems: 'center', marginTop: 45 * scaleFactor, justifyContent: 'center' }}>
+                                <Text style={styles.footer_text}>Did not get the code? </Text>
+                                <TouchableOpacity onPress={() => dispatch(phoneVerify("+19043287111"))}><Text style={styles.resend_text}>Resend</Text></TouchableOpacity>
+                            </View>
+                            <OTPModal navigation={navigation} contentText="Your account is ready to use" buttonText="Go to homepage" modalVisible={modalVisible} setModalVisible={setModalVisible} />
 
                         </View>
                     </View>
                     <KeyboardAvoidingView style={styles.buttons} behavior={Platform.OS === "ios" ? "padding" : "height"}>
-                        <TouchableOpacity style={styles.login_button} onPress={() => navigation.navigate("ResetPasswordScreen")}>
-                            <Text style={styles.login_text}>Verify</Text>
-                        </TouchableOpacity>
+                        {value1 != "" && value2 != "" && value3 != "" && value4 != "" ? (
+                            <TouchableOpacity style={styles.login_button} onPress={() => onVerifyHandler()}>
+                                <Text style={styles.login_text}>Verify</Text>
+                            </TouchableOpacity>
+                        ) : null}
                     </KeyboardAvoidingView>
                 </View>
             </SafeAreaView>
@@ -168,7 +205,6 @@ const styles = StyleSheet.create({
     },
     footer_text: {
         textAlign: 'center',
-        marginTop: 45 * scaleFactor,
         color: 'rgba(0, 0, 0, 0.80)',
         fontSize: 16 * scaleFactor,
         fontFamily: 'Montserrat',

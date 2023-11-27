@@ -1,13 +1,19 @@
 import React, { useEffect, useState } from "react"
 import { Dimensions, StyleSheet, TouchableOpacity, Text, View, Button } from "react-native"
 import LogOutImage from '../../assets/images/user/profile/logout.svg'
+import { useDispatch } from "react-redux"
+import { logout } from "../../states/redux/auth/actions"
 const { width } = Dimensions.get('window')
 const scaleFactor = width / 414
 
-const ProfileLogoutCard = () => {
-
+const ProfileLogoutCard = ({navigation}) => {
+    const dispatch = useDispatch();
+    const handleLogout = async () => {
+        await dispatch(logout());
+        navigation.navigate("LoginScreen")
+    }
     return (
-        <TouchableOpacity style={styles.card_content}>
+        <TouchableOpacity style={styles.card_content} onPress={() => {handleLogout()}}>
             <LogOutImage />
             <Text style={styles.card_text}>Log Out</Text>
         </TouchableOpacity>

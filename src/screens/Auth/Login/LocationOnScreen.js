@@ -3,10 +3,12 @@ import { Dimensions, View, StyleSheet, TouchableOpacity, SafeAreaView, Text } fr
 import ArrowLeftImage from '../../../assets/images/auth/register/arrow-left.svg'
 import AddressImage from '../../../assets/images/auth/register/Address-amico 1.svg'
 
+
 const { width } = Dimensions.get('window')
 const scaleFactor = width / 414
 
 const LocationScreen = ({ navigation }) => {
+    
 
     return (
         <SafeAreaView style={styles.container}>

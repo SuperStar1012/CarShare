@@ -1,4 +1,4 @@
-import {NavigationContainer} from "@react-navigation/native"
+import { NavigationContainer } from "@react-navigation/native"
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import SplashScreen from "../screens/Splash"
 import OnBoardingScreen_1 from "../screens/OnBoarding/OnBoarding1"
@@ -48,65 +48,95 @@ import ExtendDurationScreen from "../screens/User/ExtendDurationScreen";
 import SpecifyDetailScreen from "../screens/User/SpecifyDetailScreen";
 import KeyHandScreen from "../screens/User/KeyHandScreen";
 import InitiateRequestScreen from "../screens/User/InitiateRequestScreen";
-
+import { useDispatch, useSelector } from "react-redux";
+import { useEffect, useState } from "react";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import { getAuthData } from "../states/redux/auth/actions";
+import MainScreen from "../screens/User/MainScreen";
 
 const Stack = createNativeStackNavigator()
 
 const Routes = () => {
+
+    const auth = useSelector(state => state.auth);
+    const [isLoggedIn, setIsLoggedIn] = useState(false);
+    const [isLoading, setIsLoadding] = useState(false);
+    const dispatch = useDispatch();
+
+    useEffect(() => {
+        async function getData() {
+            token = await AsyncStorage.getItem('userToken');
+            if (token) {
+                await dispatch(getAuthData(token));
+            }
+        }
+        getData();
+        setTimeout(() => {
+            setIsLoadding(true);
+        }, 1000)
+    }, [])
+
+    useEffect(() => {
+        setIsLoggedIn(auth.isLoggedIn);
+    }, [auth])
+    if (isLoading == false) {
+        return (
+            <SplashScreen />
+        )
+    }
     return (
         <NavigationContainer>
-            <Stack.Navigator initialRouteName = "RegisterScreen" screenOptions = {{headerShown: false}}>
-                <Stack.Screen name = "SplashScreen" component = {SplashScreen} />
-                <Stack.Screen name = "OnBoardingScreen_1" component = {OnBoardingScreen_1} />
-                <Stack.Screen name = "OnBoardingScreen_2" component = {OnBoardingScreen_2} />
-                <Stack.Screen name = "Login-Register" component = {Login_RegisterScreen} />
-                <Stack.Screen name = "LoginScreen" component = {LoginScreen} />
-                <Stack.Screen name = "RegisterScreen" component = {Register_Screen} />
-                <Stack.Screen name = "OTPScreen" component = {OTPScreen} />
-                <Stack.Screen name = "OTPResetScreen" component = {OTPResetScreen} />
-                <Stack.Screen name = "ForgetPasswordScreen" component = {ForgetPasswordScreen} />
-                <Stack.Screen name = "ResetPasswordScreen" component = {ResetPasswordScreen} />
-                <Stack.Screen name = "TermScreen" component = {TermScreen} />
-                <Stack.Screen name = "LocationOnScreen" component = {LocationOnScreen} />
-                <Stack.Screen name = "LocationScreen" component = {LocationScreen} />
-                <Stack.Screen name = "AddPhoneNumberScreen" component = {AddPhoneNumberScreen} />
-                <Stack.Screen name = "OTPVerificationScreen" component = {OTPVerificationScreen} />
-                <Stack.Screen name = "SuccessOTPScreen" component = {SuccessOTPScreen} />
+            <Stack.Navigator initialRouteName={isLoggedIn == true ? "MainScreen" : "OnBoardingScreen_1"} screenOptions={{ headerShown: false }}>
+                <Stack.Screen name="OnBoardingScreen_1" component={OnBoardingScreen_1} />
+                <Stack.Screen name="OnBoardingScreen_2" component={OnBoardingScreen_2} />
+                <Stack.Screen name="Login-Register" component={Login_RegisterScreen} />
+                <Stack.Screen name="LoginScreen" component={LoginScreen} />
+                <Stack.Screen name="RegisterScreen" component={Register_Screen} />
+                <Stack.Screen name="OTPScreen" component={OTPScreen} />
+                <Stack.Screen name="OTPResetScreen" component={OTPResetScreen} />
+                <Stack.Screen name="ForgetPasswordScreen" component={ForgetPasswordScreen} />
+                <Stack.Screen name="ResetPasswordScreen" component={ResetPasswordScreen} />
+                <Stack.Screen name="TermScreen" component={TermScreen} />
+                <Stack.Screen name="LocationOnScreen" component={LocationOnScreen} />
+                <Stack.Screen name="LocationScreen" component={LocationScreen} />
+                <Stack.Screen name="AddPhoneNumberScreen" component={AddPhoneNumberScreen} />
+                <Stack.Screen name="OTPVerificationScreen" component={OTPVerificationScreen} />
+                <Stack.Screen name="SuccessOTPScreen" component={SuccessOTPScreen} />
 
-                <Stack.Screen name = "EnterLicenseScreen" component = {EnterLicenseScreen} />
-                <Stack.Screen name = "LicenseVerifyScreen" component = {LicenseVerifyScreen} />
-                <Stack.Screen name = "ScanScreen" component = {ScanScreen} />
-                <Stack.Screen name = "SuccessVerifyScreen" component = {SuccessVerifyScreen} />
+                <Stack.Screen name="EnterLicenseScreen" component={EnterLicenseScreen} />
+                <Stack.Screen name="LicenseVerifyScreen" component={LicenseVerifyScreen} />
+                <Stack.Screen name="ScanScreen" component={ScanScreen} />
+                <Stack.Screen name="SuccessVerifyScreen" component={SuccessVerifyScreen} />
 
-                <Stack.Screen name = "HomeScreen" component = {HomeScreen} />
-                <Stack.Screen name = "CategoryScreen" component = {CategoryScreen} />
-                <Stack.Screen name = "SearchResultScreen" component = {SearchResultScreen} />
-                <Stack.Screen name = "CarDetailScreen" component = {CarDetailScreen} />
-                <Stack.Screen name = "BookingDetailScreen" component = {BookingDetailScreen} />
-                <Stack.Screen name = "SummaryScreen" component = {SummaryScreen} />
-                <Stack.Screen name = "DrawSignatureScreen" component = {DrawSignatureScreen} />
-                <Stack.Screen name = "SelectPaymentMethodScreen" component = {SelectPaymentMethodScreen} />
-                <Stack.Screen name = "AddPaymentScreen" component = {AddPaymentScreen} />
-                <Stack.Screen name = "ChatScreen" component = {ChatScreen} />
+                <Stack.Screen name="MainScreen" component={MainScreen} />
+                <Stack.Screen name="CategoryScreen" component={CategoryScreen} />
+                <Stack.Screen name="SearchResultScreen" component={SearchResultScreen} />
+                <Stack.Screen name="CarDetailScreen" component={CarDetailScreen} />
+                <Stack.Screen name="BookingDetailScreen" component={BookingDetailScreen} />
+                <Stack.Screen name="SummaryScreen" component={SummaryScreen} />
+                <Stack.Screen name="DrawSignatureScreen" component={DrawSignatureScreen} />
+                <Stack.Screen name="SelectPaymentMethodScreen" component={SelectPaymentMethodScreen} />
+                <Stack.Screen name="AddPaymentScreen" component={AddPaymentScreen} />
+                <Stack.Screen name="ChatScreen" component={ChatScreen} />
 
-                <Stack.Screen name = "TimerScreen" component = {TimerScreen} />
-                <Stack.Screen name = "ExtendBookingScreen" component = {ExtendBookingScreen} />
-                <Stack.Screen name = "InspectionReportScreen" component = {InspectionReportScreen} />
-                <Stack.Screen name = "PersonalFeedbackScreen" component = {PersonalFeedbackScreen} />
-                <Stack.Screen name = "RatingScreen" component = {RatingScreen} />
-                <Stack.Screen name = "MessageScreen" component = {MessageScreen} />
-                <Stack.Screen name = "NotificationScreen" component = {NotificationScreen} />
-                <Stack.Screen name = "ProfileScreen" component = {ProfileScreen} />
-                <Stack.Screen name = "EditProfileScreen" component = {EditProfileScreen} />
-                <Stack.Screen name = "AllBookingScreen" component = {AllBookingScreen} />
-                <Stack.Screen name = "VerifyProfileScreen" component = {VerifyProfileScreen} />
-                <Stack.Screen name = "AboutScreen" component = {AboutScreen} />
-                <Stack.Screen name = "LanguageScreen" component = {LanguageScreen} />
-                <Stack.Screen name = "AddVehicleScreen" component = {AddVehicleScreen} />
-                <Stack.Screen name = "ExtendDurationScreen" component = {ExtendDurationScreen} />
-                <Stack.Screen name = "SpecifyDetailScreen" component = {SpecifyDetailScreen} />
-                <Stack.Screen name = "KeyHandScreen" component = {KeyHandScreen} />
-                <Stack.Screen name = "InitiateRequestScreen" component = {InitiateRequestScreen} />
+                <Stack.Screen name="TimerScreen" component={TimerScreen} />
+                <Stack.Screen name="ExtendBookingScreen" component={ExtendBookingScreen} />
+                <Stack.Screen name="InspectionReportScreen" component={InspectionReportScreen} />
+                <Stack.Screen name="PersonalFeedbackScreen" component={PersonalFeedbackScreen} />
+                <Stack.Screen name="RatingScreen" component={RatingScreen} />
+                <Stack.Screen name="MessageScreen" component={MessageScreen} />
+                <Stack.Screen name="NotificationScreen" component={NotificationScreen} />
+                <Stack.Screen name="ProfileScreen" component={ProfileScreen} />
+                <Stack.Screen name="EditProfileScreen" component={EditProfileScreen} />
+                <Stack.Screen name="AllBookingScreen" component={AllBookingScreen} />
+                <Stack.Screen name="VerifyProfileScreen" component={VerifyProfileScreen} />
+                <Stack.Screen name="AboutScreen" component={AboutScreen} />
+                <Stack.Screen name="LanguageScreen" component={LanguageScreen} />
+                <Stack.Screen name="AddVehicleScreen" component={AddVehicleScreen} />
+                <Stack.Screen name="ExtendDurationScreen" component={ExtendDurationScreen} />
+                <Stack.Screen name="SpecifyDetailScreen" component={SpecifyDetailScreen} />
+                <Stack.Screen name="KeyHandScreen" component={KeyHandScreen} />
+                <Stack.Screen name="InitiateRequestScreen" component={InitiateRequestScreen} />
 
             </Stack.Navigator>
         </NavigationContainer>

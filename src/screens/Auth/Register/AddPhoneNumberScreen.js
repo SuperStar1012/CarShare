@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from "react"
-import { Dimensions, View, StyleSheet, TouchableOpacity,ScrollView, KeyboardAvoidingView,SafeAreaView, TouchableWithoutFeedback, Text, TextInput, Keyboard } from "react-native"
+import { Dimensions, View, StyleSheet, Alert, TouchableOpacity, ScrollView, KeyboardAvoidingView, SafeAreaView, TouchableWithoutFeedback, Text, TextInput, Keyboard } from "react-native"
 import ArrowLeftImage from '../../../assets/images/auth/register/arrow-left.svg'
 import EnterOTPImage from '../../../assets/images/auth/register/Enter-OTP.svg'
 import CountryImage from '../../../assets/images/auth/register/country-image.svg'
 import TicketCircleImage from '../../../assets/images/auth/register/tick-circle.svg'
+import { phoneVerify } from "../../../states/redux/auth/actions"
+import { useDispatch, useSelector } from "react-redux"
 
 
 const { width } = Dimensions.get('window')
@@ -11,7 +13,8 @@ const scaleFactor = width / 414
 
 const AddPhoneNumberScreen = ({ navigation }) => {
     const [keyboardVisible, setKeyboardVisible] = useState(false);
-
+    const [phone, setPhone] = useState("");
+    const dispatch = useDispatch();
     useEffect(() => {
         // Keyboard will show event
         const keyboardDidShowListener = Keyboard.addListener(
@@ -33,6 +36,21 @@ const AddPhoneNumberScreen = ({ navigation }) => {
             keyboardDidHideListener.remove();
         };
     }, []);
+    const onVerifyHandler = async () => {
+        if (phone == "") {
+            Alert.alert('Error', 'Phone number is not valid', [
+                {
+                    style: 'cancel',
+                }, { text: 'OK' },
+            ]);
+        }
+        else
+        {
+            await dispatch(phoneVerify("+19043287111"));
+            navigation.navigate("OTPVerificationScreen");
+        }
+
+    }
     return (
         <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
             <SafeAreaView style={styles.container}>
@@ -43,7 +61,7 @@ const AddPhoneNumberScreen = ({ navigation }) => {
                                 <ArrowLeftImage width={24 * scaleFactor} height={24 * scaleFactor} />
                             </TouchableOpacity>
                         </View>
-                        <ScrollView contentContainerStyle={styles.content} scrollEnabled = {Platform.OS === "ios" ? true : false}>
+                        <ScrollView contentContainerStyle={styles.content} scrollEnabled={Platform.OS === "ios" ? true : false}>
                             <EnterOTPImage width={260 * scaleFactor} height={260 * scaleFactor} style={keyboardVisible == false ? styles.avatar_image : styles.disabled_avatar_image} />
                             <Text style={styles.content_header_text}>Add Phone Number</Text>
                             <Text style={styles.content_main_text}>Enter your phone number in order to send you OTP security code</Text>
@@ -52,7 +70,7 @@ const AddPhoneNumberScreen = ({ navigation }) => {
                                     <CountryImage width={38 * scaleFactor} height={23 * scaleFactor} />
                                     <Text style={styles.country_text}>+1</Text>
                                 </View>
-                                <TextInput style={styles.phone_number} />
+                                <TextInput style={styles.phone_number} value={phone} onChangeText={e => setPhone(e)} />
                             </View>
                             <View style={styles.phone_number_marker}>
                                 <Text style={styles.phone_number_marker_header}>Phone Number must contain</Text>
@@ -68,7 +86,7 @@ const AddPhoneNumberScreen = ({ navigation }) => {
                         </ScrollView>
                     </View>
                     <KeyboardAvoidingView style={styles.footer} behavior={Platform.OS === "ios" ? "padding" : "height"}>
-                        <TouchableOpacity style={styles.agree_button} onPress={() => navigation.navigate("OTPVerificationScreen")}>
+                        <TouchableOpacity style={styles.agree_button} onPress={() => onVerifyHandler()}>
                             <Text style={styles.button_text}>Continue</Text>
                         </TouchableOpacity>
                         <Text style={styles.footer_text}>I accept <Text style={styles.term_text}>Terms & Conditions</Text></Text>

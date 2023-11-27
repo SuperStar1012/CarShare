@@ -1,17 +1,47 @@
 import React, { useEffect, useState } from "react"
-import { Dimensions, TextInput, View, StyleSheet, TouchableOpacity, SafeAreaView, Text, Keyboard, TouchableWithoutFeedback } from "react-native"
+import { Dimensions, TextInput, View, StyleSheet, TouchableOpacity, SafeAreaView, Text, Keyboard, TouchableWithoutFeedback, Alert } from "react-native"
 import OTPModal from "../../../components/modals/OTPModal"
 import ArrowLeftImage from '../../../assets/images/auth/register/arrow-left.svg'
 import LockImage from '../../../assets/images/auth/login/lock.svg'
+import { API_BASE_URL } from '../../../config/serverApiConfig';
+import axios from "axios"
 
 
 const { width } = Dimensions.get('window')
 const scaleFactor = width / 414
 
-const ResetPasswordScreen = ({ navigation }) => {
+const ResetPasswordScreen = ({ route,navigation }) => {
     const [type, setType] = useState('new');
     const [visible, setVisible] = useState(false);
+    const [newPassword, setNew] = useState("");
+    const [confirm, setConfirm] = useState("");
+    const email = route.params && route.params.email;
 
+    const handleReset = async () => {
+        if(newPassword == "" || confirm == "")
+        {
+            Alert.alert('Error', "new Password should be entered.", [
+                {
+                    style: 'cancel',
+                }, { text: 'OK' },
+            ]);
+        }
+        else if (newPassword == confirm) {
+            const data = {email: email, password: newPassword};
+            const response = await axios.post(API_BASE_URL + "auth/resetPassword", data);
+            console.log(response.data)
+            if(response.data.success == true){
+                setVisible(true);
+            }
+        }
+        else {
+            Alert.alert('Error', "Confirm password does not match with new password.", [
+                {
+                    style: 'cancel',
+                }, { text: 'OK' },
+            ]);
+        }
+    }
     return (
         <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
             <SafeAreaView style={styles.container}>
@@ -30,14 +60,14 @@ const ResetPasswordScreen = ({ navigation }) => {
                                     <Text style={type == "news" ? styles.selected_password_text : styles.password_text}> New Password </Text>
                                     <View style={type == "news" ? styles.selected_password_input : styles.password_input}>
                                         <LockImage width={20 * scaleFactor} height={20 * scaleFactor} style={styles.lock_image} />
-                                        <TextInput style={styles.password_text_input} secureTextEntry={true} onFocus={() => setType('news')} />
+                                        <TextInput style={styles.password_text_input} secureTextEntry={true} onFocus={() => setType('news')} onChangeText={(e) => setNew(e)} />
                                     </View>
                                 </View>
                                 <View style={styles.password_field}>
                                     <Text style={type == "password" ? styles.selected_password_text : styles.password_text}> Confirm Password </Text>
                                     <View style={type == "password" ? styles.selected_password_input : styles.password_input}>
                                         <LockImage width={20 * scaleFactor} height={20 * scaleFactor} style={styles.lock_image} />
-                                        <TextInput style={styles.password_text_input} secureTextEntry={true} onFocus={() => setType('password')} />
+                                        <TextInput style={styles.password_text_input} secureTextEntry={true} onFocus={() => setType('password')} onChangeText={(e) => setConfirm(e)} />
                                     </View>
                                     <OTPModal navigation={navigation} contentText="Your account is ready to use" buttonText="Go to homepage" modalVisible={visible} setModalVisible={setVisible} />
                                 </View>
@@ -45,7 +75,7 @@ const ResetPasswordScreen = ({ navigation }) => {
                         </View>
                     </View>
                     <View style={styles.buttons}>
-                        <TouchableOpacity style={styles.login_button} onPress={() => setVisible(true)}>
+                        <TouchableOpacity style={styles.login_button} onPress={() => handleReset()}>
                             <Text style={styles.login_text}>Continue</Text>
                         </TouchableOpacity>
                     </View>
@@ -80,7 +110,7 @@ const styles = StyleSheet.create({
         fontFamily: 'Montserrat',
         fontWeight: '700',
         lineHeight: 27.34 * scaleFactor,
-        wordWrap: 'break-word',
+        // wordWrap: 'break-word',
         textAlign: 'center',
         marginLeft: -38.7 * scaleFactor / 2
     },
@@ -106,7 +136,7 @@ const styles = StyleSheet.create({
         fontFamily: 'Urbanist',
         fontWeight: '500',
         lineHeight: 24,
-        wordWrap: 'break-word',
+        // wordWrap: 'break-word',
         width: 329 * scaleFactor,
         textAlign: 'center'
     },
@@ -121,7 +151,7 @@ const styles = StyleSheet.create({
         fontSize: 14 * scaleFactor,
         fontFamily: 'Urbanist',
         fontWeight: '500',
-        wordWrap: 'break-word',
+        // wordWrap: 'break-word',
         marginBottom: 8 * scaleFactor
     },
     password_text: {
@@ -129,7 +159,7 @@ const styles = StyleSheet.create({
         fontSize: 14 * scaleFactor,
         fontFamily: 'Urbanist',
         fontWeight: '500',
-        wordWrap: 'break-word',
+        // wordWrap: 'break-word',
         marginBottom: 8 * scaleFactor
     },
     password_input: {
@@ -183,7 +213,7 @@ const styles = StyleSheet.create({
         fontSize: 18 * scaleFactor,
         fontFamily: 'Urbanist',
         fontWeight: '700',
-        wordWrap: 'break-word'
+        // wordWrap: 'break-word'
     },
 
 

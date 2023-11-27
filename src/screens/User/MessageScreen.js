@@ -22,48 +22,38 @@ const MessageScreen = ({ route, navigation }) => {
         { value: 'option2', label: 'Option 2' },
         { value: 'option3', label: 'Option 3' },
     ];
-
-
     return (
-        <TouchableWithoutFeedback onPress={() => missHandle()}>
-            <SafeAreaView style={{ flex: 1 }}>
-                <View style={styles.body}>
-                    <View style={styles.main_content}>
-                        <View style={styles.header_view}>
-                            <TouchableOpacity style={styles.header_icon} onPress={() => navigation.goBack()}>
-                                <ArrowLeftImage width={24 * scaleFactor} height={24 * scaleFactor} />
-                            </TouchableOpacity>
-                            <Text style={styles.header_text}>Messages</Text>
-                        </View>
-                        <View style={styles.content}>
-                            <View style={styles.content_header}>
-                                <View style={styles.search_view}>
-                                    <SearchImage />
-                                    <TextInput style={styles.search_text} placeholder="Search" placeholderTextColor="black" onChangeText={(e) => setSearchText(e)} />
-                                </View>
-                            </View>
-                            <ScrollView style={styles.content_view}>
-                                <MessageCard navigation={navigation} />
-                                <MessageCard />
-                                <MessageCard />
-                                <MessageCard />
-                                <MessageCard />
-                                <MessageCard />
-                                <MessageCard />
-                                <MessageCard />
-                                <MessageCard />
-                                <MessageCard />
-                                <MessageCard />
-                            </ScrollView>
+        <View style={styles.body}>
+            <View style={styles.main_content}>
+                <View style={styles.header_view}>
+                    {/* <TouchableOpacity style={styles.header_icon} onPress={() => navigation.goBack()}>
+                        <ArrowLeftImage width={24 * scaleFactor} height={24 * scaleFactor} />
+                    </TouchableOpacity> */}
+                    <Text style={styles.header_text}>Messages</Text>
+                </View>
+                <View style={styles.content}>
+                    <View style={styles.content_header}>
+                        <View style={styles.search_view}>
+                            <SearchImage />
+                            <TextInput style={styles.search_text} placeholder="Search" placeholderTextColor="black" onChangeText={(e) => setSearchText(e)} />
                         </View>
                     </View>
+                    <ScrollView style={styles.content_view}>
+                        <MessageCard navigation={navigation} />
+                        <MessageCard />
+                        <MessageCard />
+                        <MessageCard />
+                        <MessageCard />
+                        <MessageCard />
+                        <MessageCard />
+                        <MessageCard />
+                        <MessageCard />
+                        <MessageCard />
+                        <MessageCard />
+                    </ScrollView>
                 </View>
-
-                <View style={styles.footer}>
-                    <FooterMenu navigation={navigation} />
-                </View>
-            </SafeAreaView>
-        </TouchableWithoutFeedback>
+            </View>
+        </View>
     )
 }
 

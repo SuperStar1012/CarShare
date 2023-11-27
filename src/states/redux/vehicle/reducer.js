@@ -10,7 +10,7 @@ const INITIAL_STATE = {
   mailVerifyNumber: "",
   phoneVerifyNumber: "",
   errorMessage: "",
-  authData: {},
+  userData: {},
   registerData: {},
 };
 
@@ -68,13 +68,7 @@ const authReducer = (state = INITIAL_STATE, action) => {
         isLoggedIn: true,
         userData: action.payload.userData
       }
-    case actionTypes.SET_AUTH:
-      return {
-        ...state,
-        authData: action.payload,
-        isLoggedIn: true,
-        isSuccess: true,
-      }
+
     case actionTypes.LOGOUT_SUCCESS:
       return {
         ...state,

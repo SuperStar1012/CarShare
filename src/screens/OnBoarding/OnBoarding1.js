@@ -34,7 +34,7 @@ const OnBoardingScreen_1 = ({ navigation }) => {
                 <ScrollView style={{ flex: 1 }} scrollEnabled = {Platform.OS === "ios" ? true : false}>
                     <View style={styles.header}>
                         <View>
-                            <Text style={styles.skip_button}>Skip</Text>
+                            <Text style={styles.skip_button} onPress={()=>navigation.navigate("TermScreen")}>Skip</Text>
                         </View>
                         <OnBoardingImage_1 width={397.5 * scaleFactor} height={265 * scaleFactor} style={{ marginTop: 55 * scaleFactor }} />
                     </View>

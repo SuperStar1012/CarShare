@@ -1,16 +1,29 @@
 import React, { useEffect, useState } from "react"
 import { Dimensions, StyleSheet, TouchableOpacity, Text, View, Button } from "react-native"
+import { carType } from '../../config/vehicleType';
 
 const { width } = Dimensions.get('window')
 const scaleFactor = width / 414
 
 const CategoryFilterButton = ({ selected, value }) => {
     const [select, setSelected] = useState(selected);
+    const [type, setType] = useState([]);
     useEffect(() => {
         setSelected(selected)
     }, [])
+
+    const handleSetCarType = () => {
+        carType.map((data) => {
+            if(data.name == value)
+            {
+                data.state = !select;
+                setSelected(!select);
+            }
+        })
+        console.log(carType)
+    }
     return (
-        <TouchableOpacity style={select == true ? styles.selected_button : styles.button} onPress={() => setSelected(!select)}>
+        <TouchableOpacity style={select == true ? styles.selected_button : styles.button} onPress={() => handleSetCarType()}>
             <Text style={select == true ? styles.selected_button_text : styles.button_text}>{value}</Text>
         </TouchableOpacity>
     )
@@ -39,7 +52,7 @@ const styles = StyleSheet.create({
         fontSize: 12,
         fontFamily: 'Urbanist',
         fontWeight: '700',
-        
+
     },
     selected_button: {
         paddingHorizontal: 20 * scaleFactor,

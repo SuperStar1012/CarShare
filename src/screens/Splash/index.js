@@ -2,38 +2,34 @@ import React, { useEffect } from "react"
 import { Dimensions, View, StyleSheet, ActivityIndicator, SafeAreaView } from "react-native"
 import LinearGradient from 'react-native-linear-gradient';
 import SplashAvatar from '../../assets/images/avatar/splash_avatar.svg'
+import { useSelector } from "react-redux";
+import { startSession } from "../../../server/models/user";
 
 const { width } = Dimensions.get('window')
 const scaleFactor = width / 414
 
 const SplashScreen = ({ navigation }) => {
 
-    useEffect(() => {
-        setTimeout(() => {
-            navigation.navigate("OnBoardingScreen_1")
-        }, 1500)
-    },[])
-
-    return (
-        <SafeAreaView style={styles.container}>
-            <LinearGradient
-                colors={['#00A86B', '#129D6B']}
-                start={{ x: 0.5, y: 0.0 }} // These are approximations
-                end={{ x: 1.0, y: 1.0 }}   // You'll need to adjust to match the 168.21 degrees
-                locations={[0.0171, 0.9766]}
-                style={styles.boxWithShadow}
-            >
-                <View style={styles.splash_avatar}>
-                    <SplashAvatar width={148 * scaleFactor} height={126 * scaleFactor} />
-                </View>
-                <View style={styles.loading}>
-                    <ActivityIndicator size="large" color="#fff" />
-                </View>
-            </LinearGradient>
+        return (
+            <SafeAreaView style={styles.container}>
+                <LinearGradient
+                    colors={['#00A86B', '#129D6B']}
+                    start={{ x: 0.5, y: 0.0 }} // These are approximations
+                    end={{ x: 1.0, y: 1.0 }}   // You'll need to adjust to match the 168.21 degrees
+                    locations={[0.0171, 0.9766]}
+                    style={styles.boxWithShadow}
+                >
+                    <View style={styles.splash_avatar}>
+                        <SplashAvatar width={148 * scaleFactor} height={126 * scaleFactor} />
+                    </View>
+                    <View style={styles.loading}>
+                        <ActivityIndicator size="large" color="#fff" />
+                    </View>
+                </LinearGradient>
 
 
-        </SafeAreaView>
-    )
+            </SafeAreaView>
+        )
 }
 
 const styles = StyleSheet.create({

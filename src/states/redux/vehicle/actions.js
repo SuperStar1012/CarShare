@@ -1,30 +1,13 @@
 import { API_BASE_URL } from '../../../config/serverApiConfig';
 import * as actionTypes from './types';
 import axios from 'axios'
-import AsyncStorage from '@react-native-async-storage/async-storage';
-import { replaceOne } from '../../../../server/models/user';
-// import { createBrowserHistory } from 'history';
 
-// const history = createBrowserHistory();
 const assetUrl = "auth"
-export const getAuthData = (token) => async(dispatch) => {
-    const response = await axios.post(API_BASE_URL + assetUrl + '/getAuthData', {token: token});
-    if(response.data){
-        await dispatch({
-            type: actionTypes.SET_AUTH,
-            payload: response.data
-        })
-    }
+
+export const addVehicle = ({data}) => async (dispatch) => {
+    
 }
-export const editUserData = (data) => async(dispatch) => {
-    const response = await axios.post(API_BASE_URL + assetUrl + '/editUserData', data);
-    if(response.data){
-        await dispatch({
-            type: actionTypes.SET_AUTH,
-            payload: response.data
-        })
-    }
-}
+
 export const register = ({ registerData }) => async (dispatch) => {
     const response = await axios.post(API_BASE_URL + assetUrl + '/register', registerData);
     if (!response.data) {
@@ -80,14 +63,13 @@ export const registerAccount = (userData) => async (dispatch) => {
 
 export const login = (data) => async (dispatch) => {
     const response = await axios.post(API_BASE_URL + "auth/login", data);
-    console.log(response.data);
     const {token} = response.data;
     dispatch({
         type: actionTypes.LOGIN_SUCCESS,
         payload: response.data
     })
-    await AsyncStorage.setItem('userToken',token);
-    const sessionData = await AsyncStorage.getItem('userToken');
+    console.log(token);
+    AsyncStorage.setItem('userToken',token);
 }
 
 export const logout = () => async (dispatch) => {
