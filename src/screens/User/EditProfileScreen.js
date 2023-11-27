@@ -12,6 +12,9 @@ import CardImage from '../../assets/images/auth/register/cards.svg'
 import CalendarImage from '../../assets/images/auth/register/calendar.svg'
 import CardAddImage from '../../assets/images/auth/register/card-add.svg'
 import ArrowLeftImage from '../../assets/images/auth/register/arrow-left.svg'
+import { useDispatch, useSelector } from "react-redux"
+import AsyncStorage from "@react-native-async-storage/async-storage"
+import { editUserData } from "../../states/redux/auth/actions"
 
 
 
@@ -19,11 +22,23 @@ const { width } = Dimensions.get('window')
 const scaleFactor = width / 414
 
 const EditProfileScreen = ({ navigation }) => {
+    const token = AsyncStorage.getItem('userToken');
     const [keyboardVisible, setKeyboardVisible] = useState(false);
     const [checked, setChecked] = useState(false)
-
+    const auth = useSelector(state => state.auth);
+    const [userData, setUserData] = useState({});
+    const [firstName, setFirstName] = useState("");
+    const [lastName, setLastName] = useState("");
+    const [phone, setPhone] = useState("");
+    const [email, setEmail] = useState("");
+    const [driver, setDriver] = useState("");
+    const [payment, setPayment] = useState("");
+    const [date, setDate] = useState("");
+    const [cvv, setCvv] = useState("");
+    const dispatch = useDispatch();
     useEffect(() => {
         // Keyboard will show event
+        setUserData(auth.authData);
         const keyboardDidShowListener = Keyboard.addListener(
             'keyboardDidShow',
             () => {
@@ -44,6 +59,20 @@ const EditProfileScreen = ({ navigation }) => {
         };
     }, []);
 
+    useEffect(() => {
+        setFirstName(auth.authData.firstName)
+        setLastName(auth.authData.lastName)
+        setPhone(auth.authData.phone)
+    }, [auth])
+    handleEditProfile = () => {
+        const data = {
+            firstName: firstName,
+            lastName: lastName,
+            phone: phone,
+            email: auth.authData.email
+        }
+        dispatch(editUserData(data));
+    }
     return (
         <SafeAreaView style={styles.container}>
             <View style={styles.body}>
@@ -70,28 +99,21 @@ const EditProfileScreen = ({ navigation }) => {
                                     <Text style={styles.email_text}>First Name</Text>
                                     <View style={styles.email_input}>
                                         <UserImage width={20 * scaleFactor} height={20 * scaleFactor} style={styles.user_image} />
-                                        <TextInput style={styles.email_text_input} ></TextInput>
+                                        <TextInput style={styles.email_text_input} value = {firstName} onChangeText={(e) => setFirstName(e)}></TextInput>
                                     </View>
                                 </View>
                                 <View style={styles.input_content}>
                                     <Text style={styles.email_text}>Last Name</Text>
                                     <View style={styles.email_input}>
                                         <UserImage width={20 * scaleFactor} height={20 * scaleFactor} style={styles.user_image} />
-                                        <TextInput style={styles.email_text_input} ></TextInput>
+                                        <TextInput style={styles.email_text_input} value = {lastName} onChangeText={(e) => setLastName(e)}></TextInput>
                                     </View>
                                 </View>
                                 <View style={styles.input_content}>
                                     <Text style={styles.email_text}>Phone Number</Text>
                                     <View style={styles.email_input}>
                                         <PhoneImage width={20 * scaleFactor} height={20 * scaleFactor} style={styles.user_image} />
-                                        <TextInput style={styles.email_text_input} ></TextInput>
-                                    </View>
-                                </View>
-                                <View style={styles.input_content}>
-                                    <Text style={styles.email_text}>Email</Text>
-                                    <View style={styles.email_input}>
-                                        <SmsImage width={20 * scaleFactor} height={20 * scaleFactor} style={styles.user_image} />
-                                        <TextInput style={styles.email_text_input} ></TextInput>
+                                        <TextInput style={styles.email_text_input} value = {phone} onChangeText={(e) => setPhone(e)}></TextInput>
                                     </View>
                                 </View>
                                 <View style={styles.input_content}>
@@ -128,7 +150,7 @@ const EditProfileScreen = ({ navigation }) => {
                         </ScrollView>
                         <View style={styles.footer}>
                             <View style={styles.buttons}>
-                                <TouchableOpacity style={styles.login_button} onPress={() => navigation.navigate("ProfileScreen")}>
+                                <TouchableOpacity style={styles.login_button} onPress={() => handleEditProfile()}>
                                     <Text style={styles.login_text}>Save Changes</Text>
                                 </TouchableOpacity>
                             </View>
@@ -144,7 +166,7 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         backgroundColor: 'white',
-       
+
     },
     body: {
         flex: 1,

@@ -20,36 +20,26 @@ const NotificationScreen = ({ route, navigation }) => {
         { value: 'option2', label: 'Option 2' },
         { value: 'option3', label: 'Option 3' },
     ];
-
-
     return (
-        <TouchableWithoutFeedback onPress={() => missHandle()}>
-            <SafeAreaView style={{ flex: 1 }}>
-                <View style={styles.main_content}>
-                    <View style={styles.header_view}>
-                        <TouchableOpacity style={styles.header_icon} onPress={() => navigation.goBack()}>
-                            <ArrowLeftImage width={24 * scaleFactor} height={24 * scaleFactor} />
-                        </TouchableOpacity>
-                        <Text style={styles.header_text}>Notifications</Text>
-                    </View>
-                    <View style={styles.content}>
-                        <Text style={styles.content_header_text}>Today</Text>
-                        <ScrollView style={styles.content_view}>
-                            <NotificationCard />
-                            <NotificationCard />
-                            <NotificationCard />
-                            <NotificationCard />
-                            <NotificationCard />
-                            <NotificationCard />
-                        </ScrollView>
-                    </View>
-                </View>
-                <View style={styles.footer}>
-                    <FooterMenu navigation={navigation}/>
-                </View>
-            </SafeAreaView>
-
-        </TouchableWithoutFeedback>
+        <View style={styles.main_content}>
+            <View style={styles.header_view}>
+                {/* <TouchableOpacity style={styles.header_icon} onPress={() => navigation.goBack()}>
+                    <ArrowLeftImage width={24 * scaleFactor} height={24 * scaleFactor} />
+                </TouchableOpacity> */}
+                <Text style={styles.header_text}>Notifications</Text>
+            </View>
+            <View style={styles.content}>
+                <Text style={styles.content_header_text}>Today</Text>
+                <ScrollView style={styles.content_view}>
+                    <NotificationCard />
+                    <NotificationCard />
+                    <NotificationCard />
+                    <NotificationCard />
+                    <NotificationCard />
+                    <NotificationCard />
+                </ScrollView>
+            </View>
+        </View>
     )
 }
 

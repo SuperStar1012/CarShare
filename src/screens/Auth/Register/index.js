@@ -1,32 +1,33 @@
 import React, { useEffect, useState } from "react"
 import {
-    Dimensions, View, StyleSheet, TouchableOpacity, Text, TextInput, TouchableWithoutFeedback, KeyboardAvoidingView,
+    Dimensions, View, StyleSheet, TouchableOpacity, Text, TextInput, TouchableWithoutFeedback, Alert, KeyboardAvoidingView,
     Keyboard, ScrollView, SafeAreaView
 } from "react-native"
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 import CheckBox from '@react-native-community/checkbox';
 import SplashAvatar from '../../../assets/images/avatar/splash_avatar.svg'
 import UserImage from '../../../assets/images/auth/login/user.svg'
 import PhoneImage from '../../../assets/images/auth/register/call.svg'
 import SmsImage from '../../../assets/images/auth/register/sms.svg'
-import PersonalImage from '../../../assets/images/auth/register/personalcard.svg'
-import CardImage from '../../../assets/images/auth/register/cards.svg'
-import CalendarImage from '../../../assets/images/auth/register/calendar.svg'
-import CardAddImage from '../../../assets/images/auth/register/card-add.svg'
-import {register} from '../../../states/redux/auth/actions'
+import LockImage from '../../../assets/images/auth/login/lock.svg'
+import { register } from '../../../states/redux/auth/actions'
 
 
 const { width } = Dimensions.get('window')
 const scaleFactor = width / 414
 
 const Register_Screen = ({ navigation }) => {
+    const storeAuth = useSelector(state => state.auth);
+    const [auth, setAuth] = useState({});
     const [keyboardVisible, setKeyboardVisible] = useState(false);
     const [checked, setChecked] = useState(false)
-    const [firstName,setFirstName] = useState("")
-    const [lastName,setLastName] = useState("")
-    const [email,setEmail] = useState("")
-    const [phone,setPhone] = useState("")
+    const [firstName, setFirstName] = useState("")
+    const [lastName, setLastName] = useState("")
+    const [email, setEmail] = useState("")
+    const [phone, setPhone] = useState("")
+    const [password, setPassword] = useState("")
+    const [confirmPassword, setConfirmPassword] = useState("")
 
     const dispatch = useDispatch();
 
@@ -52,117 +53,165 @@ const Register_Screen = ({ navigation }) => {
         };
     }, []);
 
-    const onRegister = () => {
-        values = {
-            firstName: firstName,
-            lastName: lastName,
-            email: email,
-            phone: phone
-        };
-        console.log(values);
-        dispatch(register({registerData: values}));
+    useEffect(() => {
+        setAuth(storeAuth)
+    }, [storeAuth])
+    const onRegister = async () => {
+
+        if (firstName == "")
+            Alert.alert('Error', 'First name is required', [
+                {
+                    style: 'cancel',
+                }, { text: 'OK' },
+            ]);
+        else if (lastName == "")
+            Alert.alert('Error', 'Last name is required', [
+                {
+                    style: 'cancel',
+                }, { text: 'OK' },
+            ]);
+        else if (phone == "")
+            Alert.alert('Error', 'Phonenumber is required', [
+                {
+                    style: 'cancel',
+                }, { text: 'OK' },
+            ]);
+        else if (email == "")
+            Alert.alert('Error', 'Email is required', [
+                {
+                    style: 'cancel',
+                }, { text: 'OK' },
+            ]);
+        else if (password == "")
+            Alert.alert('Error', 'Password is required', [
+                {
+                    style: 'cancel',
+                }, { text: 'OK' },
+            ]);
+        else if (confirmPassword == "")
+            Alert.alert('Error', 'Confirm password is required', [
+                {
+                    style: 'cancel',
+                }, { text: 'OK' },
+            ]);
+        else if (password != confirmPassword)
+            Alert.alert('Error', 'Password does not match with Confirm password', [
+                {
+                    style: 'cancel',
+                }, { text: 'OK' },
+            ]);
+        else if (checked == false)
+            Alert.alert('Error', 'Agree this temrs service', [
+                {
+                    style: 'cancel',
+                }, { text: 'OK' },
+            ]);
+        else {
+            values = {
+                firstName: firstName,
+                lastName: lastName,
+                email: email,
+                phone: phone,
+                password: password,
+                type: "register"
+            };
+            await dispatch(register({ registerData: values }));
+
+            if (storeAuth.errorMessage != "") {
+                Alert.alert('Error', storeAuth.errorMessage, [
+                    {
+                        style: 'cancel',
+                    }, { text: 'OK' },
+                ]);
+            }
+            else
+                navigation.navigate("OTPResetScreen", { values: values })
+        }
+
     }
     return (
         <SafeAreaView style={styles.container}>
             <View style={styles.body}>
-            <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()} >
-                <View style={{ flex: 1 }}>
-                    {keyboardVisible == false ? (
-                        <View style={styles.header}>
-                            <View style={styles.splash_avatar}>
-                                <SplashAvatar width={108 * scaleFactor} height={92 * scaleFactor} />
-                            </View>
-                            <View style={styles.header_text}>
-                                <Text style={styles.main_text}>Create Account</Text>
-                                <Text style={styles.content_text}>Please provide following details</Text>
-                            </View>
-                        </View>) : null}
-                    <ScrollView style={{ flex: 1 }}>
-                        <View style={styles.content}>
-                            <View style={styles.input_content}>
-                                <Text style={styles.email_text}>First Name</Text>
-                                <View style={styles.email_input}>
-                                    <UserImage width={20 * scaleFactor} height={20 * scaleFactor} style={styles.user_image} />
-                                    <TextInput style={styles.email_text_input} onChangeText={(e)=>setFirstName(e)}></TextInput>
+                <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()} >
+                    <View style={{ flex: 1 }}>
+                        {keyboardVisible == false ? (
+                            <View style={styles.header}>
+                                <View style={styles.splash_avatar}>
+                                    <SplashAvatar width={108 * scaleFactor} height={92 * scaleFactor} />
                                 </View>
-                            </View>
-                            <View style={styles.input_content}>
-                                <Text style={styles.email_text}>Last Name</Text>
-                                <View style={styles.email_input}>
-                                    <UserImage width={20 * scaleFactor} height={20 * scaleFactor} style={styles.user_image} />
-                                    <TextInput style={styles.email_text_input} onChangeText={(e)=>setLastName(e)} ></TextInput>
+                                <View style={styles.header_text}>
+                                    <Text style={styles.main_text}>Create Account</Text>
+                                    <Text style={styles.content_text}>Please provide following details</Text>
                                 </View>
-                            </View>
-                            <View style={styles.input_content}>
-                                <Text style={styles.email_text}>Phone Number</Text>
-                                <View style={styles.email_input}>
-                                    <PhoneImage width={20 * scaleFactor} height={20 * scaleFactor} style={styles.user_image} />
-                                    <TextInput style={styles.email_text_input} onChangeText={(e)=>setPhone(e)} ></TextInput>
-                                </View>
-                            </View>
-                            <View style={styles.input_content}>
-                                <Text style={styles.email_text}>Email</Text>
-                                <View style={styles.email_input}>
-                                    <SmsImage width={20 * scaleFactor} height={20 * scaleFactor} style={styles.user_image} />
-                                    <TextInput style={styles.email_text_input} onChangeText={(e)=>setEmail(e)}></TextInput>
-                                </View>
-                            </View>
-                            <View style={styles.input_content}>
-                                <Text style={styles.email_text}>Driving License Number</Text>
-                                <View style={styles.email_input}>
-                                    <PersonalImage width={20 * scaleFactor} height={20 * scaleFactor} style={styles.user_image} />
-                                    <TextInput style={styles.email_text_input} keyboardType="numeric" ></TextInput>
-                                </View>
-                            </View>
-                            <View style={styles.input_content}>
-                                <Text style={styles.email_text}>Payment Details</Text>
-                                <View style={styles.email_input}>
-                                    <CardImage width={20 * scaleFactor} height={20 * scaleFactor} style={styles.user_image} />
-                                    <TextInput style={styles.email_text_input} ></TextInput>
-                                </View>
-                            </View>
-                            <View style={styles.date_cvv}>
-                                <View style={styles.date_input}>
-                                    <Text style={styles.email_text}>Expiry Date</Text>
+                            </View>) : null}
+                        <ScrollView style={{ flex: 1 }}>
+                            <View style={styles.content}>
+                                <View style={styles.input_content}>
+                                    <Text style={styles.email_text}>First Name</Text>
                                     <View style={styles.email_input}>
-                                        <CalendarImage width={20 * scaleFactor} height={20 * scaleFactor} style={styles.user_image} />
-                                        <TextInput style={styles.email_text_input} ></TextInput>
+                                        <UserImage width={20 * scaleFactor} height={20 * scaleFactor} style={styles.user_image} />
+                                        <TextInput style={styles.email_text_input} onChangeText={(e) => setFirstName(e)}></TextInput>
                                     </View>
                                 </View>
-                                <View style={styles.cvv_input}>
-                                    <Text style={styles.email_text}>CVV</Text>
+                                <View style={styles.input_content}>
+                                    <Text style={styles.email_text}>Last Name</Text>
                                     <View style={styles.email_input}>
-                                        <CardAddImage width={20 * scaleFactor} height={20 * scaleFactor} style={styles.user_image} />
-                                        <TextInput style={styles.email_text_input} keyboardType="numeric" ></TextInput>
+                                        <UserImage width={20 * scaleFactor} height={20 * scaleFactor} style={styles.user_image} />
+                                        <TextInput style={styles.email_text_input} onChangeText={(e) => setLastName(e)} ></TextInput>
+                                    </View>
+                                </View>
+                                <View style={styles.input_content}>
+                                    <Text style={styles.email_text}>Phone Number</Text>
+                                    <View style={styles.email_input}>
+                                        <PhoneImage width={20 * scaleFactor} height={20 * scaleFactor} style={styles.user_image} />
+                                        <TextInput style={styles.email_text_input} onChangeText={(e) => setPhone(e)} ></TextInput>
+                                    </View>
+                                </View>
+                                <View style={styles.input_content}>
+                                    <Text style={styles.email_text}>Email</Text>
+                                    <View style={styles.email_input}>
+                                        <SmsImage width={20 * scaleFactor} height={20 * scaleFactor} style={styles.user_image} />
+                                        <TextInput style={styles.email_text_input} onChangeText={(e) => setEmail(e)}></TextInput>
+                                    </View>
+                                </View>
+                                <View style={styles.input_content}>
+                                    <Text style={styles.email_text}>Password</Text>
+                                    <View style={styles.email_input}>
+                                        <LockImage width={20 * scaleFactor} height={20 * scaleFactor} style={styles.password_image} />
+                                        <TextInput style={styles.email_text_input} secureTextEntry={true} onChangeText={(e) => setPassword(e)}></TextInput>
+                                    </View>
+                                </View>
+                                <View style={styles.input_content}>
+                                    <Text style={styles.email_text}>Confirm Password</Text>
+                                    <View style={styles.email_input}>
+                                        <LockImage width={20 * scaleFactor} height={20 * scaleFactor} style={styles.password_image} />
+                                        <TextInput style={styles.email_text_input} secureTextEntry={true} onChangeText={(e) => setConfirmPassword(e)}></TextInput>
                                     </View>
                                 </View>
                             </View>
-                        </View>
-                    </ScrollView>
-                    <KeyboardAvoidingView style={styles.footer} behavior={Platform.OS === "ios" ? "padding" : "height"}>
-                        <View style={styles.agree_field}>
-                            <View>
-                                <CheckBox
-                                    disabled={false}
-                                    value={checked}
-                                    onChange={() => setChecked(!checked)}
-                                />
-                            </View>
-                            <Text style={styles.agree_text}>
-                                By selecting
-                                <Text style={styles.agree_bold_text}> Agree and continue</Text>  below, I agree to <Text style={styles.agree_bold_text}>CarShare</Text> Terms of Service, Payments Terms of Service, Privacy Policy, and Nondiscrimination Policy.
-
-                            </Text>
-                        </View>
-                        <View style={styles.buttons}>
-                            <TouchableOpacity style={styles.login_button} onPress={()=> onRegister()}>
-                                <Text style={styles.login_text}>Register</Text>
+                        </ScrollView>
+                        <KeyboardAvoidingView style={styles.footer} behavior={Platform.OS === "ios" ? "padding" : "height"}>
+                            <TouchableOpacity style={styles.agree_field} onPress={() => setChecked(!checked)}>
+                                <View>
+                                    <CheckBox
+                                        disabled={false}
+                                        value={checked}
+                                        onChange={() => setChecked(!checked)}
+                                    />
+                                </View>
+                                <Text style={styles.agree_text}>
+                                    By selecting
+                                    <Text style={styles.agree_bold_text}> Agree and continue</Text>  below, I agree to <Text style={styles.agree_bold_text}>CarShare</Text> Terms of Service, Payments Terms of Service, Privacy Policy, and Nondiscrimination Policy.
+                                </Text>
                             </TouchableOpacity>
-                        </View>
-                    </KeyboardAvoidingView>
-
-                </View>
-            </TouchableWithoutFeedback>
+                            <View style={styles.buttons}>
+                                <TouchableOpacity style={styles.login_button} onPress={() => onRegister()}>
+                                    <Text style={styles.login_text}>Register</Text>
+                                </TouchableOpacity>
+                            </View>
+                        </KeyboardAvoidingView>
+                    </View>
+                </TouchableWithoutFeedback>
             </View>
         </SafeAreaView>
     )

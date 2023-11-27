@@ -9,7 +9,7 @@ const auth = require('../../middleware/auth');
 const User = require('../../models/user');
 
 router.post('/register', async (req, res) => {
-    console.log(req.body);
+    console.log(req.body)
     try {
         const { email, password, firstName, lastName, phone, license, payment } = req.body;
         const existingUser = await User.findOne({ email });

@@ -16,86 +16,32 @@ import HomeButton from '../../components/buttons/HomeButton'
 import HomeCard from '../../components/cards/HomeCard'
 import HomeCarCard from "../../components/cards/HomeCarCard";
 import FooterMenu from "../../components/menus/FooterMenu";
+import HomeScreen from "./HomeScreen";
+import ProfileScreen from "./ProfileScreen";
+import MessageScreen from "./MessageScreen";
+import NotificationScreen from "./NotificationScreen";
 
 
 const { width, height } = Dimensions.get('window')
 const scaleFactor = width / 414
 
-const HomeScreen = ({ navigation }) => {
-    const [modalVisible, setModalVisible] = useState(false);
+const MainScreen = ({ navigation }) => {
+    const [menu, setMenu] = useState("home");
     const missHandle = () => {
         // setModalVisible(false)
         Keyboard.dismiss()
     }
     return (
-        <View style={{ flex: 1 }}>
-            <LinearGradient
-                start={{ x: 0.5, y: 0 }}
-                end={{ x: 0.5, y: 1 }}
-                colors={['#1BD994', '#0F704D']}
-                style={styles.header}
-            >
-                <View style={styles.header_menu}>
-                    <TouchableOpacity>
-                        <ElementImage />
-                    </TouchableOpacity>
-                    <View style={styles.location_header}>
-                        <LocationImage />
-                        <Text style={styles.location_header_text}>28 rue Gontier-Patin</Text>
-                    </View>
-                    <EllipseImage />
+        <TouchableWithoutFeedback onPress={() => missHandle()}>
+            <SafeAreaView style={styles.container}>
+                {
+                    menu == "home" ? <HomeScreen navigation={navigation} /> : (menu == "profile" ? <ProfileScreen navigation={navigation}  /> : (menu == "chat" ? <MessageScreen navigation={navigation} /> : (menu == "notification" ? <NotificationScreen navigation={navigation} /> : <></>)))
+                }
+                <View style={styles.footer}>
+                    <FooterMenu navigation={navigation} myMenu={menu} setMyMenu={setMenu} />
                 </View>
-                <View style={styles.search_menu}>
-                    <VecotorImage />
-                    <TextInput style={styles.search_text} placeholder="Search here" placeholderTextColor="white" />
-                    <DocumentImage />
-                </View>
-                <TouchableOpacity style={styles.map_icon}>
-                    <MapImage />
-                    <Text style={styles.map_text}>Map</Text>
-                </TouchableOpacity>
-            </LinearGradient>
-            <ScrollView style={styles.content}>
-                <ScrollView style={styles.car_type_content} horizontal={true} >
-                    <HomeButton selected={true} value="Luxury Car" />
-                    <HomeButton selected={false} value="Family Car" />
-                    <HomeButton selected={false} value="Comprevan" />
-                    <HomeButton selected={false} value="Comprevan" />
-                </ScrollView>
-                <TouchableOpacity>
-                    <HomeCarImage width='100%' />
-                </TouchableOpacity>
-                <View style={styles.category}>
-                    <View style={styles.category_header}>
-                        <Text style={styles.category_header_text}>Best Categories</Text>
-                        <TouchableOpacity style={{ flexDirection: 'row' }}>
-                            <Text style={styles.category_header_see}>See all</Text>
-                            <ArrowImage style={{ marginLeft: 10 * scaleFactor }} />
-                        </TouchableOpacity>
-                    </View>
-                    <ScrollView style={styles.category_content} horizontal={true}>
-                        <HomeCard navigation={navigation} ChildComponent={CardImage1} text="SUV's" />
-                        <HomeCard ChildComponent={CardImage1} text="SUV's" navigation={navigation} />
-                        <HomeCard ChildComponent={CardImage1} text="SUV's" navigation={navigation} />
-                        <HomeCard ChildComponent={CardImage1} text="SUV's" navigation={navigation} />
-                        <HomeCard ChildComponent={CardImage1} text="SUV's" navigation={navigation} />
-                    </ScrollView>
-                </View>
-                <View style={styles.recommendations}>
-                    <Text style={styles.rec_topic}>Recommendations</Text>
-                    <ScrollView style={styles.recommendations_header} horizontal={true} >
-                        <HomeButton selected={true} value="Pervious Searched" />
-                        <HomeButton value="5 Star" />
-                        <HomeButton value="Campervan" />
-                    </ScrollView>
-                    <View style={styles.recommendations_content}>
-                        <HomeCarCard navigation={navigation} modalVisible={modalVisible} setModalVisible={setModalVisible} />
-                        <HomeCarCard navigation={navigation} modalVisible={modalVisible} setModalVisible={setModalVisible} />
-                        <HomeCarCard navigation={navigation} modalVisible={modalVisible} setModalVisible={setModalVisible} />
-                    </View>
-                </View>
-            </ScrollView>
-        </View>
+            </SafeAreaView>
+        </TouchableWithoutFeedback>
     )
 }
 
@@ -237,4 +183,4 @@ const styles = StyleSheet.create({
 
 })
 
-export default HomeScreen
+export default MainScreen

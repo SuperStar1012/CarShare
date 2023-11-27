@@ -22,6 +22,7 @@ app.use(cors());
 setupDB();
 
 app.use(routes);
-const server = app.listen(port,'0.0.0.0', () => {
+
+const server = app.listen(port, () => {
     console.log("Server is running at port " + port)
 })

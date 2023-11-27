@@ -3,13 +3,36 @@ import { Dimensions, View, StyleSheet, TouchableOpacity, SafeAreaView, Text, Key
 import ArrowLeftImage from '../../../assets/images/auth/register/arrow-left.svg'
 import MessageImage from '../../../assets/images/auth/login/message-notif.svg'
 import SmsImage from '../../../assets/images/auth/login/sms-notification.svg'
+import { emailVerify } from "../../../states/redux/auth/actions"
+import { useDispatch } from "react-redux"
 
 const { width } = Dimensions.get('window')
 const scaleFactor = width / 414
 
-const ForgetPasswordScreen = ({ navigation }) => {
-    const [type, setType] = useState("sms")
-
+const ForgetPasswordScreen = ({ navigation, route }) => {
+    const [type, setType] = useState("sms");
+    const dispatch = useDispatch();
+    const email = route.params && route.params.email;
+    var showEmail = "";
+    const getEmail = () => {
+        for (i = 0; i < email.length; i++) {
+            if (i < 3) 
+                showEmail += email[i];
+            else if(i == 3){
+                showEmail += '*****';
+            }
+            else if (email[i] == "@") {
+                for(j = i + 1 ; j < email.length; j ++)
+                    showEmail += email[j];
+            }
+        }
+        return showEmail;
+    }
+    const handleVerifyMail = async () => {
+        await dispatch(emailVerify(email));
+        const values = {email: email,type: "forgetPassword"};
+        navigation.navigate("OTPResetScreen",{values});
+    }
     return (
         <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
             <SafeAreaView style={styles.container}>
@@ -40,13 +63,13 @@ const ForgetPasswordScreen = ({ navigation }) => {
 
                                 <View style={styles.via_text}>
                                     <Text style={styles.via_header}>via Email:</Text>
-                                    <Text style={styles.via_content}>shakeel*****53@gmail.com</Text>
+                                    <Text style={styles.via_content}>{getEmail(email)}</Text>
                                 </View>
                             </TouchableOpacity>
                         </View>
                     </View>
                     <View style={styles.buttons}>
-                        <TouchableOpacity style={styles.login_button} onPress={() => navigation.navigate('OTPScreen')}>
+                        <TouchableOpacity style={styles.login_button} onPress={() => handleVerifyMail()}>
                             <Text style={styles.login_text}>Continue</Text>
                         </TouchableOpacity>
                     </View>
@@ -61,9 +84,9 @@ const styles = StyleSheet.create({
         flex: 1,
         backgroundColor: 'white',
         alignItems: 'center',
-       
+
     },
-    body:{
+    body: {
         flex: 1,
         width: '100%',
         paddingLeft: 25 * scaleFactor,

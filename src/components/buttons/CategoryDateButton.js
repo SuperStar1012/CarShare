@@ -7,13 +7,17 @@ import CalendarHideImage from '../../assets/images/user/category/calendar_hide.s
 const { width } = Dimensions.get('window')
 const scaleFactor = width / 414
 
-const CategoryDateButton = ({ selected, value }) => {
+const CategoryDateButton = ({ selected, value, showDatepicker }) => {
     const [select, setSelected] = useState(false);
     useEffect(() => {
         setSelected(selected)
     }, [])
+    const handleSetDate = () => {
+        // setSelected(!selected);
+        showDatepicker('date')
+    }
     return (
-        <TouchableOpacity style={select == true ? styles.selected_button : styles.button} onPress={() => setSelected(!select)}>
+        <TouchableOpacity style={select == true ? styles.selected_button : styles.button} onPress={() => handleSetDate()}>
             <View style={styles.calendar_image}>
                 {select == true ? <CalendarImage /> : <CalendarHideImage />}
             </View>
@@ -47,7 +51,7 @@ const styles = StyleSheet.create({
         fontSize: 14 * scaleFactor,
         fontFamily: 'Montserrat',
         fontWeight: '700',
-       
+
     },
     selected_button: {
         paddingHorizontal: 20 * scaleFactor,

@@ -9,7 +9,7 @@ const OTPModal = ({ navigation, contentText, buttonText, modalVisible, setModalV
     const continueHandler = () => {
         setModalVisible(false)
         if (buttonText == "Continue")
-            navigation.navigate('TermScreen')
+            navigation.navigate('AddPhoneNumberScreen')
         else
             navigation.navigate("LoginScreen")
     }

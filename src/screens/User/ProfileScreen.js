@@ -16,13 +16,24 @@ import FooterMenu from "../../components/menus/FooterMenu"
 import ProfileCard from "../../components/cards/ProfileCard"
 import ProfileLogoutCard from "../../components/cards/ProfileLogoutCard"
 import ProfileSettingModal from "../../components/modals/ProfileSettingModal"
+import { useSelector } from "react-redux"
 
 
 const { width } = Dimensions.get('window')
 const scaleFactor = width / 414
 
 const ProfileScreen = ({ route, navigation }) => {
-    const [modalVisible,setModalVisible] = useState(false)
+    const auth = useSelector(state => state.auth);
+    const [userData, setUserData] = useState({});
+    const [isLoggedIn, setIsLoggedIn] = useState(false);
+    useEffect(() => {
+        setUserData(auth.authData);
+    }, [])
+    useEffect(() => {
+        setUserData(auth.authData);
+        setIsLoggedIn(auth.isLoggedIn);
+    }, [auth])
+    const [modalVisible, setModalVisible] = useState(false)
     const missHandle = () => {
         Keyboard.dismiss()
         setModalVisible(false)
@@ -33,43 +44,37 @@ const ProfileScreen = ({ route, navigation }) => {
         { value: 'option3', label: 'Option 3' },
     ];
     return (
-        <TouchableWithoutFeedback onPress={() => missHandle()}>
-            <SafeAreaView style={{ flex: 1 }}>
-                <View style={styles.main_content}>
-                    <View style={styles.header_view}>
-                        <TouchableOpacity style={styles.header_icon} onPress={() => navigation.goBack()}>
-                            <ArrowLeftImage width={24 * scaleFactor} height={24 * scaleFactor} />
-                        </TouchableOpacity>
-                        <Text style={styles.header_text}>Profile </Text>
-                        <TouchableOpacity onPress={()=>setModalVisible(true)}><SettingImage /></TouchableOpacity>
+        <View style={styles.main_content}>
+            <View style={styles.header_view}>
+                <TouchableOpacity style={styles.header_icon} onPress={() => navigation.goBack()}>
+                    <ArrowLeftImage width={24 * scaleFactor} height={24 * scaleFactor} />
+                </TouchableOpacity>
+                <Text style={styles.header_text}>Profile </Text>
+                <TouchableOpacity onPress={() => setModalVisible(true)}><SettingImage /></TouchableOpacity>
+            </View>
+            <View style={styles.content}>
+                <View style={styles.content_header}>
+                    <View style={styles.avatar_view}>
+                        <AvatarImage />
+                        <TouchableOpacity style={styles.edit_image}><EditImage /></TouchableOpacity>
                     </View>
-                    <View style={styles.content}>
-                        <View style={styles.content_header}>
-                            <View style={styles.avatar_view}>
-                                <AvatarImage />
-                                <TouchableOpacity style={styles.edit_image}><EditImage /></TouchableOpacity>
-                            </View>
-                            <Text style={styles.name_text}>Shakeel Ahmad</Text>
-                            <Text style={styles.email_text}>shykiahmad@gmail.com</Text>
-                        </View>
-                        <ScrollView style={styles.content_view}>
-                            <ProfileCard navigation = {navigation} Image={UserImage} text="Personal details" url="EditProfileScreen"/>
-                            <ProfileCard navigation = {navigation} Image={BookImage} text="Booking History" url = "AllBookingScreen"/>
-                            <ProfileCard navigation = {navigation} Image={LicenseImage} text="License Details" url="LicenseVerifyScreen"/>
-                            <ProfileCard navigation = {navigation} Image={VerifyImage} text="Verify Profile" url="VerifyProfileScreen"/>
-                            <ProfileCard navigation = {navigation} Image={AddImage} text="Add a Car" url="AddVehicleScreen"/>
-                            <ProfileCard navigation = {navigation} Image={PaymentImage} text="Payment Methods" url="SelectPaymentMethodScreen"/>
-                            <ProfileCard navigation = {navigation} Image={KeyImage} text="Key Handover and Return" url="KeyHandScreen"/>
-                            <ProfileLogoutCard />
-                            <ProfileSettingModal navigation = {navigation} modalVisible={modalVisible} setModalVisible={setModalVisible}/>
-                        </ScrollView>
-                    </View>
+                    <Text style={styles.name_text}>{userData.firstName + " " + userData.lastName}</Text>
+                    <Text style={styles.email_text}>{userData.email}</Text>
+
                 </View>
-                <View style={styles.footer}>
-                    <FooterMenu navigation={navigation} />
-                </View>
-            </SafeAreaView>
-        </TouchableWithoutFeedback>
+                <ScrollView style={styles.content_view}>
+                    <ProfileCard navigation={navigation} Image={UserImage} text="Personal details" url="EditProfileScreen" />
+                    <ProfileCard navigation={navigation} Image={BookImage} text="Booking History" url="AllBookingScreen" />
+                    <ProfileCard navigation={navigation} Image={LicenseImage} text="License Details" url="LicenseVerifyScreen" />
+                    <ProfileCard navigation={navigation} Image={VerifyImage} text="Verify Profile" url="VerifyProfileScreen" />
+                    <ProfileCard navigation={navigation} Image={AddImage} text="Add a Car" url="AddVehicleScreen" />
+                    <ProfileCard navigation={navigation} Image={PaymentImage} text="Payment Methods" url="SelectPaymentMethodScreen" />
+                    <ProfileCard navigation={navigation} Image={KeyImage} text="Key Handover and Return" url="KeyHandScreen" />
+                    <ProfileLogoutCard navigation={navigation} />
+                    <ProfileSettingModal navigation={navigation} modalVisible={modalVisible} setModalVisible={setModalVisible} />
+                </ScrollView>
+            </View>
+        </View>
     )
 }
 
